@@ -2,15 +2,40 @@
     <nav>
       <v-app-bar color="white" class="flex-grow-0" app>
         <v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer"/>
-        <v-img class="mx-2" src="@/assets/logo.png"
-                max-height="40" max-width="40" contain/>
+        <a href="'http://localhost:8080/#/'">
+        <v-img class="mx-2" src="@/assets/logo.png" max-height="40" max-width="40" contain/>
+        </a>
         <v-toolbar-title class="text-uppercase text--darken-4">
           <span>WMC</span>
         </v-toolbar-title>
 
+      
         <v-spacer class="btn-container" text align="center" fix>
-            <v-btn text color="#FF4081">
-                <span>BEST</span>
+            <v-btn text color="#FF4081" @mouseover="navigation_drop_table =!navigation_drop_table">
+              <span>BEST</span>
+                <v-navigation-drawer app v-model="navigation_drawer">
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="text-h6">WMC</v-list-item-title>
+                      <v-list-item-subtitle>의류</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-divider></v-divider>
+                  <v-list nav dense>
+                    <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
+                      <v-list-item-action>
+                        <v-icon left>
+                          {{ link.icon }}
+                        </v-icon>
+                      </v-list-item-action>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ link.text }}
+                        </v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-navigation-drawer>
             </v-btn>
             <v-btn text color="#000000">
                 <span>BEST</span>
@@ -32,7 +57,7 @@
             </v-btn>
         </v-spacer>
         
-        <v-btn v-if="isAuthenticated == false" text color="grey" onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'">
+        <v-btn v-if="isAuthenticated == true" text color="grey" onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'">
           <span>로그인</span>
         </v-btn>
         <v-btn v-else text color="grey" v-on:click="logout" onclick="location.href='http://localhost:8080/#/'">
@@ -139,6 +164,6 @@
     flex-wrap:nowrap;
     justify-content: center;
     align-items: center;
-
+    
   }
   </style>
