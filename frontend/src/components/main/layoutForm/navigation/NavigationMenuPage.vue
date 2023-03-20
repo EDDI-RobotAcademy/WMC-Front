@@ -1,13 +1,37 @@
 <template>
     <nav>
       <v-app-bar color="white" class="flex-grow-0" app>
-        <v-app-bar-nav-icon @mouseover="navigation_drawer = !navigation_drawer"/>
+        <v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer"/>
         <v-img class="mx-2" src="@/assets/logo.png"
                 max-height="40" max-width="40" contain/>
         <v-toolbar-title class="text-uppercase text--darken-4">
           <span>WMC</span>
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+
+        <v-spacer class="btn-container" text align="center" fix>
+            <v-btn text color="#FF4081">
+                <span>BEST</span>
+            </v-btn>
+            <v-btn text color="#000000">
+                <span>BEST</span>
+            </v-btn>
+            <v-btn text color="#000000">
+                <span>BEST</span>
+            </v-btn>
+            <v-btn text color="#000000">
+                <span>BEST</span>
+            </v-btn>
+            <v-btn text color="#000000">
+                <span>BEST</span>
+            </v-btn>
+            <v-btn text color="#000000">
+                <span>BEST</span>
+            </v-btn>
+            <v-btn text color="#000000">
+                <span>BEST</span>
+            </v-btn>
+        </v-spacer>
+        
         <v-btn v-if="isAuthenticated == false" text color="grey" onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'">
           <span>로그인</span>
         </v-btn>
@@ -110,4 +134,11 @@
   </script>
   
   <style>
+  .btn-container {
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content: center;
+    align-items: center;
+
+  }
   </style>
