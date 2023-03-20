@@ -2,9 +2,10 @@
     <nav>
       <v-app-bar color="white" class="flex-grow-0" app>
         <v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer"/>
-        <a href="'http://localhost:8080/#/'">
-        <v-img class="mx-2" src="@/assets/logo.png" max-height="40" max-width="40" contain/>
-        </a>
+        <router-link to="/">
+          <v-img
+              :src="require('@/assets/logo.png')" max-height="40" max-width="40" class="mx2"/>
+        </router-link>
         <v-toolbar-title class="text-uppercase text--darken-4">
           <span>WMC</span>
         </v-toolbar-title>
