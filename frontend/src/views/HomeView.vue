@@ -2,8 +2,8 @@
   <v-container>
     <div id="home">
       <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/sign-up">SignUpTest</router-link> |
+        <router-link to="/"></router-link>
+        
       </nav>
       <router-view/>
     </div>
