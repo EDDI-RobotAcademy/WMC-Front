@@ -3,7 +3,6 @@
     <navigation-menu-page/>
     <v-main>
       <router-view/>
-      
       <TopButton/>
     </v-main>
     <Footer/>
