@@ -88,11 +88,7 @@
         <span>로그아웃</span>
       </v-btn>
       <v-btn
-<<<<<<< HEAD
       v-if="isAuthenticated == false"
-=======
-        v-else
->>>>>>> 8c5dbad091e2c973ff9d1e6bb1a8908c6e9f3e7e
         text
         color="grey"
         onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
