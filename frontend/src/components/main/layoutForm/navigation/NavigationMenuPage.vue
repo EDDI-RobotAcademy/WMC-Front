@@ -14,42 +14,21 @@
         <span>WMC</span>
       </v-toolbar-title>
 
-      <v-spacer class="btn-container" text align="center" fix>
-        <v-btn
-          text
-          color="#FF4081"
-          @mouseover="navigation_drop_table = !navigation_drop_table"
-        >
-          <span>BEST</span>
-          <v-navigation-drawer app v-model="navigation_drawer">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="text-h6">WMC</v-list-item-title>
-                <v-list-item-subtitle>의류</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-divider></v-divider>
-            <v-list nav dense>
-              <v-list-item
-                v-for="link in links"
-                :key="link.name"
-                router
-                :to="link.route"
-              >
-                <v-list-item-action>
-                  <v-icon left>
-                    {{ link.icon }}
-                  </v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ link.text }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
-        </v-btn>
+      <v-spacer class="btn-container" text align="left" fix>
+        
+        
+          <div class="dropdown">
+            <button class="dropbtn">BEST
+            </button>
+            <div class="dropdown-content">
+              <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+              <a href=''>2월</a>
+              <a href=''>3월</a>
+              <a href=''>4월</a>
+              <a href=''>5월</a>
+             </div>
+          </div>
+        
         <v-btn text color="#000000">
           <span>BEST</span>
         </v-btn>
@@ -74,8 +53,7 @@
         v-if="isAuthenticated == false"
         text
         color="grey"
-        onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
-      >
+        onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'">
         <span>로그인</span>
       </v-btn>
       <v-btn
@@ -151,6 +129,10 @@ export default {
       ],
     };
   },
+
+    name: 'App',
+    components: {},
+
   computed: {
     ...mapState(['isAuthenticated']),
   },
