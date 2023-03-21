@@ -1,7 +1,6 @@
 export default {
-    isAuthenticated: false,
-    
     products: [],
     product: {},
 
+    isAuthenticated: false,
 }

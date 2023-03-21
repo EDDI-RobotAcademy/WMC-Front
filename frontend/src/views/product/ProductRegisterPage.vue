@@ -9,8 +9,8 @@
 import { mapActions } from 'vuex';
 import ProductRegisterForm from '../../components/product/ProductRegisterForm.vue';
 export default {
-    components: {ProductRegisterForm},
-    name: "JpaProductRegisterPage",
+    components: { ProductRegisterForm },
+    name: "ProductRegisterPage",
     methods: {
       ...mapActions ([
             'requestCreateProductToSpring'
@@ -18,7 +18,7 @@ export default {
         async onSubmit (payload) {
             await this.requestCreateProductToSpring(payload)
             await this.$router.push({
-                name: 'JpaProductListPage'
+                name: 'ProductListPage'
             })
         }
     }

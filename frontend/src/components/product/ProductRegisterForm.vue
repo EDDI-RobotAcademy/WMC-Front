@@ -32,7 +32,7 @@
   
   <script>
   export default {
-      name: "BoardRegisterForm",
+      name: "ProductRegisterForm",
       data () {
           return {
               productName: '상품명을 입력하세요.',
