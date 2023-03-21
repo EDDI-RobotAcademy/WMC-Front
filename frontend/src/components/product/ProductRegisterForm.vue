@@ -8,13 +8,7 @@
           </td>
         </tr>
         <tr>
-          <td>작성자</td>
-          <td>
-            <input type="text" v-model="writer"/>
-          </td>
-        </tr>
-        <tr>
-          <td>본문</td>
+          <td>상품 상세 설명</td>
           <td>
             <textarea cols="50" rows="20" v-model="content"/>
           </td>
@@ -42,15 +36,14 @@
       data () {
           return {
               productName: '상품명을 입력하세요.',
-              writer: '누구세요 ?',
               content: '내용을 입력하세요.',
               price: 0,
           }
       },
       methods: {
           onSubmit () {
-              const { productName, writer, content, price } = this
-              this.$emit('submit', { productName, writer, content, price })
+              const { productName, content, price } = this
+              this.$emit('submit', { productName, content, price })
           }
       }
   }

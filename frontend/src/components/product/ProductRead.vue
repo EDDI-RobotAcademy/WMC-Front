@@ -14,19 +14,13 @@
           </td>
         </tr>
         <tr>
-          <td>작성자</td>
-          <td>
-            <input type="text" :value="product.writer" readonly/>
-          </td>
-        </tr>
-        <tr>
           <td>등록일자</td>
           <td>
             <input type="text" :value="product.regDate" readonly/>
           </td>
         </tr>
         <tr>
-          <td>본문</td>
+          <td>상품 상세 설명</td>
           <td>
             <textarea cols="50" rows="20" :value="product.content" readonly/>
           </td>
