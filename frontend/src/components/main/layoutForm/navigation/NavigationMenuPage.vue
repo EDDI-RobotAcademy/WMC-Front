@@ -70,31 +70,50 @@
         </v-btn>
       </v-spacer>
 
-      <v-btn
-        v-if="isAuthenticated == false"
-        text
-        color="grey"
-        onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
-      >
-        <span>로그인</span>
-      </v-btn>
-      <v-btn
-        v-else
-        text
-        color="grey"
-        v-on:click="logout"
-        onclick="location.href='http://localhost:8080/#/'"
-      >
-        <span>로그아웃</span>
-      </v-btn>
-      <v-btn
-      v-if="isAuthenticated == false"
-        text
-        color="grey"
-        onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
-      >
-        <span>회원가입</span>
-      </v-btn>
+      <div class="right-box">
+        <div class="nav-util">
+          <v-icon> mdi-magnify</v-icon>
+          <v-btn large elevation="0" text @click="goCartPage">
+            <v-icon> mdi-cart-outline</v-icon>
+          </v-btn>
+        </div>
+        <v-btn
+          v-if="isAuthenticated == false"
+          text
+          color="grey"
+          onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
+        >
+          <span>로그인</span>
+        </v-btn>
+        <div class="nav-account">
+          <v-btn
+            v-if="isAuthenticated == true"
+            text
+            color="grey"
+            v-on:click="logout"
+            onclick="location.href='http://localhost:8080/#/'"
+          >
+            <span>로그아웃</span>
+          </v-btn>
+
+          <v-btn
+            v-if="isAuthenticated == false"
+            text
+            color="grey"
+            onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
+          >
+            <span>회원가입</span>
+          </v-btn>
+          <v-btn
+            v-if="isAuthenticated == true"
+            text
+            color="grey"
+            onclick="location.href='http://localhost:8080/my-page#/'"
+          >
+            <span>마이페이지</span>
+          </v-btn>
+        </div>
+      </div>
       <!-- <v-btn v-if="isAuthenticated == false" text color="grey" v-on:click="resign">
           <span>회원 탈퇴</span>
         </v-btn> -->
@@ -190,6 +209,10 @@ export default {
         this.$store.state.isAuthenticated = false;
       });
     },
+    goCartPage() {
+      this.$router.push({ name: 'CartView' });
+      this.showSearch = false;
+    },
   },
 };
 </script>
@@ -200,5 +223,14 @@ export default {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+}
+.right-box {
+  display: flex;
+  align-items: center;
+}
+.right-box .nav-util {
+  display: flex;
+  align-items: center;
+  margin-right: 45px;
 }
 </style>
