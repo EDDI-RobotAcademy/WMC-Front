@@ -131,30 +131,7 @@
         </div>
       </div>
 
-      <v-btn
-        v-if="isAuthenticated == false"
-        text
-        color="grey"
-        onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'">
-        <span>로그인</span>
-      </v-btn>
-      <v-btn
-        v-else
-        text
-        color="grey"
-        v-on:click="logout"
-        onclick="location.href='http://localhost:8080/#/'"
-      >
-        <span>로그아웃</span>
-      </v-btn>
-      <v-btn
-      v-if="isAuthenticated == false"
-        text
-        color="grey"
-        onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
-      >
-        <span>회원가입</span>
-      </v-btn>
+      
 
       <!-- <v-btn v-if="isAuthenticated == false" text color="grey" v-on:click="resign">
           <span>회원 탈퇴</span>
