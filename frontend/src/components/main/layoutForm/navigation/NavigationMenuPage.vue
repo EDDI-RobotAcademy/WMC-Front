@@ -16,37 +16,69 @@
 
       <v-spacer class="btn-container" text align="left" fix>
         
+        <div class="dropdown">
+          <button class="dropbtn">23SPRING
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
         
-          <div class="dropdown">
-            <button class="dropbtn">BEST
-            </button>
-            <div class="dropdown-content">
-              <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
-              <a href=''>2월</a>
-              <a href=''>3월</a>
-              <a href=''>4월</a>
-              <a href=''>5월</a>
-             </div>
-          </div>
+        <div class="dropdown">
+          <button class="dropbtn">COLLECTION
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">NEW
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">BEST
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">SHOPALL
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
         
-        <v-btn text color="#000000">
+        
+        
+        
+        <!--v-btn text color="#000000">
           <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
+        </v-btn-->
       </v-spacer>
 
       <v-btn
