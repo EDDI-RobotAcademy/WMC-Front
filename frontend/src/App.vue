@@ -34,13 +34,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 .dropbtn {
   background-color: white;
-  padding: 16px;
-  font-size: 16px;
+  padding: 20px;
+  font-size: 10px;
   border: none;
 }
 
@@ -54,13 +53,14 @@ export default {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 60px;
+  min-width: auto;
+  padding: 8px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 
 .dropdown-content a {
-  padding: 8px 16px;
+  margin-top: 10px;
   text-decoration: none;
   display: block;
 }
@@ -71,9 +71,12 @@ export default {
 
 .dropdown:hover .dropdown-content {
   display: block;
+
+
 }
 
 .dropdown:hover .dropbtn {
   background-color: #E0E0E0;
 }
+
 </style>

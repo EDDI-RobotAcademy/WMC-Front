@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <v-app-bar color="white" class="flex-grow-0" app>
-      <v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" />
+    <v-app-bar color="white" class="flex-grow-0" height="60" app>
+      <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
       <router-link to="/">
         <v-img
           :src="require('@/assets/logo.png')"
@@ -9,18 +9,23 @@
           max-width="40"
           class="mx2"
         />
+
       </router-link>
-      <v-toolbar-title class="text-uppercase text--darken-4">
+           
+      <v-toolbar-title class="text-uppercase text--darken-4" >
         <span>WMC</span>
       </v-toolbar-title>
+      
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <v-spacer class="btn-container" text align="left" fix>
-        
+
+      
+      <v-spacer class="btn-container" >
         <div class="dropdown">
           <button class="dropbtn">23SPRING
           </button>
           <div class="dropdown-content">
-            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href='http://localhost:8080/'>1월</a>
             <a href=''>2월</a>
             <a href=''>3월</a>
             <a href=''>4월</a>
@@ -71,8 +76,7 @@
             <a href=''>4월</a>
             <a href=''>5월</a>
            </div>
-        </div>
-        
+          </div>
         
         
         
@@ -108,9 +112,13 @@
       <!-- <v-btn v-if="isAuthenticated == false" text color="grey" v-on:click="resign">
           <span>회원 탈퇴</span>
         </v-btn> -->
+        
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="navigation_drawer">
+    
+    
+  
+    <!--v-navigation-drawer app v-model="navigation_drawer">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">WMC</v-list-item-title>
@@ -137,7 +145,8 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer-->
+    
   </nav>
 </template>
 
@@ -159,11 +168,17 @@ export default {
           route: '/board-list-page',
         },
       ],
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+          { title: 'About', icon: 'question_answer' },
+      ]
     };
   },
+  
 
     name: 'App',
     components: {},
+    
 
   computed: {
     ...mapState(['isAuthenticated']),
@@ -205,14 +220,15 @@ export default {
       });
     },
   },
-};
+}
 </script>
 
 <style>
 .btn-container {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 }
+
 </style>
