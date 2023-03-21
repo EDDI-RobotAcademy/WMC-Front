@@ -1,91 +1,121 @@
 <template>
-    <div class="shopping-cart">
-      <h2>Shopping Cart</h2>
-      <table>
+  <div>
+    <h3>Cart</h3>
+    <div class="remove-btn">
+      <v-btn @click="removeSelectedItems">Remove Selected Items</v-btn>
+    </div>
+    <v-simple-table>
+      <template v-slot:default>
         <thead>
           <tr>
-            <th>Item ID</th>
+            <th>
+              <v-checkbox
+                v-model="selectAll"
+                @change="toggleAllItems"
+              ></v-checkbox>
+            </th>
+            <th>Image</th>
+            <th>Item</th>
             <th>Quantity</th>
-            <th>Actions</th>
+            <th>Price</th>
+            <th>Subtotal</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(quantity, itemId) in items" :key="itemId">
-            <td>{{ itemId }}</td>
-            <td>{{ quantity }}</td>
+          <tr v-for="(item, index) in cartItems" :key="index">
             <td>
-              <button @click="updateItemQuantity(itemId, quantity - 1)">-</button>
-              <button @click="updateItemQuantity(itemId, quantity + 1)">+</button>
-              <button @click="removeItem(itemId)">Remove</button>
+              <v-checkbox v-model="item.selected"></v-checkbox>
             </td>
+            <td>
+              <v-img
+                :src="item.image"
+                alt="Product image"
+                max-width="50"
+                max-height="50"
+              />
+            </td>
+            <td>{{ item.name }}</td>
+            <td>
+              <v-text-field
+                type="number"
+                min="1"
+                v-model.number="item.quantity"
+                single-line
+                hide-details
+              ></v-text-field>
+            </td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.price * item.quantity }}</td>
           </tr>
         </tbody>
-      </table>
+      </template>
+    </v-simple-table>
+    <div class="total-info">
+      <p>Sum: {{ sum }}</p>
+      <p>Shipping fee: {{ shippingFee }}</p>
+      <p>Total: {{ sum + shippingFee }}</p>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        userId: "your_user_id", // Replace this with the actual user ID
-        items: {},
-      };
+    <v-btn color="grey" class="mr-3">Order All</v-btn>
+    <v-btn color="grey">Order Partly</v-btn>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectAll: false,
+      cartItems: [
+        {
+          name: 'Item 1',
+          quantity: 1,
+          price: 100,
+          selected: false,
+          image: 'https://via.placeholder.com/50',
+        },
+        {
+          name: 'Item 2',
+          quantity: 2,
+          price: 150,
+          selected: false,
+          image: 'https://via.placeholder.com/50',
+        },
+        {
+          name: 'Item 3',
+          quantity: 3,
+          price: 200,
+          selected: false,
+          image: 'https://via.placeholder.com/50',
+        },
+      ],
+      shippingFee: 50,
+    };
+  },
+  computed: {
+    sum() {
+      return this.cartItems.reduce(
+        (acc, item) => acc + (item.selected ? item.quantity * item.price : 0),
+        0
+      );
     },
-    methods: {
-      async fetchBasketItems() {
-        try {
-          const response = await fetch(`/basket/items?userId=${this.userId}`);
-          const data = await response.json();
-          this.items = data;
-        } catch (error) {
-          console.error("Error fetching basket items:", error);
-        }
-      },
-      async updateItemQuantity(itemId, newQuantity) {
-        if (newQuantity < 0) return;
-  
-        try {
-          await fetch(`/basket/update?userId=${this.userId}&itemId=${itemId}&quantity=${newQuantity}`, {
-            method: "POST",
-          });
-          this.items[itemId] = newQuantity;
-        } catch (error) {
-          console.error("Error updating item quantity:", error);
-        }
-      },
-      async removeItem(itemId) {
-        try {
-          await fetch(`/basket/remove?userId=${this.userId}&itemId=${itemId}`, {
-            method: "POST",
-          });
-          delete this.items[itemId];
-        } catch (error) {
-          console.error("Error removing item from basket:", error);
-        }
-      },
+  },
+  methods: {
+    toggleAllItems() {
+      this.cartItems.forEach((item) => (item.selected = this.selectAll));
     },
-    mounted() {
-      this.fetchBasketItems();
+    removeSelectedItems() {
+      this.cartItems = this.cartItems.filter((item) => !item.selected);
     },
-  };
-  </script>
-  
-  <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th,
-  td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  </style>
-  
+  },
+};
+</script>
+
+<style scoped>
+.total-info {
+  margin-top: 1rem;
+}
+.remove-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>
