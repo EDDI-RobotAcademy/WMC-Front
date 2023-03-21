@@ -3,6 +3,7 @@
     <div id="home">
       <nav>
         <router-link to="/"></router-link>
+        <router-link to="/product-list-page">상품 게시판</router-link> |
         
       </nav>
       <router-view/>
