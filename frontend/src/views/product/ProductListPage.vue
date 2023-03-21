@@ -4,7 +4,7 @@
         <router-link :to="{ name: 'ProductRegisterPage' }">
             상품등록
         </router-link>
-        <product-list @products="products"/>
+        <product-list :products="products"/>
     </v-container>
 </template>
 
