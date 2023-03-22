@@ -2,8 +2,6 @@
   <v-app>
     <navigation-menu-page/>
     <v-main>
-      <MainBannerCarouselPage/>
-      <BodyBannerCarouselPage/>
       <router-view/>
       <TopButton/>
     </v-main>
