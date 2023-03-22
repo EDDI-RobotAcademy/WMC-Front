@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <v-app-bar color="white" class="flex-grow-0" app>
-      <v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" />
+    <v-app-bar color="white" class="flex-grow-0" height="60" app>
+      <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
       <router-link to="/">
         <v-img
           :src="require('@/assets/logo.png')"
@@ -9,98 +9,140 @@
           max-width="40"
           class="mx2"
         />
+
       </router-link>
-      <v-toolbar-title class="text-uppercase text--darken-4">
+           
+      <v-toolbar-title class="text-uppercase text--darken-4" >
         <span>WMC</span>
       </v-toolbar-title>
+      
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <v-spacer class="btn-container" text align="center" fix>
-        <v-btn
-          text
-          color="#FF4081"
-          @mouseover="navigation_drop_table = !navigation_drop_table"
-        >
+
+      
+      <v-spacer class="btn-container" >
+        <div class="dropdown">
+          <button class="dropbtn">23SPRING
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        
+        <div class="dropdown">
+          <button class="dropbtn">COLLECTION
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">NEW
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">BEST
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">SHOPALL
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>2월</a>
+            <a href=''>3월</a>
+            <a href=''>4월</a>
+            <a href=''>5월</a>
+           </div>
+          </div>
+        
+        
+        
+        <!--v-btn text color="#000000">
           <span>BEST</span>
-          <v-navigation-drawer app v-model="navigation_drawer">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="text-h6">WMC</v-list-item-title>
-                <v-list-item-subtitle>의류</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-divider></v-divider>
-            <v-list nav dense>
-              <v-list-item
-                v-for="link in links"
-                :key="link.name"
-                router
-                :to="link.route"
-              >
-                <v-list-item-action>
-                  <v-icon left>
-                    {{ link.icon }}
-                  </v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ link.text }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-navigation-drawer>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
-        <v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn>
+        </v-btn-->
       </v-spacer>
 
-      <v-btn
-        v-if="isAuthenticated == false"
-        text
-        color="grey"
-        onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
-      >
-        <span>로그인</span>
-      </v-btn>
-      <v-btn
-        v-else
-        text
-        color="grey"
-        v-on:click="logout"
-        onclick="location.href='http://localhost:8080/#/'"
-      >
-        <span>로그아웃</span>
-      </v-btn>
-      <v-btn
-      v-if="isAuthenticated == false"
-        text
-        color="grey"
-        onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
-      >
-        <span>회원가입</span>
-      </v-btn>
+
+      <div class="right-box">
+        <div class="nav-util">
+          <v-icon> mdi-magnify</v-icon>
+          <v-btn large elevation="0" text @click="goCartPage">
+            <v-icon> mdi-cart-outline</v-icon>
+          </v-btn>
+        </div>
+        <v-btn
+          v-if="isAuthenticated == false"
+          text
+          color="grey"
+          onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
+        >
+          <span>로그인</span>
+        </v-btn>
+        <div class="nav-account">
+          <v-btn
+            v-if="isAuthenticated == true"
+            text
+            color="grey"
+            v-on:click="logout"
+            onclick="location.href='http://localhost:8080/#/'"
+          >
+            <span>로그아웃</span>
+          </v-btn>
+
+          <v-btn
+            v-if="isAuthenticated == false"
+            text
+            color="grey"
+            onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
+          >
+            <span>회원가입</span>
+          </v-btn>
+          <v-btn
+            v-if="isAuthenticated == true"
+            text
+            color="grey"
+            onclick="location.href='http://localhost:8080/my-page#/'"
+          >
+            <span>마이페이지</span>
+          </v-btn>
+        </div>
+      </div>
+
+      
+
       <!-- <v-btn v-if="isAuthenticated == false" text color="grey" v-on:click="resign">
           <span>회원 탈퇴</span>
         </v-btn> -->
+        
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="navigation_drawer">
+    
+    
+  
+    <!--v-navigation-drawer app v-model="navigation_drawer">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">WMC</v-list-item-title>
@@ -127,7 +169,8 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer-->
+    
   </nav>
 </template>
 
@@ -149,8 +192,18 @@ export default {
           route: '/board-list-page',
         },
       ],
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+          { title: 'About', icon: 'question_answer' },
+      ]
     };
   },
+  
+
+    name: 'App',
+    components: {},
+    
+
   computed: {
     ...mapState(['isAuthenticated']),
   },
@@ -190,15 +243,32 @@ export default {
         this.$store.state.isAuthenticated = false;
       });
     },
+    goCartPage() {
+      this.$router.push({ name: 'CartView' });
+      this.showSearch = false;
+    },
   },
-};
+}
 </script>
 
 <style>
 .btn-container {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 }
+
+.right-box {
+  display: flex;
+  align-items: center;
+}
+.right-box .nav-util {
+  display: flex;
+  align-items: center;
+  margin-right: 45px;
+}
+
+
+
 </style>
