@@ -1,16 +1,18 @@
 <template>
-    <div class="detailWrap mt-15" >
-   <cart-form @deleteCartItem="deleteCartItem"/>
+  <div class="detailWrap mt-15">
+    <cart-Form />
   </div>
 </template>
 
 <script>
 import CartForm from "@/components/order/CartForm";
-export default {
 
-}
+export default {
+  components: {
+    CartForm,
+  },
+};
 </script>
 
 <style>
-
 </style>
