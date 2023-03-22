@@ -13,8 +13,7 @@
 import Footer from '@/components/main/layoutForm/Footer.vue';
 import NavigationMenuPage from '@/components/main/layoutForm/navigation/NavigationMenuPage.vue';
 import TopButton from '@/components/pageButton/TopButton.vue';
-import MainBannerCarouselPage from './components/carousel/MainBannerCarouselPage.vue';
-import BodyBannerCarouselPage from './components/carousel/BodyBannerCarouselPage.vue';
+
 
 //import NavigationView from '@/views/lecture/layoutForm/navigation/NavigationView.vue';
 export default {
@@ -26,8 +25,7 @@ export default {
     NavigationMenuPage,
     Footer,
     TopButton,
-    MainBannerCarouselPage,
-    BodyBannerCarouselPage,
+
 },
 };
 </script>
