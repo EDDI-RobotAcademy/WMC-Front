@@ -3,9 +3,8 @@
     <div id="home">
       <nav>
         <router-link to="/"></router-link>
-        <router-link to="/product-list-page">상품 게시판</router-link> |
-
-        
+        <router-link to="/product-list-page">상품 게시판</router-link> 
+        <ProductListPage/>
       </nav>
       <router-view/>
     </div>
@@ -19,6 +18,7 @@
 <script>
 import MainBannerCarouselPage from '@/components/carousel/MainBannerCarouselPage.vue';
 import BodyBannerCarouselPage from '@/components/carousel/BodyBannerCarouselPage.vue';
+import ProductListPage from '@/views/product/ProductListPage.vue'
 
   export default {
     name: 'Home',
@@ -26,6 +26,8 @@ import BodyBannerCarouselPage from '@/components/carousel/BodyBannerCarouselPage
     components: {
      MainBannerCarouselPage,
      BodyBannerCarouselPage,
+     ProductListPage,
+     
     },
   }
 </script>
