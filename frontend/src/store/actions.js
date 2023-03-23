@@ -10,7 +10,7 @@ export default {
     formData.append('price', price);
     formData.append('stock', stock);
     for (let idx = 0; idx < files.length; idx++) {
-      formData.append('imageDataList[' + idx + ']', files[idx]);
+      formData.append('fileList[' + idx + ']', files[idx]);
     }
     return axios
       .post('http://localhost:7777/product/register', formData, {
