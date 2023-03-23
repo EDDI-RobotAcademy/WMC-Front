@@ -1,53 +1,93 @@
 <template>
-    <form @submit.prevent="onSubmit">
-      <table>
-        <tr>
-          <td>상품명</td>
-          <td>
-            <input type="text" v-model="productName"/>
-          </td>
-        </tr>
-        <tr>
-          <td>상품 상세 설명</td>
-          <td>
-            <textarea cols="50" rows="20" v-model="content"/>
-          </td>
-        </tr>
-        <tr>
-          <td>가격</td>
-          <td>
-            <input type="number" v-model="price"/>
-          </td>
-        </tr>
-      </table>
-  
-      <div>
-        <button type="submit">등록</button>
-        <router-link :to="{ name: 'ProductListPage' }">
-          취소
-        </router-link>
-      </div>
-    </form>
-  </template>
-  
-  <script>
-  export default {
-      name: "ProductRegisterForm",
-      data () {
-          return {
-              productName: '상품명을 입력하세요.',
-              content: '내용을 입력하세요.',
-              price: 0,
-          }
-      },
-      methods: {
-          onSubmit () {
-              const { productName, content, price } = this
-              this.$emit('submit', { productName, content, price })
-          }
-      }
-  }
-  </script>
-  
-  <style>
-  </style>
+  <v-app>
+    <v-container class="product-registration-page">
+      <v-row>
+        <v-col cols="12" sm="8" md="6">
+          <h1>상품 등록</h1>
+          <v-form @submit.prevent="registerProduct">
+            <v-text-field
+              label="상품명"
+              v-model="name"
+              required
+              outlined
+              class="mt-3"
+            ></v-text-field>
+            <v-textarea
+              label="상품설명"
+              v-model="description"
+              required
+              outlined
+              class="mt-3"
+            ></v-textarea>
+            <v-text-field
+              label="가격"
+              v-model="price"
+              required
+              outlined
+              type="number"
+              class="mt-3"
+            ></v-text-field>
+            <v-text-field
+              label="재고"
+              v-model="stock"
+              required
+              outlined
+              type="number"
+              class="mt-3"
+            ></v-text-field>
+            <v-file-input
+              label="상품 사진 업로드"
+              multiple
+              show-size
+              @change="handleFileUpload($event)"
+              class="mt-3"
+            ></v-file-input>
+            <v-btn type="submit" color="primary" class="mb-3 mt-3">상품등록하기</v-btn>
+            <router-link to="{ name: 'ProductListPage' }">
+              <v-btn color="secondary" outlined class="mt-3">취소</v-btn>
+            </router-link>
+          </v-form>
+        </v-col>
+        <v-col cols="12" sm="4" md="6">
+          <h2 class="mt-3">Selected Files</h2>
+          <v-row>
+            <v-col v-for="(url, index) in imageUrls" :key="index" cols="6" sm="4">
+              <v-img :src="url" :alt="'Image ' + index" aspect-ratio="1"></v-img>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: '상품명',
+      description: 'blah blah blah',
+      price: 12345,
+      stock: 0,
+      files: [],
+      imageUrls: [],
+    };
+  },
+  methods: {
+    registerProduct() {
+      const { name, description, price, stock, files } = this;
+      this.$emit('submit', { name, description, price, stock, files });
+    },
+    handleFileUpload(files) {
+      this.files = files;
+      this.imageUrls = Array.from(files).map((file) => URL.createObjectURL(file));
+    },
+  },
+};
+</script>
+
+<style scoped>
+.mt-3 {
+  margin-top: 1rem;
+}
+</style>
