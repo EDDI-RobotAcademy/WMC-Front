@@ -33,50 +33,83 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
+  padding: 10px;
+  background-color: #EFEBE9;
 }
 
 .dropbtn {
-  background-color: white;
-  padding: 20px;
+  background-color: #D7CCC8;
+  padding: 12px;
   font-size: 10px;
-  border: none;
+  border-radius: 10%;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+ 
 }
 
 .dropdown-content {
-  
+  color: black;
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
-  min-width: auto;
-  padding: 8px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  background-color: #D7CCC8;
+  min-width: 50px;
+  padding: 10px;
+  box-shadow: none;
+  z-index: auto;
+  
+  
 }
 
 .dropdown-content a {
   margin-top: 10px;
   text-decoration: none;
   display: block;
+  min-width:inherit;
+  border-radius: 10%;
 }
 
 .dropdown-content a:hover {
-  background-color: #E0E0E0;
+  background-color: #fafafa;
+  width: auto;
+  align-content: center;
+  
+  border-radius: 10%;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content{
+  color:black;
   display: block;
+  width: auto;
+  align-content: center;
+  border-radius: 7%;
+  
+}
+.dropdown:hover .dropdown-content a:hover{
+  background-color: #FAFAFA;
+  
+}
 
-
+.dropdown:hover .dropdown-content a{
+  background-color: #D7CCC8;
+  padding: auto;
+  text-align: center;
+  display: block;
+  color:black;
+  font-size: 10px;
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #E0E0E0;
+  background-color: #FAFAFA;
+
+  min-width: auto;
+  padding: auto;
+  box-shadow: none;
+  z-index: auto;
+  
 }
 
 </style>
