@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <h2>쇼핑 하기</h2>
+        <h2>SAPPUN</h2>
         <product-list :products="products"/>
     </v-container>
 </template>
