@@ -3,19 +3,20 @@
     <div id="home">
       <nav>
         <router-link to="/"></router-link>
-        <router-link to="/product-list-page">상품 게시판</router-link> |
-        
+        <ProductListPage/>
       </nav>
       <router-view/>
     </div>
   </v-container>
 </template>
 <script>
+import ProductListPage from '@/views/product/ProductListPage.vue'
 
   export default {
     name: 'Home',
 
     components: {
+      ProductListPage,
     },
   }
 </script>
