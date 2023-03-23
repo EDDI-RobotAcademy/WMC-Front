@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav :class="{'hidden': isNavHidden}">
     <v-app-bar color="white" class="flex-grow-0" height="60" app>
       <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
       <router-link to="/">
@@ -77,12 +77,7 @@
             <a href=''>5월</a>
            </div>
           </div>
-        
-        
-        
-        <!--v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn-->
+
       </v-spacer>
 
 
@@ -138,39 +133,6 @@
         </v-btn> -->
         
     </v-app-bar>
-
-    
-    
-  
-    <!--v-navigation-drawer app v-model="navigation_drawer">
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">WMC</v-list-item-title>
-          <v-list-item-subtitle>의류</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-divider></v-divider>
-      <v-list nav dense>
-        <v-list-item
-          v-for="link in links"
-          :key="link.name"
-          router
-          :to="link.route"
-        >
-          <v-list-item-action>
-            <v-icon left>
-              {{ link.icon }}
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ link.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer-->
-    
   </nav>
 </template>
 
@@ -183,6 +145,7 @@ export default {
     return {
       isTrue: false,
       navigation_drawer: false,
+      isNavHidden: false,
       links: [
         { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
         {
@@ -208,13 +171,18 @@ export default {
     ...mapState(['isAuthenticated']),
   },
   mounted() {
+    window.addEventListener('scroll', this.handleScroll);
     if (localStorage.getItem('userInfo')) {
       this.$store.state.isAuthenticated = true;
     } else {
       this.$store.state.isAuthenticated = false;
     }
+    
   },
   methods: {
+    handleScroll(){
+      this.isNavHidden = window.pageYOffset > 0;
+    },
     clickToggle() {
       this.isTrue = !this.isTrue;
     },
@@ -268,7 +236,9 @@ export default {
   align-items: center;
   margin-right: 45px;
 }
-
+.hidden {
+  display: none;
+}
 
 
 </style>
