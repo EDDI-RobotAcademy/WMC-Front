@@ -2,6 +2,8 @@
   <v-container>
     <div id="home">
       <nav>
+        <header>
+        </header>
         <router-link to="/"></router-link>
         <ProductListPage/>
       </nav>
