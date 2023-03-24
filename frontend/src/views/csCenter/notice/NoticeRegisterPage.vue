@@ -4,7 +4,7 @@
         <notice-register-form @submit="onSubmit" />
     </v-container>
 </template>
-  
+
 <script>
 
 import NoticeRegisterForm from '../../../components/csCenter/notice/NoticeRegisterForm.vue'
