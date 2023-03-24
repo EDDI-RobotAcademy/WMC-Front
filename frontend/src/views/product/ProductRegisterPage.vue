@@ -50,11 +50,9 @@
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
-    background-color: #333;
-    color: #fff;
+    background-color: white;
+    color: white;
     cursor: pointer;
-  }
-  button:hover {
   }
   </style>
   
