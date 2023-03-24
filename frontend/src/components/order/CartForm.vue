@@ -24,7 +24,10 @@
         <tbody>
           <tr v-for="(item, index) in cartItems" :key="index">
             <td>
-              <v-checkbox v-model="item.selected"></v-checkbox>
+              <v-checkbox
+                v-model="item.selected"
+                @change="updateSum"
+              ></v-checkbox>
             </td>
             <td>
               <v-img
@@ -61,50 +64,52 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
+      cartItems: [],
       selectAll: false,
-      cartItems: [
-        {
-          name: 'Item 1',
-          quantity: 1,
-          price: 100,
-          selected: false,
-          image: 'https://via.placeholder.com/50',
-        },
-        {
-          name: 'Item 2',
-          quantity: 2,
-          price: 150,
-          selected: false,
-          image: 'https://via.placeholder.com/50',
-        },
-        {
-          name: 'Item 3',
-          quantity: 3,
-          price: 200,
-          selected: false,
-          image: 'https://via.placeholder.com/50',
-        },
-      ],
       shippingFee: 50,
+      sum: 0,
     };
   },
-  computed: {
-    sum() {
-      return this.cartItems.reduce(
-        (acc, item) => acc + (item.selected ? item.quantity * item.price : 0),
-        0
-      );
+  created() {
+    const token = JSON.parse(localStorage.getItem('userInfo'));
+    axios.post('http://localhost:7777/cart/validate', token).then((res) => {
+      if (res.data) {
+        console.log('인증된 사용자 입니다.');
+        const cartKey = `cart_${res.data}`;
+        const cartItems = localStorage.getItem(cartKey)
+          ? JSON.parse(localStorage.getItem(cartKey))
+          : [];
+        this.cartItems = cartItems;
+      }
+    });
+  },
+
+  watch: {
+    cartItems: {
+      deep: true,
+      handler() {
+        this.updateSum();
+      },
     },
   },
+
   methods: {
     toggleAllItems() {
       this.cartItems.forEach((item) => (item.selected = this.selectAll));
+      this.updateSum();
     },
     removeSelectedItems() {
       this.cartItems = this.cartItems.filter((item) => !item.selected);
+    },
+    updateSum() {
+      this.sum = this.cartItems.reduce(
+        (acc, item) => acc + (item.selected ? item.quantity * item.price : 0),
+        0
+      );
     },
   },
 };
