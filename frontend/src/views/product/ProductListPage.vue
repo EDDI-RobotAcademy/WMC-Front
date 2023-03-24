@@ -1,9 +1,6 @@
 <template>
     <v-container>
-        <h2>상품 리스트 보여주기</h2>
-        <router-link :to="{ name: 'ProductRegisterPage' }">
-            상품등록
-        </router-link>
+        <h2>SAPPUN</h2>
         <product-list :products="products"/>
     </v-container>
 </template>
@@ -16,9 +13,12 @@ export default {
     components: { ProductList },
     name: "ProductListPage",
     computed: {
-      ...mapState([
-        'products'
-      ]),
+  ...mapState({
+    products: state => state.products.map(product => ({
+      ...product,
+      imageDataList: product.imageDataList
+    }))
+  })
     },
     mounted() {
       this.requestProductListToSpring()

@@ -1,6 +1,7 @@
 <template>
-  <nav>
-    <v-app-bar color="white" class="flex-grow-0" height="60" app>
+
+  <nav :class="{'hidden': isNavHidden}">
+    <v-app-bar color="#D7CCC8" class="flex-grow-0" height="60" app>
       <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
       <router-link to="/">
         <v-img
@@ -13,12 +14,12 @@
       </router-link>
            
       <v-toolbar-title class="text-uppercase text--darken-4" >
-        <span>WMC</span>
+        <span></span>
       </v-toolbar-title>
       
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
+      
       
       <v-spacer class="btn-container" >
         <div class="dropdown">
@@ -48,7 +49,7 @@
           <button class="dropbtn">NEW
           </button>
           <div class="dropdown-content">
-            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href='http://localhost:8080/sign-in-test#/sign-in' color="black">1월</a>
             <a href=''>2월</a>
             <a href=''>3월</a>
             <a href=''>4월</a>
@@ -70,19 +71,13 @@
           <button class="dropbtn">SHOPALL
           </button>
           <div class="dropdown-content">
-            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href='http://localhost:8080/#/product-list-page'>전체상품</a>
             <a href=''>2월</a>
             <a href=''>3월</a>
             <a href=''>4월</a>
             <a href=''>5월</a>
            </div>
           </div>
-        
-        
-        
-        <!--v-btn text color="#000000">
-          <span>BEST</span>
-        </v-btn-->
       </v-spacer>
 
 
@@ -93,31 +88,14 @@
             <v-icon> mdi-cart-outline</v-icon>
           </v-btn>
         </div>
-        <v-btn
-          v-if="isAuthenticated == false"
-          text
-          color="grey"
-          onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
-        >
+        <v-btn v-if="isAuthenticated == false" text color="black" onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'">
           <span>로그인</span>
         </v-btn>
         <div class="nav-account">
-          <v-btn
-            v-if="isAuthenticated == true"
-            text
-            color="grey"
-            v-on:click="logout"
-            onclick="location.href='http://localhost:8080/#/'"
-          >
+          <v-btn v-if="isAuthenticated == true" text color="black"  v-on:click="logout" onclick="location.href='http://localhost:8080/#/'">
             <span>로그아웃</span>
           </v-btn>
-
-          <v-btn
-            v-if="isAuthenticated == false"
-            text
-            color="grey"
-            onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
-          >
+          <v-btn v-if="isAuthenticated == false" text color="black" onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'" >
             <span>회원가입</span>
           </v-btn>
           <v-btn
@@ -138,39 +116,6 @@
         </v-btn> -->
         
     </v-app-bar>
-
-    
-    
-  
-    <!--v-navigation-drawer app v-model="navigation_drawer">
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">WMC</v-list-item-title>
-          <v-list-item-subtitle>의류</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-divider></v-divider>
-      <v-list nav dense>
-        <v-list-item
-          v-for="link in links"
-          :key="link.name"
-          router
-          :to="link.route"
-        >
-          <v-list-item-action>
-            <v-icon left>
-              {{ link.icon }}
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ link.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer-->
-    
   </nav>
 </template>
 
@@ -183,6 +128,7 @@ export default {
     return {
       isTrue: false,
       navigation_drawer: false,
+      isNavHidden: false,
       links: [
         { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
         {
@@ -199,6 +145,7 @@ export default {
     };
   },
   
+  
 
     name: 'App',
     components: {},
@@ -208,13 +155,18 @@ export default {
     ...mapState(['isAuthenticated']),
   },
   mounted() {
+    window.addEventListener('scroll', this.handleScroll);
     if (localStorage.getItem('userInfo')) {
       this.$store.state.isAuthenticated = true;
     } else {
       this.$store.state.isAuthenticated = false;
     }
+    
   },
   methods: {
+    handleScroll(){
+      this.isNavHidden = window.pageYOffset > 0;
+    },
     clickToggle() {
       this.isTrue = !this.isTrue;
     },
@@ -252,23 +204,42 @@ export default {
 </script>
 
 <style>
+
+
+.v-main {
+}
+
 .btn-container {
+
+  padding:auto;
   display: flex;
   flex-wrap: nowrap;
   justify-content: left;
   align-items: center;
+  
 }
 
 .right-box {
+  background-color: #D7CCC8;
+  padding: auto;
+  text-align: center;
+  display: block;
+  color:black;
+  font-size: 10px;
   display: flex;
   align-items: center;
 }
 .right-box .nav-util {
+  
   display: flex;
   align-items: center;
   margin-right: 45px;
-}
+  padding:auto;
 
+}
+.hidden {
+  display: none;
+}
 
 
 </style>

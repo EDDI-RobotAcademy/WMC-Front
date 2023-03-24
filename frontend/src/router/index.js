@@ -34,6 +34,7 @@ const routes = [
     path: "/cart",
     name: "CartView",
     component: CartView,
+  },
   {
     path: '/product-register-page',
     name: 'ProductRegisterPage',
