@@ -22,7 +22,7 @@ export default {
   components: {
     NavigationMenuPage,
     Footer,
-    TopButton
+    TopButton,
   },
 };
 </script>
