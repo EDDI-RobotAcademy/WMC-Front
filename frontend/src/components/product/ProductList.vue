@@ -39,23 +39,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-card class="mt-5">
-          <v-card-title>Cart</v-card-title>
-          <v-list>
-            <v-list-item v-for="(item, index) in cart" :key="index">
-              <v-list-item-title
-                >{{ item.name }} - Quantity: {{ item.quantity }} - Total: won{{
-                  item.price * item.quantity
-                }}</v-list-item-title
-              >
-            </v-list-item>
-          </v-list>
-          <v-card-subtitle>Total: {{ total }}won</v-card-subtitle>
-        </v-card>
-      </v-col>
-    </v-row>
+
   </v-container>
 </template>
 

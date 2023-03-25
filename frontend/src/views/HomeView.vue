@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <MainBannerCarouselPage1/>
+      <MainBannerCarouselPage/>
     </div>
     <v-container>
       <div id="home">
@@ -18,18 +18,14 @@
     </div>
 </template>
 <script>
-import MainBannerCarouselPage1 from '@/components/carousel/MainBannerCarouselPage1.vue';
-import BodyBannerCarouselPage from '@/components/carousel/BodyBannerCarouselPage.vue';
+import MainBannerCarouselPage from '@/components/carousel/MainBannerCarouselPage.vue';
 import ProductListPage from '@/views/product/ProductListPage.vue'
-import ReviewListPage from '@/components/reviewBoard/ReviewListForm.vue';
 
   export default {
     name: 'Home',
     
     components: {
-     MainBannerCarouselPage1,
-     BodyBannerCarouselPage,
-     ReviewListPage,
+     MainBannerCarouselPage,
      ProductListPage,
      
     },
