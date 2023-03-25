@@ -1,26 +1,16 @@
 <template>
- <div>
-  <div>
-    <MainBannerCarouselPage1/>
-
-  </div>
-  <div>
-    <v-container>
-      <div id="home">
-        <nav>
-          <router-link to="/"></router-link>
-          <router-link to="/product-list-page">상품 게시판</router-link><br>
-          <router-link to="/review-list-page">리뷰 게시판</router-link> 
-
-        </nav>
-        <router-view/>
-      </div>
-    </v-container>
-  </div>
-  <div>
-    <BodyBannerCarouselPage/> 
-  </div>
-</div> 
+  <v-container>
+    <div id="home">
+      <nav>
+        <header>
+        </header>
+        <router-link to="/"></router-link>
+        <router-link to="/notice-list" style="color: black;">공지사항</router-link>
+        <ProductListPage/>
+      </nav>
+      <router-view/>
+    </div>
+  </v-container>
 </template>
 <script>
 import MainBannerCarouselPage1 from '@/components/carousel/MainBannerCarouselPage1.vue';
@@ -30,7 +20,7 @@ import ReviewListPage from '@/components/reviewBoard/ReviewListForm.vue';
 
   export default {
     name: 'Home',
-
+    
     components: {
      MainBannerCarouselPage1,
      BodyBannerCarouselPage,
