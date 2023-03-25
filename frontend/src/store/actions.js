@@ -59,6 +59,3 @@ requestNoticeListToSpring ({ commit }) {
   
 };
 
-
-
-
