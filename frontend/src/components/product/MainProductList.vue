@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-       
+        </router-link>
       </v-col>
     </v-row>
     <v-row>
@@ -13,23 +13,24 @@
       </v-col>
       <v-col
         v-else
-        v-for="(mainProduct, index) in mainProducts"
-        :key="mainProduct.mainProductId"
+        v-for="(product, index) in products"
+        :key="product.productId"
         cols="12"
         sm="6"
         md="4"
       >
         <v-card>
           <v-img
-            :src="mainProduct.firstPhoto ? getImagePath(mainProduct.firstPhoto) : ''"
+            :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
             aspect-ratio="1"
             class="grey lighten-2"
           ></v-img>
 
-          <v-card-title>{{ mainProduct.name }}</v-card-title>
-          <v-card-text>{{ mainProduct.description }}</v-card-text>
-          <v-card-subtitle>{{ mainProduct.price }}₩</v-card-subtitle>
+          <v-card-title>{{ product.name }}</v-card-title>
+          <v-card-text>{{ product.description }}</v-card-text>
+          <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
           <v-card-actions>
+            
           </v-card-actions>
         </v-card>
       </v-col>
@@ -60,7 +61,7 @@ export default {
     };
   },
   created() {
-    console.log('mainProducts:', this.mainProducts);
+    console.log('products:', this.products);
   },
   computed: {
     ...mapState(['isAuthenticated']),
