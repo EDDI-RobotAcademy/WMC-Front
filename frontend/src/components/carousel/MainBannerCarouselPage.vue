@@ -1,6 +1,6 @@
 <template>
   <div>
-          <v-carousel hide-delimiters cycle :interval="3000">
+          <v-carousel hide-delimiters cycle :interval="5000">
             <v-carouserl-items>
               <v-carousel-item src="@/assets/banner/banner1.jpg" cover />
               <v-carousel-item src="@/assets/banner/banner2.jpg" cover />
