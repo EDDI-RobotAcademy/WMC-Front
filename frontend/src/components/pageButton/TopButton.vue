@@ -7,9 +7,9 @@ export default {
  methods: {
    handleScroll() {
      if (window.scrollY > 100) {
-       this.$refs.btnGotop.classList.add("show");
+       this.$refs.btnGotop.style.display = "block";
      } else {
-      this.$refs.btnGotop.classList.remove("show");
+       this.$refs.btnGotop.style.display = "none";
      }
    },
    scrollTop() {
@@ -20,7 +20,6 @@ export default {
    }
  },
  mounted() {
-   this.handleScroll();
    window.addEventListener("scroll", this.handleScroll);
  },
  destroyed() {
@@ -42,14 +41,7 @@ export default {
  cursor: pointer;
  padding: 15px 20px;
  border-radius: 100%;
- transition: opacity 0.3s ease-in-out;
- opacity: 0;
 }
-
-.btn_gotop.show {
- opacity: 1;
-}
-
 .btn_gotop:hover {
  background-color: #555;
 }
