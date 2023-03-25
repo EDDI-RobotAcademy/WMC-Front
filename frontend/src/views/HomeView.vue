@@ -1,16 +1,21 @@
 <template>
-  <v-container>
-    <div id="home">
-      <nav>
-        <header>
-        </header>
-        <router-link to="/"></router-link>
-        <router-link to="/notice-list" style="color: black;">공지사항</router-link>
-        <ProductListPage/>
-      </nav>
-      <router-view/>
+  <div>
+    <div>
+      <MainBannerCarouselPage1/>
     </div>
-  </v-container>
+    <v-container>
+      <div id="home">
+        <nav>
+          <header>
+          </header>
+          <router-link to="/"></router-link>
+          <router-link to="/notice-list" style="color: black;">공지사항</router-link>
+          <ProductListPage/>
+        </nav>
+        <router-view/>
+      </div>
+    </v-container>
+    </div>
 </template>
 <script>
 import MainBannerCarouselPage1 from '@/components/carousel/MainBannerCarouselPage1.vue';
