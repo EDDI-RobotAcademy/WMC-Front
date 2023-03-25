@@ -5,8 +5,12 @@ import SignUpView from '@/views/account/SignUpView.vue'
 import SignInView from '@/views/account/SignInView.vue'
 import ProductRegisterPage from '@/views/product/ProductRegisterPage.vue'
 import ProductListPage from '@/views/product/ProductListPage.vue'
+import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
+import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
+import NoticeReadPage from "@/views/csCenter/notice/NoticeListPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import CartView from "@/views/order/CartView";
+
 
 Vue.use(VueRouter)
 
@@ -45,6 +49,21 @@ const routes = [
     path: '/product-list-page',
     name: 'ProductListPage',
     component: ProductListPage
+  },
+  {
+    path: '/notice-list',
+    name: 'NoticeListPage',
+    component: NoticeListPage
+  },
+  {
+    path: '/notice-register',
+    name: 'NoticeRegisterPage',
+    component: NoticeRegisterPage
+  },
+  {
+    path: '/notice-read',
+    name: 'NoticeReadPage',
+    component: NoticeReadPage
   },
 
 ]
