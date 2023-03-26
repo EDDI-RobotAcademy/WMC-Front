@@ -1,42 +1,30 @@
 <template>
+  <div class="main-container">
   <v-container>
     <v-row>
-      <v-col>
-        </router-link>
-      </v-col>
-    </v-row>
-    <v-row>
       <v-col
-        v-if="!products || (Array.isArray(products) && products.length === 0)"
-      >
-        현재 등록된 상품이 없습니다!
-      </v-col>
-      <v-col
-        v-else
         v-for="(product, index) in products"
         :key="product.productId"
-        cols="12"
-        sm="6"
-        md="4"
-      >
-        <v-card>
+        cols="8"
+        sm="3"
+        md="3"
+        >
+          <v-card>
           <v-img
             :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
             aspect-ratio="1"
-            class="grey lighten-2"
-          ></v-img>
-
-          <v-card-title>{{ product.name }}</v-card-title>
-          <v-card-text>{{ product.description }}</v-card-text>
-          <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
-          <v-card-actions>
+            class="grey lighten-3"
+            ></v-img>
             
-          </v-card-actions>
-        </v-card>
+            <v-card-title>{{ product.name }}</v-card-title>
+            <v-card-actions>
+              
+            </v-card-actions>
+          </v-card>
       </v-col>
     </v-row>
-
   </v-container>
+</div>
 </template>
 
 <script>
@@ -130,24 +118,10 @@ export default {
 </script>
 
 <style>
-.shopping-mall {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+.main-container {
+  width: 100%;
+  position: relative;
 }
-.products-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-.product {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-}
-.cart-container {
-  margin-top: 50px;
-}
+
 </style>

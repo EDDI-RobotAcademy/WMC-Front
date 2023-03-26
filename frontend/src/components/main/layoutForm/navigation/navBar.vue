@@ -61,7 +61,7 @@
           <button class="dropbtn">BEST
           </button>
           <div class="dropdown-content">
-            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
+            <a href=''>1월</a>
             <a href=''>2월</a>
             <a href=''>3월</a>
             <a href=''>4월</a>
@@ -73,10 +73,13 @@
           </button>
           <div class="dropdown-content">
             <a href='http://localhost:8080/#/product-list-page'>전체상품</a>
-            <a href=''>2월</a>
-            <a href=''>3월</a>
-            <a href=''>4월</a>
-            <a href=''>5월</a>
+           </div>
+          </div>
+        <div class="dropdown">
+          <button class="dropbtn">CS CENTER
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/#/notice-list'>공지사항</a>
            </div>
           </div>
         
@@ -240,7 +243,7 @@ export default {
 .dropdown {
   position: relative;
   display: inline-block;
- 
+  
 }
 
 
@@ -253,6 +256,7 @@ export default {
   box-shadow: none;
   z-index: auto;
   
+  background-color: #fff;
   
 }
 

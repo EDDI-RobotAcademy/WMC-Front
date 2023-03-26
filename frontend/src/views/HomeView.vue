@@ -8,7 +8,7 @@
         <nav>
           <header>
           </header>
-          <router-link to="/notice-list" style="color: black;">공지사항</router-link>
+          <router-link></router-link>
           <MainProductListPage/>
         </nav>
         <router-view/>
