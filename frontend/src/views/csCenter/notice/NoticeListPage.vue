@@ -102,17 +102,12 @@ export default {
   height: 200px;
   ;
 }
-
 .notice_list {
   width: 800px;
 }
-
 .d-flex {
   display: flex;
 }
-
-
-
 .justify-space-between {
   justify-content: space-between;
 }

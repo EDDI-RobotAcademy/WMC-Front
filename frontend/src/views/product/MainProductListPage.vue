@@ -41,8 +41,6 @@ export default {
 .container-text{
   display: flex;
 }
-.container {
-  
-}
+
 
 </style>

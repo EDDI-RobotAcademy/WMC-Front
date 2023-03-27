@@ -1,20 +1,25 @@
 <template>
-  <v-carousel :multi-item="true" :per-page="items.length" cycle hide-delimiters>
-    <v-carousel-item v-for="n in Math.ceil(items.length / 4)" :key="n">
-      <v-row justify="center">
-        <v-col cols="4"  v-for="(item, index) in items.slice((n - 1) * 3, n * 3)" :key="index">
-          <v-card :color="item.color" class="card-carousel">
-            <v-card-title>{{ item.title }}</v-card-title>
-            <v-img :src="item.src" contain :aspect-ratio="1.77778"  class="carousel-image"></v-img>
-            <v-card-text>{{ item.text }}</v-card-text>
-            <v-card-actions>
-              <v-btn text>Read More</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-carousel-item>
+  <div>
+    <div class="body-text">
+      <h3 class="mb-auto">🤩이러한 혜택도 있답니다🤩</h3>
+    </div>
+    <v-carousel :multi-item="true" :per-page="items.length" cycle hide-delimiters>
+      <v-carousel-item v-for="n in Math.ceil(items.length / 4)" :key="n">
+        <v-row justify="center">
+          <v-col cols="4"  v-for="(item, index) in items.slice((n - 1) * 3, n * 3)" :key="index">
+            <v-card :color="item.color" class="card-carousel">
+              <v-card-title>{{ item.title }}</v-card-title>
+              <v-img :src="item.src" contain :aspect-ratio="1.77778"  class="carousel-image"></v-img>
+              <v-card-text>{{ item.text }}</v-card-text>
+              <v-card-actions>
+                <v-btn text>Read More</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-carousel-item>
   </v-carousel>
+</div>
   </template>
   
   <script>
@@ -75,6 +80,9 @@
   .carousel-image {
   height: 230px;
 
+  }
+  .body-text{
+    display: flex;
   }
 
   </style>
