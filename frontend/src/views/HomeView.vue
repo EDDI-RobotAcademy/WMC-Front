@@ -1,25 +1,33 @@
 <template>
-  <v-container>
-    <div id="home">
-      <nav>
-        <header>
-        </header>
-        <router-link to="/"></router-link>
-        <router-link to="/notice-list" style="color: black;">공지사항</router-link>
-        <ProductListPage/>
-      </nav>
-      <router-view/>
+  <div>
+    <div>
+      <MainBannerCarouselPage/>
     </div>
-  </v-container>
+    <v-container>
+      <div id="home">
+        <nav>
+          <header>
+          </header>
+          <router-link></router-link>
+          <MainProductListPage/>
+        </nav>
+        <router-view/>
+      </div>
+    </v-container>
+    </div>
 </template>
 <script>
-import ProductListPage from '@/views/product/ProductListPage.vue'
-
+import MainBannerCarouselPage from '@/components/carousel/MainBannerCarouselPage.vue';
+//import ProductListPage from '@/views/product/ProductListPage.vue'
+import MainProductListPage from '@/views/product/MainProductListPage.vue';
   export default {
     name: 'Home',
     
     components: {
-      ProductListPage,
+     MainBannerCarouselPage,
+     //ProductListPage,
+     MainProductListPage,
+     
     },
   }
 </script>
