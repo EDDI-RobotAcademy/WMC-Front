@@ -1,7 +1,7 @@
 import { 
     REQUEST_PRODUCT_LIST_TO_SPRING ,
     REQUEST_MAIN_PRODUCT_LIST_TO_SPRING ,
-    REQUEST_CREATE_NOTICE_DATA_TO_SPRING,
+    REQUEST_NOTICE_LIST_TO_SPRING,
 } from './mutation-types';
 
 import axios from 'axios';
