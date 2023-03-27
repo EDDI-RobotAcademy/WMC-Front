@@ -1,6 +1,8 @@
 <template>
   <v-container>
-      <h2></h2>
+    <div class="container-text">
+      <h5 class="mb-auto">🎀가장 주목해야할 이달의 신상품🎀</h5>
+    </div>
       <main-product-list :products="products"/>
   </v-container>
 </template>
@@ -33,5 +35,14 @@ export default {
 </script>
 
 <style>
+.body {
+  margin: 0px;
+}
+.container-text{
+  display: flex;
+}
+.container {
+  
+}
 
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div class="main-container">
   <v-container>
-    <v-row>
-      <v-col
+    <v-row >
+      <v-col class="pt-0px"
         v-for="(product, index) in products"
         :key="product.productId"
         cols="8"
         sm="3"
         md="3"
         >
-          <v-card>
+          <v-card >
           <v-img
             :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
             aspect-ratio="1"
@@ -118,10 +118,17 @@ export default {
 </script>
 
 <style>
+.container {
+  max-width: 100%;
+  min-width:0%;
+  padding: 12px;
+  margin:0px;
+}
 
 .main-container {
-  width: 100%;
-  position: relative;
+  max-width: 100%;
+  padding: 0px;
+  margin:0;
 }
 
 </style>

@@ -3,13 +3,13 @@
     <div>
       <MainBannerCarouselPage/>
     </div>
+      <MainProductListPage/>
     <v-container>
       <div id="home">
         <nav>
           <header>
           </header>
           <router-link></router-link>
-          <MainProductListPage/>
         </nav>
         <router-view/>
       </div>
@@ -31,3 +31,4 @@ import MainProductListPage from '@/views/product/MainProductListPage.vue';
     },
   }
 </script>
+
