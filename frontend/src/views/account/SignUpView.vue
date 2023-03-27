@@ -16,10 +16,10 @@
     },
     methods: {
       onSubmit (payload) {
-        const { email, password, city, street, addressDetail, zipcode } = payload;
+        const { email, password, username, birthdate, authorityName, managerCheck, managerCode, city, street , addressDetail , zipcode ,phoneNumber } = payload;
   
         axios.post("http://localhost:7777/member/sign-up", {
-          email, password, city, street, addressDetail, zipcode
+          email, password, username, birthdate, authorityName, managerCheck, managerCode, city, street , addressDetail , zipcode ,phoneNumber
         })
             .then((res) => {
               alert("회원 가입 완료!" + res)
