@@ -8,8 +8,11 @@
         <nav>
           <header>
           </header>
-          <router-link></router-link>
           <MainProductListPage/>
+          <router-link to="/"></router-link>
+          <router-link to="/notice-list" style="color: black;">공지사항</router-link>|
+          <ProductListPage/>
+          <BodyBannerCarouselPage/>
         </nav>
         <router-view/>
       </div>
@@ -20,6 +23,9 @@
 import MainBannerCarouselPage from '@/components/carousel/MainBannerCarouselPage.vue';
 //import ProductListPage from '@/views/product/ProductListPage.vue'
 import MainProductListPage from '@/views/product/MainProductListPage.vue';
+import ProductListPage from '@/views/product/ProductListPage.vue'
+import BodyBannerCarouselPage from '@/components/carousel/BodyBannerCarouselPage.vue';
+
   export default {
     name: 'Home',
     
@@ -27,6 +33,8 @@ import MainProductListPage from '@/views/product/MainProductListPage.vue';
      MainBannerCarouselPage,
      //ProductListPage,
      MainProductListPage,
+     ProductListPage,
+     BodyBannerCarouselPage,
      
     },
   }
