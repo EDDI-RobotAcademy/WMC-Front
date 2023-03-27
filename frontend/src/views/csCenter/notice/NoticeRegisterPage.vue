@@ -18,7 +18,7 @@ export default {
             'requestCreateNoticeToSpring'
         ]),
         async onSubmit (payload) {
-            await this.requestCreateBoardToSpring(payload)
+            await this.requestCreateNoticeToSpring(payload)
             await this.$router.push({
                 name: 'NoticeListPage'
             })

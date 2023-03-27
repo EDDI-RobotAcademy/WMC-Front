@@ -38,24 +38,24 @@ export default {
 
 
 
-  requestCreateNoticeToSpring ({}, payload) {
+  requestCreateNoticeToSpring({ }, payload) {
 
     const { title, content, writer } = payload
-    return axios.post('http://localhost:7777/Notice/register',
-        { title, content, writer })
-        .then(() => {
-            alert('공지사항 등록 성공!')
-        })
-        .catch(() => {
-            alert('문제 발생!')
-        })
-},
-requestNoticeListToSpring ({ commit }) {
+    return axios.post('http://localhost:7777/notice/register',
+      { title, content, writer })
+      .then(() => {
+        alert('공지사항 등록 성공!')
+      })
+      .catch(() => {
+        alert('문제 발생!')
+      })
+  },
+  requestNoticeListToSpring({ commit }) {
     return axios.get('http://localhost:7777/notice/list')
-        .then((res) => {
-            commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
-        })
-}
+      .then((res) => {
+        commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
+      })
+  }
   
 };
 
