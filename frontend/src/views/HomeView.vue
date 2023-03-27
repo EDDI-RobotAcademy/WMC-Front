@@ -11,7 +11,6 @@
           <MainProductListPage/>
           <router-link to="/"></router-link>
           <router-link to="/notice-list" style="color: black;">공지사항</router-link>|
-          <ProductListPage/>
           <BodyBannerCarouselPage/>
         </nav>
         <router-view/>
