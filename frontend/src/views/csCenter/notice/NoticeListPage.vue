@@ -7,28 +7,28 @@
           <br>
           <div class="elevation-10 rounded">
             <v-card class="side_menu" max-width="300">
-              <v-list :items="items">
+              <v-list>
                 <router-link to="/notice-list" style="color: black;">공지사항</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">자주 묻는 질문</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">상품 문의</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">입금/결제 문의</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">배송 전 변경&취소</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">배송 문의</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">배송 후 교환/반품 문의</router-link>
               </v-list>
-              <v-list :items="items">
+              <v-list>
                 <router-link to="#" style="color: black;">A/S 문의</router-link>
               </v-list>
             </v-card>

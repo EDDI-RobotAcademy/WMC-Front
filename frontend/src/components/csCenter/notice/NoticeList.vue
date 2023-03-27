@@ -1,6 +1,6 @@
 <template>
   <div style="border-bottom: 1px dotted lightgray;">
-    <h3>공지사항 목록</h3>
+    <h3></h3>
     <table>
       <tr height="40">
         <th align="center" width="100">No</th>
