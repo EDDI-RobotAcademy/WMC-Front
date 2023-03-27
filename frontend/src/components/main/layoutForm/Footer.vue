@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-footer inset padless class="justify-center pl-0">
     <v-card flat class="text-center" width="100%">
       <v-divider></v-divider>
@@ -13,6 +14,7 @@
       </v-card-text>
     </v-card>
   </v-footer>
+</div>
 </template>
 
 <script>
@@ -30,4 +32,7 @@ export default {
 };
 </script>
 
-<style></style>
+
+<style>
+
+</style>

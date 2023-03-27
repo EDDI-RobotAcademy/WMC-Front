@@ -8,9 +8,8 @@
         <nav>
           <header>
           </header>
-          <router-link to="/"></router-link>
-          <router-link to="/notice-list" style="color: black;">공지사항</router-link>
-          <ProductListPage/>
+          <router-link></router-link>
+          <MainProductListPage/>
         </nav>
         <router-view/>
       </div>
@@ -19,14 +18,15 @@
 </template>
 <script>
 import MainBannerCarouselPage from '@/components/carousel/MainBannerCarouselPage.vue';
-import ProductListPage from '@/views/product/ProductListPage.vue'
-
+//import ProductListPage from '@/views/product/ProductListPage.vue'
+import MainProductListPage from '@/views/product/MainProductListPage.vue';
   export default {
     name: 'Home',
     
     components: {
      MainBannerCarouselPage,
-     ProductListPage,
+     //ProductListPage,
+     MainProductListPage,
      
     },
   }

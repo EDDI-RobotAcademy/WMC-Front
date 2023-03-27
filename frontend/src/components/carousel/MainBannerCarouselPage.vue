@@ -1,14 +1,12 @@
 <template>
   <div>
-          <v-carousel hide-delimiters cycle :interval="5000">
-            <v-carouserl-items>
-              <v-carousel-item src="@/assets/banner/banner1.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner2.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner3.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner4.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner5.jpg" cover />
-            </v-carouserl-items>
-          </v-carousel>
+    <v-carousel hide-delimiters cycle :interval="5000">
+        <v-carousel-item src="@/assets/banner/banner1.jpg" cover />
+        <v-carousel-item src="@/assets/banner/banner2.jpg" cover />
+        <v-carousel-item src="@/assets/banner/banner3.jpg" cover />
+        <v-carousel-item src="@/assets/banner/banner4.jpg" cover />
+        <v-carousel-item src="@/assets/banner/banner5.jpg" cover />
+    </v-carousel>
   </div>
 </template>
 
