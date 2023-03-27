@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="border-bottom: 1px dotted lightgray;">
     <h3>공지사항 목록</h3>
     <table>
-      <tr>
+      <tr height="40">
         <th align="center" width="100">No</th>
         <th align="center" width="640">제목</th>
         <th align="center" width="150">작성자</th>
@@ -32,21 +32,36 @@
       </tr>
     </table>
   </div>
+  
 </template>
 
 <script>
 
 export default {
-    name: "NoticeList",
-    props: {
-        notices: {
-            type: Array
-        }
+  name: "NoticeList",
+  props: {
+    notices: {
+      type: Array
     }
+  }
 }
+
+
 
 </script>
 
-<style>
+<style scoped>
+  h3 {
+    border-bottom: 3px solid black;
+    margin-bottom: 10px;
+  }
+
+  tr:not(:first-child) {
+    border-top: 1px dotted lightgray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  
 
 </style>
