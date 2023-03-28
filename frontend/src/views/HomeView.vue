@@ -8,8 +8,12 @@
         <BodyBannerCarouselPage/>
       </div>
     <v-container>
-      <div id="home">
-      </div>
+      <div id="home"></div>
+        <nav>
+          <header>
+          </header>
+        </nav>
+        <router-view/>
     </v-container>
     </div>
 </template>

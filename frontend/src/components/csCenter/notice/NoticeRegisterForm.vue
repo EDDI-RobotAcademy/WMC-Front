@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit" class="notice-form">
-    <v-table>
+    <table>
       <tr>
         <td>제목</td>
         <td>
@@ -19,7 +19,7 @@
           <textarea cols="50" rows="20" v-model="content"  class="mb-5 notice-textarea"/>
         </td>
       </tr>
-    </v-table>
+    </table>
     <div>
       <button type="submit" class="mr-5 notice-button">등록</button>
       <router-link :to="{ name: 'NoticeListPage' }" class="notice-button">
@@ -51,6 +51,10 @@ export default {
 </script>
 
 <style scoped>
+
+table {
+  margin: 0 auto;
+}
 
 .notice-input {
 width: 100%;
