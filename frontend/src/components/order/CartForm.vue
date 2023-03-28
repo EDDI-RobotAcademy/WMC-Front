@@ -79,7 +79,10 @@ export default {
     axios.post('http://localhost:7777/cart/validate', token).then((res) => {
       if (res.data) {
         console.log('인증된 사용자 입니다.');
-        const cartKey = `cart_${res.data}`;
+        const [memberId, authorityName] = res.data.split(":");
+        console.log(memberId);
+        console.log(authorityName);
+        const cartKey = `cart_${memberId}`;
         const cartItems = localStorage.getItem(cartKey)
           ? JSON.parse(localStorage.getItem(cartKey))
           : [];
