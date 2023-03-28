@@ -3,7 +3,9 @@
     <v-row>
       <v-col>
         <router-link to="/product-register-page">
-          <v-btn color="#a1887f" outlined>상품 등록 하러가기</v-btn>
+          <v-btn v-if="authorityName == 'MANAGER'" color="#a1887f" outlined
+            >상품 등록 하러가기</v-btn
+          >
         </router-link>
       </v-col>
     </v-row>
@@ -39,7 +41,6 @@
         </v-card>
       </v-col>
     </v-row>
-
   </v-container>
 </template>
 
@@ -62,11 +63,11 @@ export default {
   data() {
     return {
       cart: [],
+      memberId: null,
+      authorityName: null,
     };
   },
-  created() {
-    console.log('products:', this.products);
-  },
+  
   computed: {
     ...mapState(['isAuthenticated']),
 
@@ -92,38 +93,39 @@ export default {
         this.$router.push('/sign-in');
         return;
       }
-      const token = JSON.parse(localStorage.getItem('userInfo')); //localStorage에 userInfo에 매핑되어있는 token을 가져옴(redis key)
-      axios.post('http://localhost:7777/cart/validate', token).then((res) => {
-        if (res.data) {
-          console.log('인증된 사용자 입니다.');
-          const cartKey = `cart_${res.data}`;
-          let cart = localStorage.getItem(cartKey);
+      const memberId = localStorage.getItem('memberId');
+      const authorityName = localStorage.getItem('authorityName');
+      if(memberId && authorityName) {
+      const cartKey = `cart_${memberId}`;
+      let cart = localStorage.getItem(cartKey);
+      if (!cart) {
+        cart = [];
+      } else {
+        cart = JSON.parse(cart);
+      }
 
-          if (!cart) {
-            cart = [];
-          } else {
-            cart = JSON.parse(cart);
-          }
+      const existingCartItem = cart.find(
+        (item) => item.product_id === product.productId
+      );
 
-          const existingCartItem = cart.find(
-            (item) => item.product_id === product.productId
-          );
+      if (existingCartItem) {
+        existingCartItem.quantity += quantity;
+      } else {
+        cart.push({
+          product_id: product.productId,
+          name: product.name,
+          image: product.firstPhoto
+            ? this.getImagePath(product.firstPhoto)
+            : '',
+          price: product.price,
+          quantity: quantity,
+        });
+      }
 
-          if (existingCartItem) {
-            existingCartItem.quantity += quantity;
-          } else {
-            cart.push({ product_id: product.productId,
-              name: product.name,
-              image: product.firstPhoto ? this.getImagePath(product.firstPhoto) : '',
-              price: product.price,
-              quantity: quantity });
-          }
-
-          localStorage.setItem(cartKey, JSON.stringify(cart));
-          console.log('Cart:', cart);
-          alert("장바구니에 추가되었습니다!")
-        }
-      });
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+      console.log('Cart:', cart);
+      alert('장바구니에 추가되었습니다!');
+    }
     },
     getImagePath(imageData) {
       console.log('imageData:', imageData);
