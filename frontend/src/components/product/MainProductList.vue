@@ -1,29 +1,30 @@
 <template>
   <div class="main-container">
-  <v-container>
-    <v-row >
-      <v-col class="pt-0px"
+  <!--이슈작성-->
+    <v-row style="--bs-gutter-x: 1.5rem;">
+      <v-col class="card-container"
         v-for="(product, index) in products"
         :key="product.productId"
-        cols="8"
+        cols="12"
         sm="3"
         md="3"
+    
         >
-          <v-card >
-          <v-img
-            :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
-            aspect-ratio="1"
-            class="grey lighten-3"
-            ></v-img>
-            
-            <v-card-title>{{ product.name }}</v-card-title>
-            <v-card-actions>
-              
-            </v-card-actions>
-          </v-card>
+            <v-card tile flat class="p-12 mb-0">
+                <v-img
+                :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
+                aspect-ratio=".8"
+                class="grey lighten-3"
+                ></v-img>
+                
+                <v-card-title>{{ product.name }}</v-card-title>
+                <v-card-actions>      
+              </v-card-actions>
+            </v-card>
+
       </v-col>
     </v-row>
-  </v-container>
+
 </div>
 </template>
 
@@ -118,6 +119,10 @@ export default {
 </script>
 
 <style>
+.row {
+  --bs-gutter-x:0rem;
+}
+
 .container {
   max-width: 100%;
   min-width:0%;
@@ -127,8 +132,14 @@ export default {
 
 .main-container {
   max-width: 100%;
-  padding: 0px;
+ 
   margin:0;
 }
+
+.card-container{
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
 
 </style>

@@ -1,26 +1,21 @@
 <template>
 
-  <nav :class="{'hidden': isNavHidden}">
-    <v-app-bar color="white"  class="flex-grow-0" height="60" app>
+  <nav :class="fixed">
+    <v-app-bar flat color="rgba(255,255,255,0.7)" class="flex-grow-0" height="50" app>
       <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
       <router-link to="/">
         <v-img
           :src="require('@/assets/logo.png')"
           max-height="40"
           max-width="40"
-          class="mx2"
+          class="mx-10"
         />
       </router-link>
 
-      <v-toolbar-title class="text-uppercase text--darken-4">
-        <span></span>
-      </v-toolbar-title>
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       
       <v-spacer class="btn-container" >
         <div class="dropdown">
-          <button class="dropbtn">BEST
+          <button class="dropbtn">SUNGLASSES
           </button>
           <div class="dropdown-content">
             <a href='http://localhost:8080/'>1월</a>
@@ -32,7 +27,7 @@
         </div>
         
         <div class="dropdown">
-          <button class="dropbtn">NEW 10%
+          <button class="dropbtn">EYEGLASSES
           </button>
           <div class="dropdown-content">
             <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
@@ -42,9 +37,8 @@
             <a href=''>5월</a>
            </div>
         </div>
-        |
         <div class="dropdown">
-          <button class="dropbtn">SHOE
+          <button class="dropbtn">ACC
           </button>
           <div class="dropdown-content">
             <a href='http://localhost:8080/sign-in-test#/sign-in' color="black">HEEL</a>
@@ -58,7 +52,7 @@
            </div>
         </div>
         <div class="dropdown">
-          <button class="dropbtn">BEST
+          <button class="dropbtn">REVIEW
           </button>
           <div class="dropdown-content">
             <a href=''>1월</a>
@@ -69,14 +63,21 @@
            </div>
         </div>
         <div class="dropdown">
-          <button class="dropbtn">SALE
+          <button class="dropbtn">SRORE
           </button>
           <div class="dropdown-content">
             <a href='http://localhost:8080/#/product-list-page'>전체상품</a>
            </div>
           </div>
         <div class="dropdown">
-          <button class="dropbtn">CS CENTER
+          <button class="dropbtn">BRAND
+          </button>
+          <div class="dropdown-content">
+            <a href='http://localhost:8080/#/notice-list'>공지사항</a>
+           </div>
+          </div>
+        <div class="dropdown">
+          <button class="dropbtn">ARCHIVE
           </button>
           <div class="dropdown-content">
             <a href='http://localhost:8080/#/notice-list'>공지사항</a>
@@ -88,20 +89,21 @@
       <div class="right-box">
         <div class="nav-util">
           <v-icon> mdi-magnify</v-icon>
-          <v-btn large elevation="0" text @click="goCartPage">
+          <button class="right-btn" large elevation="0" text @click="goCartPage">
             <v-icon> mdi-cart-outline</v-icon>
-          </v-btn>
+          </button>
         </div>
-        <v-btn
-          v-if="isAuthenticated == false"
+
+        <button v-if="isAuthenticated == false"
           text
           color="black"
           onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
         >
           <span>로그인</span>
-        </v-btn>
+        </button>
         <div class="nav-account">
-          <v-btn
+        
+          <button class="right-btn"
             v-if="isAuthenticated == true"
             text
             color="black"
@@ -109,23 +111,24 @@
             onclick="location.href='http://localhost:8080/#/'"
           >
             <span>로그아웃</span>
-          </v-btn>
-          <v-btn
+          </button>
+
+          <button class="right-btn"
             v-if="isAuthenticated == false"
             text
             color="black"
             onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
           >
             <span>회원가입</span>
-          </v-btn>
-          <v-btn
+          </button>
+          <button class="right-btn"
             v-if="isAuthenticated == true"
             text
             color="grey"
             onclick="location.href='http://localhost:8080/my-page#/'"
           >
             <span>마이페이지</span>
-          </v-btn>
+          </button>
         </div>
       </div>
 
@@ -220,8 +223,10 @@ export default {
 </script>
 
 <style>
+
 .btn-container {
-  padding:auto;
+  padding-left: 20px;
+  padding-right: 20px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: left;
@@ -230,9 +235,9 @@ export default {
 
 
 .dropbtn {
-  padding: 12px;
-  font-size: 10px;
-  border-radius: 10%;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size:14px;
   
 }
 .btn-container .dropbtn :hover {
@@ -242,8 +247,7 @@ export default {
 
 .dropdown {
   position: relative;
-  display: inline-block;
-  
+  display: center;  
 }
 
 
@@ -251,10 +255,11 @@ export default {
   color: inherit;
   display: none;
   position: absolute;
-  min-width: 50px;
+  min-width: 80px;
   padding: 10px;
   box-shadow: none;
   z-index: auto;
+  width: fit-content;
   
   background-color: #fff;
   
@@ -265,13 +270,12 @@ export default {
   text-decoration: none;
   display: block;
   min-width:inherit;
-  border-radius: 10%;
+  
 }
 
 .dropdown-content a:hover {
   width: auto;
   align-content: center;
-  border-radius: 10%;
 
 }
 
@@ -280,7 +284,6 @@ export default {
   display: block;
   width: auto;
   align-content: center;
-  border-radius: 7%;
   
 }
 
@@ -291,7 +294,7 @@ export default {
   text-align: center;
   display: block;
   color:black;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .dropdown:hover .dropbtn {
@@ -311,12 +314,12 @@ export default {
   flex-wrap: nowrap;
   justify-content: left;
   align-items: center;
+  font-size:14px;
 }
 
 .v-btn {
-
   padding: 12px;
-  font-size: 10px;
+  font-size: 12px;
   border-radius: 10%;
   
 }
@@ -326,12 +329,18 @@ export default {
   display: flex;
   align-items: center;
   margin-right: 45px;
-  padding: auto;
+}
+
+.right-btn {
+  padding-left: 20px;
+  padding-right: 20px;
+  text:fixed;
 }
 
 .hidden {
   display: none;
 }
+
 
 
 
