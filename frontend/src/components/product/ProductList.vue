@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <router-link to="/product-register-page">
-          <v-btn v-if="authorityName == 'MANAGER'" color="#a1887f" outlined
+          <v-btn v-if="authorityName === 'MANAGER'" color="#a1887f" outlined
             >상품 등록 하러가기</v-btn
           >
         </router-link>
@@ -62,9 +62,9 @@ export default {
   },
   data() {
     return {
+      memberId: localStorage.getItem('memberId'),
+      authorityName: localStorage.getItem('authorityName'),
       cart: [],
-      memberId: null,
-      authorityName: null,
     };
   },
   
@@ -93,8 +93,7 @@ export default {
         this.$router.push('/sign-in');
         return;
       }
-      const memberId = localStorage.getItem('memberId');
-      const authorityName = localStorage.getItem('authorityName');
+
       if(memberId && authorityName) {
       const cartKey = `cart_${memberId}`;
       let cart = localStorage.getItem(cartKey);
