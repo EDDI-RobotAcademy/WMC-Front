@@ -51,6 +51,7 @@ export default {
                     const [memberId, authorityName] = res.data.split(':');
                     localStorage.setItem('memberId', memberId);
                     localStorage.setItem('authorityName', authorityName);
+                    const user = localStorage.getItem('memberId')
                   }
                 });
               this.$router.push('/');
