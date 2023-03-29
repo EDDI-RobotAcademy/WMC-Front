@@ -3,6 +3,7 @@ import {
     REQUEST_MAIN_PRODUCT_LIST_TO_SPRING,
     
     REQUEST_NOTICE_LIST_TO_SPRING,
+    REQUEST_NOTICE_TO_SPRING,
 } from './mutation-types'
 
 
@@ -33,6 +34,10 @@ export default {
 
 
     [REQUEST_NOTICE_LIST_TO_SPRING] (state, passingData) {
-        state.notices = passingData
-    }
+      state.notices = passingData.map(noticeResponse => ({
+        ...noticeResponse
+      }));
+    },
+    
+
 }

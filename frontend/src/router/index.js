@@ -69,7 +69,12 @@ const routes = [
   {
     path: '/notice-read',
     name: 'NoticeReadPage',
-    component: NoticeReadPage
+    component: {
+      default: NoticeReadPage
+    },
+    props: {
+      default: true
+    }
   },
 
 ]

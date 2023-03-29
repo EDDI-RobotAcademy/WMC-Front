@@ -76,9 +76,11 @@ export default {
   components: { NoticeList },
   name: "NoticeListPage",
   computed: {
-    ...mapState([
-      'notices'
-    ]),
+    ...mapState({
+      notices: state => state.notices.map(notice => ({
+        ...notice
+      }))
+  }),
   },
   mounted() {
     this.requestNoticeListToSpring()
