@@ -170,6 +170,8 @@ export default {
       axios.post('http://localhost:7777/member/logout', token).then(() => {
         alert('로그아웃 완료');
         localStorage.removeItem('userInfo');
+        localStorage.removeItem('memberId');
+        localStorage.removeItem('authorityName');
         this.$store.state.isAuthenticated = false;
       });
     },
