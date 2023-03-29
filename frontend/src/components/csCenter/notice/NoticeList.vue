@@ -18,8 +18,7 @@
           {{ notice.noticeId }}
         </td>
         <td align="left">
-          <router-link :to="{ name: 'NoticeReadPage',
-                            params: { noticeId: notice.noticeId.toString() }}">
+          <router-link :to="{ name: 'NoticeReadPage', params: { noticeId: notice.noticeId.toString() }}">
             {{ notice.title }}
           </router-link>
         </td>
