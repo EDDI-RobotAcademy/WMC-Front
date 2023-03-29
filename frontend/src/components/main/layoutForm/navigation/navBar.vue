@@ -1,7 +1,7 @@
 <template>
 
-  <nav :class="fixed">
-    <v-app-bar flat color="rgba(255,255,255,0.7)" class="flex-grow-0" height="50" app>
+  <nav>
+    <v-app-bar flat color="rgba(255,255,255,0.5)" class="flex-grow-0" height="50" app>
       <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
       <router-link to="/">
         <v-img
@@ -15,75 +15,47 @@
       
       <v-spacer class="btn-container" >
         <div class="dropdown">
-          <button class="dropbtn">SUNGLASSES
+          <button class="button" type="button" data-hover="선글라스"  onclick="location.href='http://localhost:8080/#/product-list-page'">
+            <span>SUNGLASSES</span>
           </button>
-          <div class="dropdown-content">
-            <a href='http://localhost:8080/'>1월</a>
-            <a href=''>2월</a>
-            <a href=''>3월</a>
-            <a href=''>4월</a>
-            <a href=''>5월</a>
-           </div>
         </div>
         
         <div class="dropdown">
-          <button class="dropbtn">EYEGLASSES
+          <button class="button" type="button" data-hover="안경" onclick="location.href='http://localhost:8080/#/product-list-page'">
+            <span>EYEGLASSES</span>
           </button>
-          <div class="dropdown-content">
-            <a href='http://localhost:8080/sign-in-test#/sign-in'>1월</a>
-            <a href=''>2월</a>
-            <a href=''>3월</a>
-            <a href=''>4월</a>
-            <a href=''>5월</a>
-           </div>
         </div>
         <div class="dropdown">
-          <button class="dropbtn">ACC
+          <button class="button" type="button" data-hover="ACC" onclick="location.href='http://localhost:8080/#/product-list-page'">
+            <span>ACC</span>
           </button>
-          <div class="dropdown-content">
-            <a href='http://localhost:8080/sign-in-test#/sign-in' color="black">HEEL</a>
-            <a href=''>FLAT</a>
-            <a href=''>LOAFER</a>
-            <a href=''>SNEAKERS/SLIPON</a>
-            <a href=''>ANKLE/BOOTS</a>
-            <a href=''>SLIPPER</a>
-            <a href=''>SANDAL</a>
-            <a href=''>ACC</a>
-           </div>
         </div>
         <div class="dropdown">
-          <button class="dropbtn">REVIEW
+          <button class="button" type="button" data-hover="리뷰" onclick="location.href='http://localhost:8080/#/product-list-page'">
+            <span>REVIEW</span>
           </button>
-          <div class="dropdown-content">
-            <a href=''>1월</a>
-            <a href=''>2월</a>
-            <a href=''>3월</a>
-            <a href=''>4월</a>
-            <a href=''>5월</a>
-           </div>
         </div>
         <div class="dropdown">
-          <button class="dropbtn">SRORE
+          <button class="button" type="button" data-hover="스토어" onclick="location.href='http://localhost:8080/#/product-list-page'">
+            <span>STORE</span>
           </button>
-          <div class="dropdown-content">
-            <a href='http://localhost:8080/#/product-list-page'>전체상품</a>
-           </div>
-          </div>
+        </div>
         <div class="dropdown">
-          <button class="dropbtn">BRAND
-          </button>
-          <div class="dropdown-content">
-            <a href='http://localhost:8080/#/notice-list'>공지사항</a>
-           </div>
+          <div class="dropbtn">
+            <button class="button" type="button" data-hover="브랜드" onclick="location.href='http://localhost:8080/#/product-list-page'">
+              <span>BRAND</span>
+            </button>
+            <div class="dropdown-content">
+              <a href='http://localhost:8080/#/notice-list'>공지사항</a>
+            </div>
           </div>
+        </div>
         <div class="dropdown">
-          <button class="dropbtn">ARCHIVE
+          <button class="button" type="button" data-hover="아카이브" onclick="location.href='http://localhost:8080/#/product-list-page'">
+            <span>ARCHIVE</span>
           </button>
-          <div class="dropdown-content">
-            <a href='http://localhost:8080/#/notice-list'>공지사항</a>
-           </div>
-          </div>
-        
+        </div>
+
       </v-spacer>
 
       <div class="right-box">
@@ -242,7 +214,7 @@ export default {
 }
 .btn-container .dropbtn :hover {
   border-color: #fff;
-  background-color:#fff;
+  background-color: rgba(255, 255, 255, 0.5);;
 }
 
 .dropdown {
@@ -261,7 +233,7 @@ export default {
   z-index: auto;
   width: fit-content;
   
-  background-color: #fff;
+  background-color:  rgba(255, 255, 255, 0.5);;
   
 }
 
@@ -340,6 +312,98 @@ export default {
 .hidden {
   display: none;
 }
+
+
+.button {
+  display: inline-block;
+  position: relative;
+  margin: 1em;
+  padding: 0.67em;
+  overflow: hidden;
+  text-decoration: none;
+  font-size: 14px;
+  outline: none;
+  color: black;
+  background: transparent;
+  font-family: 'raleway', sans-serif;
+}
+
+.button span {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-transition-delay: 0.1s;
+  -moz-transition-delay: 0.1s;
+  -o-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+
+.button:before,
+.button:after {
+  content: '';
+  position: absolute;
+  top: 0.67em;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  -webkit-transition: .2s,opacity .4s;
+  -moz-transition: .2s,opacity .4s;
+  -o-transition: .2s,opacity .4s;
+  transition: .2s,opacity .4s;
+}
+
+/* :before */
+
+.button:before {
+  content: attr(data-hover);
+  -webkit-transform: translate(0%,-100%);
+  -moz-transform: translate(0%,-100%);
+  -ms-transform: translate(0%,-100%);
+  -o-transform: translate(0%,-100%);
+  transform: translate(0%,-100%);
+}
+
+/* :after */
+
+
+
+/* Span on :hover and :active */
+
+.button:hover span,
+.button:active span {
+  opacity: 0;
+  -webkit-transform: scale(0.3);
+  -moz-transform: scale(0.3);
+  -ms-transform: scale(0.3);
+  -o-transform: scale(0.3);
+  transform: scale(0.3);
+}
+
+/*  
+  We show :before pseudo-element on :hover 
+  and :after pseudo-element on :active 
+*/
+
+.button:hover:before,
+.button:active:after {
+  opacity: 1;
+  -webkit-transform: translate(0,0);
+  -moz-transform: translate(0,0);
+  -ms-transform: translate(0,0);
+  -o-transform: translate(0,0);
+  transform: translate(0,0);
+  -webkit-transition-delay: .2s;
+  -moz-transition-delay: .2s;
+  -o-transition-delay: .2s;
+  transition-delay: .2s;
+}
+
+/* 
+We hide :before pseudo-element on :active
+*/
+
 
 
 
