@@ -5,5 +5,8 @@ export default {
     notices: [],
     notice: {},
 
+    reviews:[],
+    review:{},
+
     isAuthenticated: false,
 }

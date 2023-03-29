@@ -4,6 +4,8 @@ import {
     
     REQUEST_NOTICE_LIST_TO_SPRING,
     REQUEST_NOTICE_TO_SPRING,
+    REQUEST_REVIEW_LIST_TO_SPRING,
+    REQUEST_REVIEW_TO_SPRING,
 } from './mutation-types'
 
 
@@ -38,6 +40,11 @@ export default {
         ...noticeResponse
       }));
     },
-    
 
+    [REQUEST_REVIEW_LIST_TO_SPRING] (state, passingData) {
+        state.reviews = passingData
+    },
+    [REQUEST_REVIEW_TO_SPRING] (state, passingData) {
+        state.review = passingData
+    },
 }

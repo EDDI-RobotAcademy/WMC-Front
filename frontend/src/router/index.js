@@ -11,6 +11,9 @@ import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
 import NoticeReadPage from "@/views/csCenter/notice/NoticeListPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import CartView from "@/views/order/CartView";
+import ReviewRegisterPage from "@/views/ReviewBoard/ReviewRegisterPage"
+import ReviewListPage from "@/views/ReviewBoard/ReviewListPage"
+import ReviewReadPage from "@/views/ReviewBoard/ReviewReadPage"
 
 
 Vue.use(VueRouter)
@@ -75,6 +78,21 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/review-list-page',
+    name: 'ReviewListPage',
+    component: ReviewListPage
+  },
+  {
+    path: '/review-register-page',
+    name: 'ReviewRegisterPage',
+    component: ReviewRegisterPage
+  },
+  {
+    path: '/review-read-page',
+    name: 'ReviewReadPage',
+    component: ReviewReadPage
   },
 
 ]
