@@ -38,13 +38,14 @@ export default {
         return {
             title: '제목을 입력하세요.',
             writer: 'WMC',
-            content: '내용을 입력하세요.'
+            content: '내용을 입력하세요.',
+            files: [],
         }
     },
     methods: {
         onSubmit () {
-            const { title, writer, content } = this
-            this.$emit('submit', { title, writer, content })
+            const { title, writer, content, files } = this
+            this.$emit('submit', { title, writer, content, files })
         }
     }
 }
