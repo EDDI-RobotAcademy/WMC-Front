@@ -94,8 +94,8 @@ export default {
         return;
       }
 
-      if(memberId && authorityName) {
-      const cartKey = `cart_${memberId}`;
+      if(this.memberId && this.authorityName) {
+      const cartKey = `cart_${this.memberId}`;
       let cart = localStorage.getItem(cartKey);
       if (!cart) {
         cart = [];
