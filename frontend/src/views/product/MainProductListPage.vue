@@ -1,8 +1,16 @@
 <template>
-  <v-container>
-      <h2></h2>
-      <main-product-list :products="products"/>
-  </v-container>
+  <div style="padding:24px;">
+    <br/>
+    <br/>
+    <h4 class="body-text">2023 선글라스 컬렉션
+      <button>&nbsp;<&nbsp; </button>
+      <button> &nbsp;></button>
+    </h4>
+    <br/>
+      <div class="body-container">
+        <main-product-list :products="products"/>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -33,5 +41,15 @@ export default {
 </script>
 
 <style>
+.body-container{
+  
+  justify-content: center;
+} 
+.body-text{
+  margin-bottom: 0rem;
+  text-align: left;
+  }
+
+
 
 </style>

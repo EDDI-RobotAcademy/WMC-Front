@@ -72,8 +72,6 @@
 <script>
 import NoticeList from '../../../components/csCenter/notice/NoticeList.vue'
 import { mapActions, mapState } from 'vuex';
-
-
 export default {
   components: { NoticeList },
   name: "NoticeListPage",
@@ -98,22 +96,18 @@ export default {
   display: flex;
   justify-content: center;
 }
-
 .right {
   display: flex;
   width: 800px;
   height: 200px;
   ;
 }
-
 .notice_list {
   width: 800px;
 }
-
 .d-flex {
   display: flex;
 }
-
 .justify-space-between {
   justify-content: space-between;
 }

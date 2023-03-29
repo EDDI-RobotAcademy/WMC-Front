@@ -1,20 +1,25 @@
 <template>
-  <v-carousel :multi-item="true" :per-page="items.length" cycle hide-delimiters>
-    <v-carousel-item v-for="n in Math.ceil(items.length / 4)" :key="n">
-      <v-row justify="center">
-        <v-col cols="4"  v-for="(item, index) in items.slice((n - 1) * 3, n * 3)" :key="index">
-          <v-card :color="item.color" class="card-carousel">
-            <v-card-title>{{ item.title }}</v-card-title>
-            <v-img :src="item.src" contain :aspect-ratio="1.77778"  class="carousel-image"></v-img>
-            <v-card-text>{{ item.text }}</v-card-text>
-            <v-card-actions>
-              <v-btn text>Read More</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-carousel-item>
+  <div>
+    <div class="body-container">
+      <h5 class="body-text">🤩이러한 혜택도 있답니다🤩</h5>
+    </div>
+    <v-carousel :multi-item="true" :per-page="items.length" cycle hide-delimiters>
+      <v-carousel-item v-for="n in Math.ceil(items.length / 4)" :key="n">
+        <v-row justify="center">
+          <v-col cols="4"  v-for="(item, index) in items.slice((n - 1) * 3, n * 3)" :key="index">
+            <v-card flat tile :color="item.color" class="card-carousel">    
+                <v-card-title>{{ item.title }}</v-card-title>
+                <v-img :src="item.src" contain :aspect-ratio="1.77778"  class="carousel-image"></v-img>
+                <v-card-text>{{ item.text }}</v-card-text>
+              <v-card-actions>
+                <v-btn text>Read More</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-carousel-item>
   </v-carousel>
+</div>
   </template>
   
   <script>
@@ -50,7 +55,7 @@
         },
         {
           src: 'https://mblogthumb-phinf.pstatic.net/MjAxNjEyMDVfMTc0/MDAxNDgwOTEwNjExODA2.B_rB4a3Suh11wb_bio66785mMqxofmo5y5KTaMOApKQg.5nLJPj_KEzpUM2OGYwt9G3NyGhPTR2ddMGrvL4NLrRkg.JPEG.onceblue82/CHARLES-KEITH-winter-2016-ess-001_KOR.jpg?type=w800',
-          title: 'best deals on our products today! ',
+          title: 'best deals on our products  ',
           text: '화.수.목 단 3일간 단 73% 할인 찬스',
           color: 'white',
         },
@@ -71,10 +76,20 @@
   width: 100%;
   height: 400px;
   margin-right:50px ;
+  outline-color: black;
   }
   .carousel-image {
   height: 230px;
 
   }
+  .body-container{
+    display: flex;
+  }
+  .body-text{
+    
+    padding-left:24px;
+    padding-top: 24px;
+    padding-bottom: 12px;
+    }
 
   </style>

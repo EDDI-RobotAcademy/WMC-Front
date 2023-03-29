@@ -37,9 +37,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
-  padding: 10px;
+  padding: 0px;
   background-color: white;
+
 }
+
+
 
 
 </style>
