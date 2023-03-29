@@ -1,11 +1,12 @@
 <template>
   <div>
-          <v-carousel hide-delimiters cycle :interval="5000">
-              <v-carousel-item src="@/assets/banner/banner1.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner2.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner3.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner4.jpg" cover />
-              <v-carousel-item src="@/assets/banner/banner5.jpg" cover />
+          <v-carousel height="auto" hide-delimiters cycle :interval="5000">
+              <v-carousel-item src="@/assets/banner/glassBanner1.jpeg" cover />
+              <v-carousel-item src="@/assets/banner/glassBanner2.jpeg" cover />
+              <v-carousel-item src="@/assets/banner/glassBanner3.jpeg" cover />
+              <v-carousel-item src="@/assets/banner/glassBanner4.jpeg" cover />
+              <v-carousel-item src="@/assets/banner/glassBanner5.jpeg" cover />
+              <v-carousel-item src="@/assets/banner/glassBanner6.jpeg" cover />
           </v-carousel>
   </div>
 </template>
@@ -30,8 +31,8 @@ export default {
 }
 
 .carousel-item img {
+  height: 850px;
   width: 100%;
-  height: 300px;
   margin: 0;
   padding: 0;
   }
