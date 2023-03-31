@@ -83,7 +83,7 @@
     }
   }
   </script>
-  <!--
+  
   <style scoped>
   
   table.boards {
@@ -126,4 +126,3 @@
   }
   
   </style>
-  -->
