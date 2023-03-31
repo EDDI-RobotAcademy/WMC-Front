@@ -3,6 +3,8 @@ import {
     REQUEST_MAIN_PRODUCT_LIST_TO_SPRING ,
     REQUEST_NOTICE_LIST_TO_SPRING,
     REQUEST_NOTICE_TO_SPRING,
+    //REQUEST_QUESTION_BOARD_LIST_TO_SPRING,
+    //REQUEST_QUESTION_BOARD_TO_SPRING,
 } from './mutation-types';
 
 import axios from 'axios';
@@ -90,7 +92,25 @@ export default {
       .then((res) => {
         commit(REQUEST_NOTICE_TO_SPRING, res.data)
       })
-  }
+  },
+  /*
+  requestQuestionBoardListToSpring ({ commit }) {
+    console.log('requestQuestionBoardListToSpring()')
+    return axios.get('http://localhost:7777/questionBoard/list')
+        .then((res) => {
+            commit(REQUEST_QUESTION_BOARD_LIST_TO_SPRING, res.data)
+        })
+},*/
+
+  requestCreateQuestionBoardToSpring ({ }, payload) {
+      console.log('requestCreateQuestionBoardToSpring()')
+      const { title, content, writer } = payload
+      return axios.post('http://localhost:7777/questionBoard/register',
+          { title, content, writer })
+          .then(() => {
+              alert('등록 완료했습니다!')
+          })
+  },
   
 };
 

@@ -11,6 +11,9 @@ import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
 import NoticeReadPage from "@/views/csCenter/notice/NoticeListPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import CartView from "@/views/order/CartView";
+import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
+import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
+
 
 
 Vue.use(VueRouter)
@@ -76,6 +79,17 @@ const routes = [
       default: true
     }
   },
+  {
+    path: '/question-board',
+    name: 'QuestionBoardListPage',
+    component: QuestionBoardListPage
+  },
+  {
+    path: '/question-register',
+    name: 'QuestionBoardRegisterPage',
+    component: QuestionBoardRegisterPage
+  },
+
 
 ]
 
