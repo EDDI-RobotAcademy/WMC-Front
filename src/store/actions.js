@@ -60,25 +60,13 @@ export default {
         },
       })
       .then(() => {
-        alert('상품 등록 성공!');
+        alert('공지사항 등록 성공!');
       })
       .catch(() => {
         alert('문제 발생!');
       });
   },
-/*
-  requestCreateNoticeToSpring({ }, payload) {
-    const { title, content, writer } = payload
-    return axios.post('http://localhost:7777/notice/register',
-      { title, content, writer })
-      .then(() => {
-        alert('공지사항 등록 성공!')
-      })
-      .catch(() => {
-        alert('문제 발생!')
-      })
-  },
-*/
+
   requestNoticeListToSpring({ commit }) {
     return axios.get('http://localhost:7777/notice/list')
       .then((res) => {
