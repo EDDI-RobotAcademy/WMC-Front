@@ -11,20 +11,20 @@ import NoticeRegisterForm from '../../../components/csCenter/notice/NoticeRegist
 import { mapActions } from 'vuex'
 
 export default {
-    components: { NoticeRegisterForm },
-    name: "NoticeListPage",
-    methods: {
-        ...mapActions ([
-            'requestCreateNoticeToSpring'
-        ]),
-        async onSubmit (payload) {
-            await this.requestCreateNoticeToSpring(payload)
-            await this.$router.push({
-                name: 'NoticeListPage'
-            })
-        }
+  components: { NoticeRegisterForm },
+  name: 'NoticeListPage',
+  methods: {
+    ...mapActions([
+      'requestCreateNoticeToSpring'
+    ]),
+    async onSubmit (payload) {
+      await this.requestCreateNoticeToSpring(payload)
+      await this.$router.push({
+        name: 'NoticeListPage'
+      })
     }
+  }
 }
 </script>
-  
+
 <style></style>

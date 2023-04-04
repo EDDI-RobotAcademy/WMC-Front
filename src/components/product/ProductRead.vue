@@ -34,18 +34,18 @@
       </table>
     </div>
   </template>
-  
-  <script>
-  export default {
-      name: "JpaProductRead",
-      props: {
-          product: {
-              type: Object,
-              required: true,
-          }
-      }
+
+<script>
+export default {
+  name: 'JpaProductRead',
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
   }
-  </script>
-  
+}
+</script>
+
   <style>
   </style>

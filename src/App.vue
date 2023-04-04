@@ -10,12 +10,11 @@
 </template>
 
 <script>
-import Footer from '@/components/main/layoutForm/Footer.vue';
-import NavigationMenuPage from '@/components/main/layoutForm/navigation/navBar.vue';
-import TopButton from '@/components/pageButton/TopButton.vue';
+import Footer from '@/components/main/layoutForm/Footer.vue'
+import NavigationMenuPage from '@/components/main/layoutForm/navigation/navBar.vue'
+import TopButton from '@/components/pageButton/TopButton.vue'
 
-
-//import NavigationView from '@/views/lecture/layoutForm/navigation/NavigationView.vue';
+// import NavigationView from '@/views/lecture/layoutForm/navigation/NavigationView.vue';
 export default {
   name: 'App',
   data: () => ({
@@ -24,15 +23,15 @@ export default {
   components: {
     NavigationMenuPage,
     Footer,
-    TopButton,
-    
-  },
-};
+    TopButton
+
+  }
+}
 </script>
 
 <style>
 #app {
-  
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -41,8 +40,5 @@ export default {
   background-color: white;
 
 }
-
-
-
 
 </style>

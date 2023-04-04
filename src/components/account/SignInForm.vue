@@ -12,10 +12,10 @@
             </router-link>
             <v-card width="460">
               <v-card-text class="text-center px-12 py-16">
-  
+
                 <v-form @submit.prevent="onSubmit">
                   <div class="text-h4 font-weight-black mb-10">로그인</div>
-  
+
                   <div class="d-flex">
                     <v-text-field
                         v-model="email"
@@ -26,7 +26,7 @@
                         color="orange"
                     />
                   </div>
-  
+
                   <div class="d-flex">
                     <v-text-field
                         type="password"
@@ -38,7 +38,7 @@
                         color="orange"
                     />
                   </div>
-  
+
                   <v-btn
                       type="submit"
                       block
@@ -48,7 +48,7 @@
                       class="mt-6"
                       :disabled="false"
                   >로그인</v-btn><br/>
-  
+
                   <div class="mt-5">
                     <v-row>
                       <v-col>
@@ -66,7 +66,7 @@
                     </v-row>
                   </div>
                 </v-form>
-  
+
               </v-card-text>
             </v-card>
           </v-col>
@@ -74,41 +74,41 @@
       </v-container>
     </div>
   </template>
-  
-  <script>
-  
-  export default {
-    name: "SignInForm",
-    data() {
-      return {
-        email: "",
-        password: "",
-        email_rule:[
-          v => !!v || '이메일을 입력해주세요.',
-          v => {
-            const replaceV = v.replace(/(\s*)/g, '')
-            const pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
-            return pattern.test(replaceV) || '이메일 형식으로 입력해주세요'
-          }
-        ],
-        password_rule: [
-          v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
-          v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
-        ],
-      };
-    },
-    methods: {
-      onSubmit() {
-        const { email, password } = this;
-        this.$emit("submit", { email, password });
-      },
-    },
-  };
-  
-  </script>
-  
+
+<script>
+
+export default {
+  name: 'SignInForm',
+  data () {
+    return {
+      email: '',
+      password: '',
+      email_rule: [
+        v => !!v || '이메일을 입력해주세요.',
+        v => {
+          const replaceV = v.replace(/(\s*)/g, '')
+          const pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
+          return pattern.test(replaceV) || '이메일 형식으로 입력해주세요'
+        }
+      ],
+      password_rule: [
+        v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
+        v => !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.'
+      ]
+    }
+  },
+  methods: {
+    onSubmit () {
+      const { email, password } = this
+      this.$emit('submit', { email, password })
+    }
+  }
+}
+
+</script>
+
   <style scoped>
-  
+
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
-  
+
   </style>

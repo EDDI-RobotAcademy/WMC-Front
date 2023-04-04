@@ -14,21 +14,21 @@
 </template>
 
 <script>
-import MainProductList from '../../components/product/MainProductList.vue';
-import { mapActions, mapState } from 'vuex';
+import MainProductList from '../../components/product/MainProductList.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   components: { MainProductList },
-  name: "MainProductListPage",
+  name: 'MainProductListPage',
   computed: {
-...mapState({
-  products: state => state.products.map(product => ({
-    ...product,
-    imageDataList: product.imageDataList
-  }))
-})
+    ...mapState({
+      products: state => state.products.map(product => ({
+        ...product,
+        imageDataList: product.imageDataList
+      }))
+    })
   },
-  mounted() {
+  mounted () {
     this.requestMainProductListToSpring()
   },
   methods: {
@@ -42,14 +42,12 @@ export default {
 
 <style>
 .body-container{
-  
+
   justify-content: center;
-} 
+}
 .body-text{
   margin-bottom: 0rem;
   text-align: left;
   }
-
-
 
 </style>

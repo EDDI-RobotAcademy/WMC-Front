@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import CartForm from "@/components/order/CartForm";
+import CartForm from '@/components/order/CartForm'
 
 export default {
   components: {
-    CartForm,
-  },
-};
+    CartForm
+  }
+}
 </script>
 
 <style>

@@ -21,17 +21,16 @@
 export default {
   name: 'Footer',
   data: () => ({
-    icons: [ 
+    icons: [
       'mdi-facebook',
       'mdi-twitter',
       'mdi-google-plus',
       'mdi-linkedin',
-      'mdi-instagram',
-    ],
-  }),
-};
+      'mdi-instagram'
+    ]
+  })
+}
 </script>
-
 
 <style>
 

@@ -4,29 +4,29 @@
 
 <script>
 export default {
- methods: {
-   handleScroll() {
-     if (window.scrollY > 100) {
-       this.$refs.btnGotop.classList.add("show");
-     } else {
-      this.$refs.btnGotop.classList.remove("show");
-     }
-   },
-   scrollTop() {
-     window.scrollTo({
-       top: 0,
-       behavior: "smooth"
-     });
-   }
- },
- mounted() {
-   this.handleScroll();
-   window.addEventListener("scroll", this.handleScroll);
- },
- destroyed() {
-   window.removeEventListener("scroll", this.handleScroll);
- }
-};
+  methods: {
+    handleScroll () {
+      if (window.scrollY > 100) {
+        this.$refs.btnGotop.classList.add('show')
+      } else {
+        this.$refs.btnGotop.classList.remove('show')
+      }
+    },
+    scrollTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  },
+  mounted () {
+    this.handleScroll()
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+}
 </script>
 
 <style>

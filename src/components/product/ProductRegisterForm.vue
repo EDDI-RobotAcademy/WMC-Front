@@ -63,27 +63,27 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       name: '상품명',
       description: 'blah blah blah',
       price: 12345,
       stock: 0,
       files: [],
-      imageUrls: [],
-    };
+      imageUrls: []
+    }
   },
   methods: {
-    registerProduct() {
-      const { name, description, price, stock, files } = this;
-      this.$emit('submit', { name, description, price, stock, files });
+    registerProduct () {
+      const { name, description, price, stock, files } = this
+      this.$emit('submit', { name, description, price, stock, files })
     },
-    handleFileUpload(files) {
-      this.files = files;
-      this.imageUrls = Array.from(files).map((file) => URL.createObjectURL(file));
-    },
-  },
-};
+    handleFileUpload (files) {
+      this.files = files
+      this.imageUrls = Array.from(files).map((file) => URL.createObjectURL(file))
+    }
+  }
+}
 </script>
 
 <style scoped>

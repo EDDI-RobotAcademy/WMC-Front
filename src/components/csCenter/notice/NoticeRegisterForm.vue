@@ -25,7 +25,7 @@
       <router-link :to="{ name: 'NoticeListPage' }" class="notice-button">
         취소
       </router-link>
-      
+
     </div>
   </form>
 </template>
@@ -33,21 +33,21 @@
 <script>
 
 export default {
-    name: "NoticeRegisterForm",
-    data () {
-        return {
-            title: '제목을 입력하세요.',
-            writer: 'WMC',
-            content: '내용을 입력하세요.',
-            files: [],
-        }
-    },
-    methods: {
-        onSubmit () {
-            const { title, writer, content, files } = this
-            this.$emit('submit', { title, writer, content, files })
-        }
+  name: 'NoticeRegisterForm',
+  data () {
+    return {
+      title: '제목을 입력하세요.',
+      writer: 'WMC',
+      content: '내용을 입력하세요.',
+      files: []
     }
+  },
+  methods: {
+    onSubmit () {
+      const { title, writer, content, files } = this
+      this.$emit('submit', { title, writer, content, files })
+    }
+  }
 }
 </script>
 
