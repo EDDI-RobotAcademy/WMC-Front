@@ -22,11 +22,11 @@
             {{ notice.title }}
           </router-link>
         </td>
-        <td align="right">
+        <td align="center">
           {{ notice.writer }}
         </td>
         <td align="center">
-          {{ notice.regDate }}
+          {{ new Date(notice.regDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '') }}
         </td>
       </tr>
     </table>
