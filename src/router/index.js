@@ -5,13 +5,13 @@ import SignUpView from '@/views/account/SignUpView.vue'
 import SignInView from '@/views/account/SignInView.vue'
 import ProductRegisterPage from '@/views/product/ProductRegisterPage.vue'
 import ProductListPage from '@/views/product/ProductListPage.vue'
+import ProductItemListPage from '@/views/product/productItem/ProductItemListPage.vue'
 import MainProductListPage from '@/views/product/MainProductListPage.vue'
 import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
-import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
-import NoticeReadPage from "@/views/csCenter/notice/NoticeListPage.vue"
+import NoticeRegisterPage from '@/views/csCenter/notice/NoticeRegisterPage.vue'
+import NoticeReadPage from '@/views/csCenter/notice/NoticeListPage.vue'
 import MyPageView from '@/views/myPage/MyPageView.vue'
-import CartView from "@/views/order/CartView";
-
+import CartView from '@/views/order/CartView'
 
 Vue.use(VueRouter)
 
@@ -37,9 +37,9 @@ const routes = [
     component: MyPageView
   },
   {
-    path: "/cart",
-    name: "CartView",
-    component: CartView,
+    path: '/cart',
+    name: 'CartView',
+    component: CartView
   },
   {
     path: '/product-register-page',
@@ -50,6 +50,11 @@ const routes = [
     path: '/product-list-page',
     name: 'ProductListPage',
     component: ProductListPage
+  },
+  {
+    path: '/product-item-list-page',
+    name: 'ProductItemListPage',
+    component: ProductItemListPage
   },
   {
     path: '/main-product-list-page',
@@ -75,7 +80,7 @@ const routes = [
     props: {
       default: true
     }
-  },
+  }
 
 ]
 
