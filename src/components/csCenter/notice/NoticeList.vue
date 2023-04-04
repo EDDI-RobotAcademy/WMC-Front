@@ -31,21 +31,19 @@
       </tr>
     </table>
   </div>
-  
+
 </template>
 
 <script>
 
 export default {
-  name: "NoticeList",
+  name: 'NoticeList',
   props: {
     notices: {
       type: Array
     }
   }
 }
-
-
 
 </script>
 
@@ -60,7 +58,5 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-
-  
 
 </style>
