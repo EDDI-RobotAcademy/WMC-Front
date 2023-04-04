@@ -12,12 +12,11 @@
 import ProductRead from '@/components/product/ProductRead.vue'
 export default {
   components: { ProductRead },
-    name: "ProductReadPage",
-    methods: {
-        
-       
-    },
-    
+  name: 'ProductReadPage',
+  methods: {
+
+  }
+
 }
 </script>
 
