@@ -19,7 +19,7 @@ describe('NoticeList', () => {
     notice.id = 1
     notice.title = "go"
     notice.writer = "go"
-  
+    notice.regDate = new Date()
 
     const wrapper = shallowMount(NoticeList, {
       propsData: { notices: notice }
