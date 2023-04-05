@@ -2,5 +2,8 @@ export default {
   products: [],
   product: {},
 
-  isAuthenticated: false
+    questionBoards: [],
+    questionBoard: {},
+  
+    isAuthenticated: false,
 }
