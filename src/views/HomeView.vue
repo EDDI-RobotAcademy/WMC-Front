@@ -11,6 +11,7 @@
       <div id="home"></div>
         <nav>
           <header>
+            <router-link to="/question-board" style="color: black;">QA</router-link>|
           </header>
         </nav>
         <router-view/>

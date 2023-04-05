@@ -71,7 +71,6 @@ export default {
         alert('문제 발생!');
       });
   },
-
   requestNoticeListToSpring({ commit }) {
     return axios.get('http://localhost:7777/notice/list')
       .then((res) => {

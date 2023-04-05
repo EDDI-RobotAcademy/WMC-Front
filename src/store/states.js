@@ -5,5 +5,8 @@ export default {
   notices: [],
     notice: {},
 
-  isAuthenticated: false
+    questionBoards: [],
+    questionBoard: {},
+  
+    isAuthenticated: false,
 }
