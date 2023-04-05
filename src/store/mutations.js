@@ -2,6 +2,8 @@ import {
   REQUEST_PRODUCT_LIST_TO_SPRING,
   REQUEST_PRODUCT_ITEM_LIST_TO_SPRING,
   REQUEST_MAIN_PRODUCT_LIST_TO_SPRING,
+  REQUEST_NOTICE_LIST_TO_SPRING,
+  REQUEST_NOTICE_TO_SPRING
 } from './mutation-types'
 
 export default {
@@ -37,6 +39,12 @@ export default {
       ...productResponse,
       imageDataList: productResponse.imageDataList
     }))
+  },
+
+  [REQUEST_NOTICE_LIST_TO_SPRING] (state, passingData) {
+    state.notices = passingData.map(noticeResponse => ({
+      ...noticeResponse
+    }));
   },
 
   

@@ -16,6 +16,7 @@
 <script>
 import MainProductList from '../../components/product/MainProductList.vue'
 import { mapActions, mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
   components: { MainProductList },
