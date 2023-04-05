@@ -1,9 +1,5 @@
-export default {
-  products: [],
-  product: {},
 
-    questionBoards: [],
-    questionBoard: {},
-  
-    isAuthenticated: false,
+export default {
+  isAuthenticated: false,
 }
+

@@ -35,13 +35,13 @@
   <script>
   import { mapState, mapActions } from "vuex";
   import QuestionBoardList from "@/components/questionBoard/QuestionBoardList.vue";
-  import RegisterQuestionBoardForm from "@/components/questionBoard/RegisterQuestionBoardForm.vue";
+  //import RegisterQuestionBoardForm from "@/components/questionBoard/RegisterQuestionBoardForm.vue";
   
   export default {
     name: "QuestionBoardListPage",
     components: {
         QuestionBoardList,
-        RegisterQuestionBoardForm,
+       //RegisterQuestionBoardForm,
     },
     computed: {
       ...mapState([

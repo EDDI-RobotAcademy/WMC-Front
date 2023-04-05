@@ -7,7 +7,7 @@
 <script>
 import LoginForm from '@/components/account/SignInForm.vue'
 import Vue from 'vue'
-
+import axios from 'axios'
 import cookies from 'vue-cookies'
 
 Vue.use(cookies)

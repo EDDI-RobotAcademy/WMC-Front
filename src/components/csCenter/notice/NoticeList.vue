@@ -36,6 +36,7 @@
 
 <script>
 
+
 export default {
   name: 'NoticeList',
   props: {

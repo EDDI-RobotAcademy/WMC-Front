@@ -31,6 +31,7 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel'
 import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
   name: 'MainProductList',
