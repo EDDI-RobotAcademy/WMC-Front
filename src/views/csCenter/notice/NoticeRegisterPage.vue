@@ -10,11 +10,13 @@
 import NoticeRegisterForm from '../../../components/csCenter/notice/NoticeRegisterForm.vue'
 import { mapActions } from 'vuex'
 
+const noticeModule = 'noticeModule'
+
 export default {
   components: { NoticeRegisterForm },
   name: 'NoticeListPage',
   methods: {
-    ...mapActions([
+    ...mapActions(noticeModule, [
       'requestCreateNoticeToSpring'
     ]),
     async onSubmit (payload) {

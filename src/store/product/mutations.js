@@ -38,7 +38,6 @@ export default {
       imageDataList: productResponse.imageDataList
     }))
   },
-
   
 
 }

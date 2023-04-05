@@ -70,27 +70,34 @@
 </template>
 
 <script>
-import NoticeList from '../../../components/csCenter/notice/NoticeList.vue'
+import NoticeList from '@/components/csCenter/notice/NoticeList.vue'
 import { mapActions, mapState } from 'vuex'
+
+const noticeModule = 'noticeModule'
+
 export default {
   components: { NoticeList },
-  name: 'NoticeListPage',
+  name: "NoticeListPage",
   computed: {
-    ...mapState({
-      notices: state => state.notices.map(notice => ({
-        ...notice
+    ...mapState(noticeModule, ['notices']), 
+    noticeItemList() {
+      return state.notices = passingData.map(Response => ({
+          ...notice,
+          ImageDataList: Response.ImageDataList
       }))
-    })
+    }
   },
-  mounted () {
+
+  mounted() {
     this.requestNoticeListToSpring()
   },
   methods: {
-    ...mapActions([
+    ...mapActions(noticeModule,[
       'requestNoticeListToSpring'
     ])
   }
 }
+
 </script>
 
 <style scoped>

@@ -12,17 +12,20 @@
 import ProductItemList from '@/components/product/productItem/ProductItemList.vue'
 import { mapActions, mapState } from 'vuex'
 
+
+const productModule = 'productModule'
+
 export default {
   components: { ProductItemList },
   name: 'ProductItemListPage',
   computed: {
-    ...mapState({
+    ...mapState(productModule, ['products']),
       products: state => state.products.map(product => ({
         ...product,
         imageDataList: product.imageDataList
       }))
-    })
-  },
+    }, 
+
   mounted () {
     this.requestProductItemListToSpring()
   },

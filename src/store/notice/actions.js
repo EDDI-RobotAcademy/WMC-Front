@@ -3,7 +3,7 @@ import {
     REQUEST_NOTICE_TO_SPRING
 } from'./mutation-types'
 
-import axios from 'axios'
+import axiosInst from '@/utility/axiosObject'
 
 export default {
 
@@ -16,7 +16,7 @@ export default {
         for (let idx = 0; idx < files.length; idx++) {
           formData.append('fileList[' + idx + ']', files[idx]);
         }
-        return axios
+        return axiosInst
           .post('http://localhost:7777/notice/register', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -31,13 +31,13 @@ export default {
       },
     
       requestNoticeListToSpring({ commit }) {
-        return axios.get('http://localhost:7777/notice/list')
+        return axiosInst.get('http://localhost:7777/notice/list')
           .then((res) => {
             commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
           })
       },
       requestNoticeToSpring ({ commit }) {
-        return axios.get('http://localhost:7777/notice/${noitceId}')
+        return axiosInst.get('http://localhost:7777/notice/${noitceId}')
           .then((res) => {
             commit(REQUEST_NOTICE_TO_SPRING, res.data)
           })
