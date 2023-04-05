@@ -12,14 +12,13 @@
         />
       </router-link>
 
-      
       <v-spacer class="btn-container" >
         <div class="dropdown">
           <button class="button" type="button" data-hover="선글라스"  onclick="location.href='http://localhost:8080/#/product-list-page'">
             <span>SUNGLASSES</span>
           </button>
         </div>
-        
+
         <div class="dropdown">
           <button class="button" type="button" data-hover="안경" onclick="location.href='http://localhost:8080/#/product-list-page'">
             <span>EYEGLASSES</span>
@@ -41,13 +40,12 @@
           </button>
         </div>
         <div class="dropdown">
-          <div class="dropbtn">
             <button class="button" type="button" data-hover="브랜드" onclick="location.href='http://localhost:8080/#/product-list-page'">
               <span>BRAND</span>
             </button>
             <div class="dropdown-content">
               <a href='http://localhost:8080/#/notice-list'>공지사항</a>
-            </div>
+
           </div>
         </div>
         <div class="dropdown">
@@ -74,7 +72,7 @@
           <span>로그인</span>
         </button>
         <div class="nav-account">
-        
+
           <button class="right-btn"
             v-if="isAuthenticated == true"
             text
@@ -112,11 +110,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import axios from 'axios';
+import { mapState } from 'vuex'
+
 export default {
   name: 'NavigationMenuPage',
-  data() {
+  data () {
     return {
       isTrue: false,
       navigation_drawer: false,
@@ -127,71 +125,70 @@ export default {
           icon: 'mdi-share-variant-outline',
           text: 'Sharing',
           name: 'JpaBoardListPage',
-          route: '/board-list-page',
-        },
+          route: '/board-list-page'
+        }
       ],
       items: [
         { title: 'Home', icon: 'dashboard' },
-        { title: 'About', icon: 'question_answer' },
-      ],
-    };
+        { title: 'About', icon: 'question_answer' }
+      ]
+    }
   },
-  
-  
-    name: 'App',
-    components: {},
-    
+
+  name: 'App',
+  components: {},
+
   computed: {
-    ...mapState(['isAuthenticated']),
+    ...mapState(['isAuthenticated'])
   },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
 
     if (localStorage.getItem('userInfo')) {
-      this.$store.state.isAuthenticated = true;
+      this.$store.state.isAuthenticated = true
     } else {
-      this.$store.state.isAuthenticated = false;
+      this.$store.state.isAuthenticated = false
     }
   },
   methods: {
-    handleScroll() {
-      this.isNavHidden = window.pageYOffset > 0;
+    handleScroll () {
+      this.isNavHidden = window.pageYOffset > 0
     },
-    clickToggle() {
-      this.isTrue = !this.isTrue;
+    clickToggle () {
+      this.isTrue = !this.isTrue
     },
-    logout() {
-      console.log('getItem: ' + localStorage.getItem('userInfo'));
-      let token = localStorage.getItem('userInfo');
-      const length = token.length;
-      console.log('token: ' + token + ', length: ' + length);
-      token = token.substr(1, length - 2);
-      console.log('token: ' + token + ', length: ' + token.length);
+    logout () {
+      console.log('getItem: ' + localStorage.getItem('userInfo'))
+      let token = localStorage.getItem('userInfo')
+      const length = token.length
+      console.log('token: ' + token + ', length: ' + length)
+      token = token.substr(1, length - 2)
+      console.log('token: ' + token + ', length: ' + token.length)
       axios.post('http://localhost:7777/member/logout', token).then(() => {
-        alert('로그아웃 완료');
-        localStorage.removeItem('userInfo');
-        localStorage.removeItem('memberId');
-        localStorage.removeItem('authorityName');
-        this.$store.state.isAuthenticated = false;
-      });
+        alert('로그아웃 완료')
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('memberId')
+        localStorage.removeItem('authorityName')
+        this.$store.state.isAuthenticated = false
+      })
     },
-    resign() {
-      let token = localStorage.getItem('userInfo');
-      const length = token.length;
-      console.log('token: ' + token + ', length: ' + length);
-      token = token.substr(1, length - 2);
-      console.log('token: ' + token);
+    resign () {
+      let token = localStorage.getItem('userInfo')
+      const length = token.length
+      console.log('token: ' + token + ', length: ' + length)
+      token = token.substr(1, length - 2)
+      console.log('token: ' + token)
       axios.post('http://localhost:7777/member/resign', token).then(() => {
-        alert('회원탈퇴 완료');
-        localStorage.removeItem('userInfo');
-        this.$store.state.isAuthenticated = false;
-      });
+        alert('회원탈퇴 완료')
+        localStorage.removeItem('userInfo')
+        this.$store.state.isAuthenticated = false
+      })
     },
-    goCartPage() {
-      this.$router.push({ name: 'CartView' });
-      this.showSearch = false;
-    },
-  },
+    goCartPage () {
+      this.$router.push({ name: 'CartView' })
+      this.showSearch = false
+    }
+  }
 }
 
 </script>
@@ -207,23 +204,11 @@ export default {
   align-items: center;
 }
 
-
-.dropbtn {
-  padding-left: 25px;
-  padding-right: 25px;
-  font-size:14px;
-  
-}
-.btn-container .dropbtn :hover {
-  border-color: #fff;
-  background-color: rgba(255, 255, 255, 0.5);;
-}
-
 .dropdown {
   position: relative;
-  display: center;  
+  display: center;
+  padding-top: -20px;
 }
-
 
 .dropdown-content {
   color: inherit;
@@ -232,11 +217,8 @@ export default {
   min-width: 80px;
   padding: 10px;
   box-shadow: none;
-  z-index: auto;
   width: fit-content;
-  
-  background-color:  rgba(255, 255, 255, 0.5);;
-  
+  background-color:  rgba(255, 255, 255, 0);
 }
 
 .dropdown-content a {
@@ -244,12 +226,6 @@ export default {
   text-decoration: none;
   display: block;
   min-width:inherit;
-  
-}
-
-.dropdown-content a:hover {
-  width: auto;
-  align-content: center;
 
 }
 
@@ -258,9 +234,8 @@ export default {
   display: block;
   width: auto;
   align-content: center;
-  
-}
 
+}
 
 .dropdown:hover .dropdown-content a{
 
@@ -276,11 +251,7 @@ export default {
   padding: auto;
   box-shadow: none;
   z-index: auto;
-  
-  
 }
-
-
 
 .right-box {
   padding:auto;
@@ -295,9 +266,8 @@ export default {
   padding: 12px;
   font-size: 12px;
   border-radius: 10%;
-  
-}
 
+}
 
 .right-box .nav-util {
   display: flex;
@@ -314,7 +284,6 @@ export default {
 .hidden {
   display: none;
 }
-
 
 .button {
   display: inline-block;
@@ -369,8 +338,6 @@ export default {
 
 /* :after */
 
-
-
 /* Span on :hover and :active */
 
 .button:hover span,
@@ -383,9 +350,9 @@ export default {
   transform: scale(0.3);
 }
 
-/*  
-  We show :before pseudo-element on :hover 
-  and :after pseudo-element on :active 
+/*
+  We show :before pseudo-element on :hover
+  and :after pseudo-element on :active
 */
 
 .button:hover:before,
@@ -402,13 +369,8 @@ export default {
   transition-delay: .2s;
 }
 
-/* 
+/*
 We hide :before pseudo-element on :active
 */
-
-
-
-
-
 
 </style>

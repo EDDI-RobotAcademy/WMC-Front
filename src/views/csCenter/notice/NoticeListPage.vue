@@ -5,8 +5,8 @@
         <div class="mr-10 left">
           <h2 style="font-size: 36px; font-weight: bold; letter-spacing: 1px;">CS SENTER</h2>
           <br>
-          <div class="elevation-10 rounded">
-            <v-card class="side_menu" max-width="300">
+          <div class="elevation-0">
+            <v-card tile class="side_menu" max-width="300">
               <v-list>
                 <router-link to="/notice-list" style="color: black;">공지사항</router-link>
               </v-list>
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div>
-          <div class="elevation-10 rounded right" style="background-color: #F8F8FA;">
+          <div class="elevation-0 right" style="background-color: white;">
             <div class="body_left">
               <h2 class="mt-10 ml-15 text-md-center">안녕하세요! WMC 고객센터입니다.</h2>
               <br>
@@ -71,18 +71,18 @@
 
 <script>
 import NoticeList from '../../../components/csCenter/notice/NoticeList.vue'
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex'
 export default {
   components: { NoticeList },
-  name: "NoticeListPage",
+  name: 'NoticeListPage',
   computed: {
     ...mapState({
       notices: state => state.notices.map(notice => ({
         ...notice
       }))
-  }),
+    })
   },
-  mounted() {
+  mounted () {
     this.requestNoticeListToSpring()
   },
   methods: {
@@ -102,7 +102,7 @@ export default {
   display: flex;
   width: 800px;
   height: 200px;
-  ;
+  border:2px;
 }
 .notice_list {
   width: 800px;

@@ -1,9 +1,6 @@
 export default {
-    products: [],
-    product: {},
-    
-    notices: [],
-    notice: {},
+  products: [],
+  product: {},
 
     questionBoards: [],
     questionBoard: {},
