@@ -33,9 +33,11 @@
   </template>
   
   <script>
-  import { mapState, mapActions } from "vuex";
   import QuestionBoardList from "@/components/questionBoard/QuestionBoardList.vue";
   //import RegisterQuestionBoardForm from "@/components/questionBoard/RegisterQuestionBoardForm.vue";
+  import { mapActions, mapState } from "vuex";
+  
+  const questionModule = 'questionModule'
   
   export default {
     name: "QuestionBoardListPage",
@@ -44,7 +46,7 @@
        //RegisterQuestionBoardForm,
     },
     computed: {
-      ...mapState([
+      ...mapState(questionModule, [
         'questionBoards'
       ]),
     },
@@ -71,7 +73,7 @@
         this.showRegisterBoard = true
         }
       },
-      ...mapActions([
+      ...mapActions(questionModule,[
         'requestQuestionBoardListToSpring'
       ])
     }
