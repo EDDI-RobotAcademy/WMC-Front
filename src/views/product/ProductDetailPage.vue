@@ -18,7 +18,6 @@ export default {
   beforeRouteEnter(to, from, next) {
     const productId = to.params.productId;
 
-    // Import the store and call the action directly
     import('@/store').then(({ default: store }) => {
       store
         .dispatch('productModule/fetchProductById', productId)
@@ -29,7 +28,7 @@ export default {
         })
         .catch((error) => {
           console.error('Error fetching product:', error);
-          next(false); // Cancel navigation
+          next(false);
         });
     });
   },
