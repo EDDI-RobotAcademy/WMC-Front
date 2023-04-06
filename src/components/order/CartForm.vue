@@ -30,12 +30,14 @@
               ></v-checkbox>
             </td>
             <td>
+              <router-link :to="{ name: 'ProductDetailPage', params: { productId: item.product_id } }" tag="div">
               <v-img
                 :src="item.image"
                 alt="Product image"
                 max-width="50"
                 max-height="50"
               />
+            </router-link>
             </td>
             <td>{{ item.name }}</td>
             <td>
