@@ -1,6 +1,5 @@
 <template>
     <v-container>
-        <h2></h2>
         <product-list :products="products"/>
     </v-container>
 </template>
