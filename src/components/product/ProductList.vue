@@ -45,93 +45,93 @@
 </template>
 
 <script>
-import { Carousel, Slide } from 'vue-carousel';
-import { mapState } from 'vuex';
-import axios from 'axios';
+import { Carousel, Slide } from 'vue-carousel'
+import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
   name: 'ProductList',
   components: {
     Carousel,
-    Slide,
+    Slide
   },
   props: {
     products: {
-      type: Array,
-    },
+      type: Array
+    }
   },
-  data() {
+  data () {
     return {
       memberId: localStorage.getItem('memberId'),
       authorityName: localStorage.getItem('authorityName'),
-      cart: [],
-    };
+      cart: []
+    }
   },
-  
+
   computed: {
     ...mapState(['isAuthenticated']),
 
-    total() {
-      let sum = 0;
-      for (let item of this.cart) {
-        sum += item.price * item.quantity;
+    total () {
+      let sum = 0
+      for (const item of this.cart) {
+        sum += item.price * item.quantity
       }
-      return sum;
-    },
+      return sum
+    }
   },
-  mounted() {
+  mounted () {
     if (localStorage.getItem('userInfo')) {
-      this.$store.state.isAuthenticated = true;
+      this.$store.state.isAuthenticated = true
     } else {
-      this.$store.state.isAuthenticated = false;
+      this.$store.state.isAuthenticated = false
     }
   },
   methods: {
-    addToCart(product, quantity = 1) {
+    addToCart (product, quantity = 1) {
       if (!this.isAuthenticated) {
-        alert('로그인 먼저 하세용^_^');
-        this.$router.push('/sign-in');
-        return;
+        alert('로그인 먼저 하세용^_^')
+        this.$router.push('/sign-in')
+        return
       }
 
-      if(this.memberId && this.authorityName) {
-      const cartKey = `cart_${this.memberId}`;
-      let cart = localStorage.getItem(cartKey);
-      if (!cart) {
-        cart = [];
-      } else {
-        cart = JSON.parse(cart);
+      if (this.memberId && this.authorityName) {
+        const cartKey = `cart_${this.memberId}`
+        let cart = localStorage.getItem(cartKey)
+        if (!cart) {
+          cart = []
+        } else {
+          cart = JSON.parse(cart)
+        }
+
+        const existingCartItem = cart.find(
+          (item) => item.product_id === product.productId
+        )
+
+        if (existingCartItem) {
+          existingCartItem.quantity += quantity
+        } else {
+          cart.push({
+            product_id: product.productId,
+            name: product.name,
+            image: product.firstPhoto
+              ? this.getImagePath(product.firstPhoto)
+              : '',
+            price: product.price,
+            quantity
+          })
+        }
+
+        localStorage.setItem(cartKey, JSON.stringify(cart))
+        console.log('Cart:', cart)
+        alert('장바구니에 추가되었습니다!')
       }
-
-      const existingCartItem = cart.find(
-        (item) => item.product_id === product.productId
-      );
-
-      if (existingCartItem) {
-        existingCartItem.quantity += quantity;
-      } else {
-        cart.push({
-          product_id: product.productId,
-          name: product.name,
-          image: product.firstPhoto
-            ? this.getImagePath(product.firstPhoto)
-            : '',
-          price: product.price,
-          quantity: quantity,
-        });
-      }
-
-      localStorage.setItem(cartKey, JSON.stringify(cart));
-      console.log('Cart:', cart);
-      alert('장바구니에 추가되었습니다!');
+    },
+    getImagePath (imageData) {
+      console.log('imageData:', imageData)
+      return require(`@/${imageData}`)
     }
-    },
-    getImagePath(imageData) {
-      console.log('imageData:', imageData);
-      return require(`@/${imageData}`);
-    },
-  },
-};
+  }
+}
 </script>
 
 <style>

@@ -14,42 +14,42 @@
 </template>
 
 <script>
-import MainProductList from '../../components/product/MainProductList.vue';
-import { mapActions, mapState } from 'vuex';
+import MainProductList from '../../components/product/MainProductList.vue'
+import { mapActions, mapState } from 'vuex'
+
+const productModule = 'productModule'
 
 export default {
   components: { MainProductList },
-  name: "MainProductListPage",
+  name: 'MainProductListPage',
   computed: {
-...mapState({
-  products: state => state.products.map(product => ({
-    ...product,
-    imageDataList: product.imageDataList
-  }))
-})
-  },
-  mounted() {
+    ...mapState(productModule, ['products']),
+    productItemList() {
+      return this.products.map(product => ({
+        ...product,
+        imageDataList: product.imageDataList
+      }))
+    }
+  }, 
+  mounted () {
     this.requestMainProductListToSpring()
   },
   methods: {
-    ...mapActions([
+    ...mapActions(productModule, [
       'requestMainProductListToSpring'
     ])
   }
-
-}
+} 
 </script>
 
 <style>
 .body-container{
-  
+
   justify-content: center;
-} 
+}
 .body-text{
   margin-bottom: 0rem;
   text-align: left;
   }
-
-
 
 </style>

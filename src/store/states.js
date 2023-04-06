@@ -1,9 +1,5 @@
-export default {
-    products: [],
-    product: {},
-    
-    notices: [],
-    notice: {},
 
-    isAuthenticated: false,
+export default {
+  isAuthenticated: false,
 }
+

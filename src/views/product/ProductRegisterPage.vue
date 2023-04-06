@@ -3,26 +3,26 @@
       <Product-register-form @submit="onSubmit" />
     </v-container>
   </template>
-  
-  <script>
-  import ProductRegisterForm from '@/components/product/ProductRegisterForm.vue';
-  import { mapActions } from 'vuex';
-  
-  export default {
-    components: { ProductRegisterForm },
-    name: 'ProductRegisterPage',
-    methods: {
-      ...mapActions(['requestCreateProductToSpring']),
-      async onSubmit(payload) {
-        await this.requestCreateProductToSpring(payload);
-        await this.$router.push({
-          name: 'ProductListPage',
-        });
-      },
-    },
-  };
-  </script>
-  
+
+<script>
+import ProductRegisterForm from '@/components/product/ProductRegisterForm.vue'
+import { mapActions } from 'vuex'
+
+export default {
+  components: { ProductRegisterForm },
+  name: 'ProductRegisterPage',
+  methods: {
+    ...mapActions(['requestCreateProductToSpring']),
+    async onSubmit (payload) {
+      await this.requestCreateProductToSpring(payload)
+      await this.$router.push({
+        name: 'ProductListPage'
+      })
+    }
+  }
+}
+</script>
+
   <style scoped>
   .product-registration-page {
     display: flex;
@@ -55,4 +55,3 @@
     cursor: pointer;
   }
   </style>
-  

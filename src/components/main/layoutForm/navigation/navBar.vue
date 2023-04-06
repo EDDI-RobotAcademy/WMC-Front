@@ -41,13 +41,12 @@
           </button>
         </div>
         <div class="dropdown">
-          <div class="dropbtn">
             <button class="button" type="button" data-hover="브랜드" onclick="location.href='http://localhost:8080/#/product-list-page'">
               <span>BRAND</span>
             </button>
             <div class="dropdown-content">
               <a href='http://localhost:8080/#/notice-list'>공지사항</a>
-            </div>
+  
           </div>
         </div>
         <div class="dropdown">
@@ -207,21 +206,10 @@ export default {
   align-items: center;
 }
 
-
-.dropbtn {
-  padding-left: 25px;
-  padding-right: 25px;
-  font-size:14px;
-  
-}
-.btn-container .dropbtn :hover {
-  border-color: #fff;
-  background-color: rgba(255, 255, 255, 0.5);;
-}
-
 .dropdown {
   position: relative;
   display: center;  
+  padding-top: -20px;
 }
 
 
@@ -232,11 +220,8 @@ export default {
   min-width: 80px;
   padding: 10px;
   box-shadow: none;
-  z-index: auto;
   width: fit-content;
-  
-  background-color:  rgba(255, 255, 255, 0.5);;
-  
+  background-color:  rgba(255, 255, 255, 0);
 }
 
 .dropdown-content a {
@@ -245,12 +230,6 @@ export default {
   display: block;
   min-width:inherit;
   
-}
-
-.dropdown-content a:hover {
-  width: auto;
-  align-content: center;
-
 }
 
 .dropdown:hover .dropdown-content{
@@ -276,8 +255,6 @@ export default {
   padding: auto;
   box-shadow: none;
   z-index: auto;
-  
-  
 }
 
 

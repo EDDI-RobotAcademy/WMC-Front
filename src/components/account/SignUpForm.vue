@@ -294,11 +294,11 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   name: 'SignUpForm',
-  data() {
+  data () {
     return {
       manager: false,
       managerCode: '',
@@ -323,11 +323,11 @@ export default {
       email_rule: [
         (v) => !!v || '이메일을 입력해주세요.',
         (v) => {
-          const replaceV = v.replace(/(\s*)/g, '');
+          const replaceV = v.replace(/(\s*)/g, '')
           const pattern =
-            /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
-          return pattern.test(replaceV) || '이메일 형식을 입력하세요.';
-        },
+            /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
+          return pattern.test(replaceV) || '이메일 형식을 입력하세요.'
+        }
       ],
       password_rule: [
         (v) =>
@@ -335,7 +335,7 @@ export default {
             ? !!v || '패스워드는 필수 입력사항입니다.'
             : true,
         (v) =>
-          !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
+          !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.'
       ],
       password_confirm_rule: [
         (v) =>
@@ -344,38 +344,38 @@ export default {
             : true,
         (v) =>
           !(v && v.length >= 30) || '패스워드는 30자 이상 입력할 수 없습니다.',
-        (v) => v === this.password || '패스워드가 일치하지 않습니다.',
+        (v) => v === this.password || '패스워드가 일치하지 않습니다.'
       ],
       phoneNumber_rule: [
         (v) => !!v || '전화번호를 입력 해주세요.',
         (v) => {
-          const replaceV = v.replace(/(\s*)/g, '');
-          const pattern = /010-\d{4}-\d{4}/;
+          const replaceV = v.replace(/(\s*)/g, '')
+          const pattern = /010-\d{4}-\d{4}/
           return (
             pattern.test(replaceV) ||
             '전화번호 11자리를 입력해주세요. ("-"포함)'
-          );
-        },
+          )
+        }
       ],
       birthdate_rule: [
         (v) => !!v || '생년월일 8자리를 입력해주세요.',
         (v) => {
-          const replaceV = v.replace(/(\s*)/g, '');
+          const replaceV = v.replace(/(\s*)/g, '')
           const pattern =
-            /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-          return pattern.test(replaceV) || '생년월일 형식을 입력하세요.';
-        },
-      ],
-    };
+            /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
+          return pattern.test(replaceV) || '생년월일 형식을 입력하세요.'
+        }
+      ]
+    }
   },
   methods: {
-    onSubmit() {
+    onSubmit () {
       if (this.$refs.form.validate()) {
         if (this.manager) {
-          const authorityName = 'MANAGER';
-          const managerCode = this.managerCode;
-          const managerCheck = this.manager;
-          const { email, password, username, birthdate, phoneNumber } = this;
+          const authorityName = 'MANAGER'
+          const managerCode = this.managerCode
+          const managerCheck = this.manager
+          const { email, password, username, birthdate, phoneNumber } = this
           this.$emit('submit', {
             email,
             password,
@@ -384,11 +384,11 @@ export default {
             authorityName,
             managerCheck,
             managerCode,
-            phoneNumber,
-          });
+            phoneNumber
+          })
         } else {
-          const authorityName = 'MEMBER';
-          const managerCheck = this.manager;
+          const authorityName = 'MEMBER'
+          const managerCheck = this.manager
           const {
             email,
             password,
@@ -398,8 +398,8 @@ export default {
             street,
             addressDetail,
             zipcode,
-            phoneNumber,
-          } = this;
+            phoneNumber
+          } = this
           this.$emit('submit', {
             email,
             password,
@@ -411,91 +411,91 @@ export default {
             street,
             addressDetail,
             zipcode,
-            phoneNumber,
-          });
+            phoneNumber
+          })
         }
       } else {
-        alert('올바른 정보를 입력하세요!');
+        alert('올바른 정보를 입력하세요!')
       }
     },
-    emailValidation() {
+    emailValidation () {
       const emailValid = this.email.match(
         /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+      )
 
       if (emailValid) {
-        this.emailPass = true;
+        this.emailPass = true
       }
     },
-    checkDuplicateEmail() {
+    checkDuplicateEmail () {
       const emailValid = this.email.match(
         /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+      )
 
       if (emailValid) {
-        const { email } = this;
+        const { email } = this
         axios
           .post(`http://localhost:7777/member/check-email/${email}`)
           .then((res) => {
             if (res.data) {
-              alert('사용 가능한 이메일입니다!');
-              this.emailPass = true;
+              alert('사용 가능한 이메일입니다!')
+              this.emailPass = true
             } else {
-              alert('중복된 이메일입니다!');
-              this.emailPass = false;
+              alert('중복된 이메일입니다!')
+              this.emailPass = false
             }
-          });
+          })
       }
     },
-    checkManagerCode() {
-      const { managerCode } = this;
+    checkManagerCode () {
+      const { managerCode } = this
       axios
         .post(`http://localhost:7777/member/check-manager/${managerCode}`)
         .then((res) => {
           if (res.data) {
-            alert('관리자 코드 확인하였습니다.');
-            this.managerPass = true;
+            alert('관리자 코드 확인하였습니다.')
+            this.managerPass = true
           } else {
-            alert('일치하는 관리자 코드가 없습니다.');
-            this.managerPass = false;
+            alert('일치하는 관리자 코드가 없습니다.')
+            this.managerPass = false
           }
-        });
+        })
     },
-    callDaumAddressApi() {
+    callDaumAddressApi () {
       new window.daum.Postcode({
         oncomplete: (data) => {
-          let fullRoadAddr = data.roadAddress;
-          let extraRoadAddr = '';
+          let fullRoadAddr = data.roadAddress
+          let extraRoadAddr = ''
 
           if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-            extraRoadAddr += data.bname;
+            extraRoadAddr += data.bname
           }
 
           if (data.buildingName !== '' && data.apartment === 'Y') {
             extraRoadAddr +=
               extraRoadAddr !== ''
                 ? ', ' + data.buildingName
-                : data.buildingName;
+                : data.buildingName
           }
 
           if (extraRoadAddr !== '') {
-            extraRoadAddr = ' (' + extraRoadAddr + ')';
+            extraRoadAddr = ' (' + extraRoadAddr + ')'
           }
 
           if (fullRoadAddr !== '') {
-            fullRoadAddr += extraRoadAddr;
+            fullRoadAddr += extraRoadAddr
           }
 
-          this.city = data.sido;
-          this.zipcode = data.zonecode;
-          this.street = data.sigungu + ' ' + fullRoadAddr;
+          this.city = data.sido
+          this.zipcode = data.zonecode
+          this.street = data.sigungu + ' ' + fullRoadAddr
 
-          this.streetPass = true;
-        },
-      }).open();
-    },
-  },
-};
+          this.streetPass = true
+        }
+      }).open()
+    }
+  }
+}
 </script>
 
 <style scoped></style>
