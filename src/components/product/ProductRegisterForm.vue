@@ -117,7 +117,7 @@ export default {
         description,
         price,
         stock,
-        categoryId,
+        category: categoryId,
         files,
       });
     },

@@ -14,6 +14,7 @@ import MyPageView from '@/views/myPage/MyPageView.vue'
 import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
 import CartView from "@/views/order/CartView";
 import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
+import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
 
 
 Vue.use(VueRouter)
@@ -93,6 +94,11 @@ const routes = [
     path: '/question-register',
     name: 'QuestionBoardRegisterPage',
     component: QuestionBoardRegisterPage
+  },
+  {
+    path: '/product-detail',
+    name: 'ProductDetailPage',
+    component: ProductDetailPage
   },
 
 
