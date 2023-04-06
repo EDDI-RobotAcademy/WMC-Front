@@ -68,7 +68,7 @@
         <button v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='http://localhost:8080/sign-in-test#/sign-in'"
+          onclick="location.href='http://localhost:8080/#/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -88,7 +88,7 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='http://localhost:8080/sign-up-test#/sign-up'"
+            onclick="location.href='http://localhost:8080/#/sign-up'"
           >
             <span>회원가입</span>
           </button>
@@ -96,7 +96,7 @@
             v-if="isAuthenticated == true"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/my-page#/'"
+            onclick="location.href='http://localhost:8080/#/my-page'"
           >
             <span>마이페이지</span>
           </button>

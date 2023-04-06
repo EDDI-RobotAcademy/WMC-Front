@@ -7,13 +7,24 @@ import {
 import axiosInst from '@/utility/axiosObject'
 
 export default {
+  async fetchProductById(_, productId) {
+    try {
+      const response = await axiosInst.get(`http://localhost:7777/product/detail/`, {
+        params: { productId },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    }
+  },
   requestCreateProductToSpring ({}, payload) {
-    const { name, description, price, stock, files } = payload
+    const { name, description, price, stock, category, files } = payload
     const formData = new FormData()
     formData.append('name', name)
     formData.append('description', description)
     formData.append('price', price)
     formData.append('stock', stock)
+    formData.append('categoryId', category)
     for (let idx = 0; idx < files.length; idx++) {
       formData.append('fileList[' + idx + ']', files[idx])
     }

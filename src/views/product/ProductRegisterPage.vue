@@ -12,7 +12,7 @@ export default {
   components: { ProductRegisterForm },
   name: 'ProductRegisterPage',
   methods: {
-    ...mapActions(['requestCreateProductToSpring']),
+    ...mapActions('productModule', ['requestCreateProductToSpring']),
     async onSubmit (payload) {
       await this.requestCreateProductToSpring(payload)
       await this.$router.push({

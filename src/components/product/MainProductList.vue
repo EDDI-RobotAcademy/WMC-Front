@@ -3,7 +3,7 @@
   <!--이슈작성-->
     <v-row style="--bs-gutter-x: 1.5rem;">
       <v-col class="card-container"
-        v-for="(product, index) in products"
+        v-for="product in products"
         :key="product.productId"
         cols="12"
         sm="3"
