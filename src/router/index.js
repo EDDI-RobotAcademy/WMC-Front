@@ -96,11 +96,10 @@ const routes = [
     component: QuestionBoardRegisterPage
   },
   {
-    path: '/product/detail/:productId',
+    path: '/product-detail',
     name: 'ProductDetailPage',
     component: ProductDetailPage
-  }
-  
+  },
 
 
 ]

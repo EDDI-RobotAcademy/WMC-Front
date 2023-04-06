@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      mainImage: this.product ? this.getImagePath(this.product.imageDataList[0].imageData) : '',
+      mainImage: this.product ? this.product.images[0] : '',
     };
   },
   methods: {

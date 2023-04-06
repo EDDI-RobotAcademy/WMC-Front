@@ -8,14 +8,13 @@ import axiosInst from '@/utility/axiosObject'
 
 export default {
   async fetchProductById(_, productId) {
-    console.log("asdf");
     try {
       const response = await axiosInst.get(`http://localhost:7777/product/detail/`, {
         params: { productId },
       });
       return response.data;
     } catch (error) {
-      console.error('에러났다:', error);
+      console.error('Error fetching product:', error);
     }
   },
   requestCreateProductToSpring ({}, payload) {
