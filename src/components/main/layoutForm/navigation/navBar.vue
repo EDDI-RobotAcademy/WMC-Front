@@ -96,7 +96,7 @@
             v-if="isAuthenticated == true"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/my-page#/'"
+            onclick="location.href='http://localhost:8080/#/my-page'"
           >
             <span>마이페이지</span>
           </button>
