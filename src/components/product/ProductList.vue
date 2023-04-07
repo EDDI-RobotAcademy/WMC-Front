@@ -120,7 +120,7 @@ export default {
           existingCartItem.quantity += quantity;
         } else {
           cart.push({
-            product_id: product.productId,
+            productId: product.productId,
             name: product.name,
             image: product.firstPhoto
               ? this.getImagePath(product.firstPhoto)
