@@ -1,19 +1,27 @@
 <template>
   <v-row>
-    <v-col cols="12" sm="6" md="6">
-      <div v-if="product">
-        <v-img
-          v-for="(image, index) in product.imageDataList"
-          :key="index"
-          :src="getImagePath(image.imageData)"
-          :alt="'Image ' + index"
-          class="mini-image"
-          @mouseover="changeMainImage(getImagePath(image.imageData))"
-        ></v-img>
-        <v-img :src="mainImage" :alt="'Main Image'" class="main-image"></v-img>
+    <v-col cols="12" sm="8" md="8">
+      <div v-if="product" class="image-box">
+        <v-row>
+          <v-col>
+            <v-img
+              v-for="(image, index) in product.imageDataList"
+              :key="index"
+              :src="getImagePath(image.imageData)"
+              :alt="'Image ' + index"
+              class="mini-image"
+              @mouseover="changeMainImage(getImagePath(image.imageData))"
+            ></v-img>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-img :src="mainImage" :alt="'Main Image'" class="main-image"></v-img>
+          </v-col>
+        </v-row>
       </div>
     </v-col>
-    <v-col cols="12" sm="6" md="6" v-if="product">
+    <v-col cols="12" sm="4" md="4" v-if="product">
       <v-card flat>
         <v-card-title>{{ product.name }}</v-card-title>
         <v-divider></v-divider>
@@ -129,14 +137,18 @@ export default {
 </script>
 
 <style scoped>
+.image-box{
+  display: flex;
+}
 .mini-image {
+  margin-top: 33px;
   width: 50px;
   height: 50px;
   cursor: pointer;
 }
 .main-image {
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 600px;
   margin-top: 1rem;
 }
 </style>
