@@ -38,12 +38,6 @@ export default {
       type: Object,
       required: true,
     },
-    /*
-    images: {
-    type: Array,
-    default: () => []
-    },
-    */
   },
 
   computed: {
