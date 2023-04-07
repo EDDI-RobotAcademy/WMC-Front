@@ -10,7 +10,7 @@
       <tr>
         <td>작성자</td>
         <td>
-          <input type="text" v-model="Writer" class="mt-5 mb-5 notice-input"/>
+          <input type="text" v-model="writer" class="mt-5 mb-5 notice-input"/>
         </td>
       </tr>
       <tr>
@@ -43,7 +43,7 @@ export default {
     data () {
         return {
             title: '제목을 입력하세요.',
-            Writer: 'WMC',
+            writer: 'WMC',
             content: '내용을 입력하세요.',
             files: [],
         }
