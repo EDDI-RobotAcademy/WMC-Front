@@ -8,8 +8,8 @@ import ProductListPage from '@/views/product/ProductListPage.vue'
 import ProductItemListPage from '@/views/product/productItem/ProductItemListPage.vue'
 import MainProductListPage from '@/views/product/MainProductListPage.vue'
 import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
-import NoticeRegisterPage from '@/views/csCenter/notice/NoticeRegisterPage.vue'
-import NoticeReadPage from '@/views/csCenter/notice/NoticeListPage.vue'
+import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
+import NoticeReadPage from "@/views/csCenter/notice/NoticeReadPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
 import CartView from "@/views/order/CartView";
@@ -77,9 +77,9 @@ const routes = [
     component: NoticeRegisterPage
   },
   {
-    path: '/notice-read',
+    path: '/notice-read/:noticeId',
     name: 'NoticeReadPage',
-    component: {
+    components: {
       default: NoticeReadPage
     },
     props: {

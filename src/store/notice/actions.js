@@ -36,11 +36,15 @@ export default {
             commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
           })
       },
-      requestNoticeToSpring ({ commit }) {
-        return axiosInst.get('http://localhost:7777/notice/${noitceId}')
+      
+      requestNoticeToSpring ({ commit }, noticeId) {
+        return axiosInst.get(`http://localhost:7777/notice/${noticeId}`)
           .then((res) => {
             commit(REQUEST_NOTICE_TO_SPRING, res.data)
           })
       }
       
+      
+      
     };
+
