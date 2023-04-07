@@ -1,4 +1,5 @@
 import {
+  REQUEST_PRODUCT_LIST_BY_CATEGORY,
   REQUEST_PRODUCT_LIST_TO_SPRING,
   REQUEST_PRODUCT_ITEM_LIST_TO_SPRING,
   REQUEST_MAIN_PRODUCT_LIST_TO_SPRING,
@@ -42,7 +43,13 @@ export default {
         alert('문제 발생!')
       })
   },
-
+  requestProductListByCategory({ commit }, categoryId) {
+    return axiosInst.get('http://localhost:7777/product/listByCategory', {
+      params: { categoryId }
+    }).then((res) => {
+      commit(REQUEST_PRODUCT_LIST_BY_CATEGORY, res.data)
+    })
+  },  
   requestProductListToSpring ({ commit }) {
     return axiosInst.get('http://localhost:7777/product/list').then((res) => {
       commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data)

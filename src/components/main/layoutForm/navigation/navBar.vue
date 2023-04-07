@@ -1,8 +1,12 @@
 <template>
-
   <nav>
-    <v-app-bar flat color="rgba(255,255,255,0.5)" class="flex-grow-0" height="50" app>
-      <!--v-app-bar-nav-icon @click="navigation_drawer = !navigation_drawer" /-->
+    <v-app-bar
+      flat
+      color="rgba(255,255,255,0.5)"
+      class="flex-grow-0"
+      height="50"
+      app
+    >
       <router-link to="/">
         <v-img
           :src="require('@/assets/logo.png')"
@@ -11,61 +15,112 @@
           class="mx-10"
         />
       </router-link>
-
-      
-      <v-spacer class="btn-container" >
+      <v-spacer class="btn-container">
         <div class="dropdown">
-          <button class="button" type="button" data-hover="선글라스"  onclick="location.href='http://localhost:8080/#/product-list-page'">
+          <router-link
+            :to="{
+              name: 'ProductListByCategoryPage',
+              params: { categoryId: 1 },
+            }"
+            tag="button"
+            class="button"
+            type="button"
+            data-hover="선글라스"
+          >
             <span>SUNGLASSES</span>
-          </button>
+          </router-link>
         </div>
-        
+
         <div class="dropdown">
-          <button class="button" type="button" data-hover="안경" onclick="location.href='http://localhost:8080/#/product-list-page'">
+          <router-link
+            :to="{
+              name: 'ProductListByCategoryPage',
+              params: { categoryId: 2 },
+            }"
+            tag="button"
+            class="button"
+            type="button"
+            data-hover="안경"
+          >
             <span>EYEGLASSES</span>
-          </button>
+          </router-link>
         </div>
+
         <div class="dropdown">
-          <button class="button" type="button" data-hover="ACC" onclick="location.href='http://localhost:8080/#/product-list-page'">
+          <router-link
+            :to="{
+              name: 'ProductListByCategoryPage',
+              params: { categoryId: 3 },
+            }"
+            tag="button"
+            class="button"
+            type="button"
+            data-hover="악세서리"
+          >
             <span>ACC</span>
-          </button>
+          </router-link>
         </div>
         <div class="dropdown">
-          <button class="button" type="button" data-hover="리뷰" onclick="location.href='http://localhost:8080/#/product-list-page'">
+          <button
+            class="button"
+            type="button"
+            data-hover="리뷰"
+            onclick="location.href='http://localhost:8080/#/product-list-page'"
+          >
             <span>REVIEW</span>
           </button>
         </div>
         <div class="dropdown">
-          <button class="button" type="button" data-hover="스토어" onclick="location.href='http://localhost:8080/#/product-list-page'">
+          <button
+            class="button"
+            type="button"
+            data-hover="스토어"
+            onclick="location.href='http://localhost:8080/#/product-list-page'"
+          >
             <span>STORE</span>
           </button>
         </div>
         <div class="dropdown">
-            <button class="button" type="button" data-hover="브랜드" onclick="location.href='http://localhost:8080/#/product-list-page'">
-              <span>BRAND</span>
-            </button>
-            <div class="dropdown-content">
-              <a href='http://localhost:8080/#/notice-list'>공지사항</a>
-  
+          <button
+            class="button"
+            type="button"
+            data-hover="브랜드"
+            onclick="location.href='http://localhost:8080/#/product-list-page'"
+          >
+            <span>BRAND</span>
+          </button>
+          <div class="dropdown-content">
+            <a href="http://localhost:8080/#/notice-list">공지사항</a>
           </div>
         </div>
         <div class="dropdown">
-          <button class="button" type="button" data-hover="아카이브" onclick="location.href='http://localhost:8080/#/product-list-page'">
+          <button
+            class="button"
+            type="button"
+            data-hover="아카이브"
+            onclick="location.href='http://localhost:8080/#/product-list-page'"
+          >
             <span>ARCHIVE</span>
           </button>
         </div>
-
       </v-spacer>
 
       <div class="right-box">
         <div class="nav-util">
           <v-icon> mdi-magnify</v-icon>
-          <button class="right-btn" large elevation="0" text @click="goCartPage">
+          <button
+            class="right-btn"
+            large
+            elevation="0"
+            text
+            @click="goCartPage"
+          >
             <v-icon> mdi-cart-outline</v-icon>
           </button>
         </div>
 
-        <button v-if="isAuthenticated == false"
+        <button
+          v-if="isAuthenticated == false"
           text
           color="black"
           onclick="location.href='http://localhost:8080/#/sign-in'"
@@ -73,8 +128,8 @@
           <span>로그인</span>
         </button>
         <div class="nav-account">
-        
-          <button class="right-btn"
+          <button
+            class="right-btn"
             v-if="isAuthenticated == true"
             text
             color="black"
@@ -84,7 +139,8 @@
             <span>로그아웃</span>
           </button>
 
-          <button class="right-btn"
+          <button
+            class="right-btn"
             v-if="isAuthenticated == false"
             text
             color="black"
@@ -92,7 +148,8 @@
           >
             <span>회원가입</span>
           </button>
-          <button class="right-btn"
+          <button
+            class="right-btn"
             v-if="isAuthenticated == true"
             text
             color="grey"
@@ -102,10 +159,6 @@
           </button>
         </div>
       </div>
-
-      <!-- <v-btn v-if="isAuthenticated == false" text color="grey" v-on:click="resign">
-          <span>회원 탈퇴</span>
-        </v-btn> -->
     </v-app-bar>
   </nav>
 </template>
@@ -135,11 +188,10 @@ export default {
       ],
     };
   },
-  
-  
-    name: 'App',
-    components: {},
-    
+
+  name: 'App',
+  components: {},
+
   computed: {
     ...mapState(['isAuthenticated']),
   },
@@ -153,6 +205,17 @@ export default {
     }
   },
   methods: {
+    async fetchProductsByCategory(categoryId) {
+      try {
+        this.$router.push({
+          name: 'ProductListByCategoryPage',
+          params: { categoryId },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
     handleScroll() {
       this.isNavHidden = window.pageYOffset > 0;
     },
@@ -191,12 +254,10 @@ export default {
       this.showSearch = false;
     },
   },
-}
-
+};
 </script>
 
 <style>
-
 .btn-container {
   padding-left: 20px;
   padding-right: 20px;
@@ -208,10 +269,9 @@ export default {
 
 .dropdown {
   position: relative;
-  display: center;  
+  display: center;
   padding-top: -20px;
 }
-
 
 .dropdown-content {
   color: inherit;
@@ -221,32 +281,28 @@ export default {
   padding: 10px;
   box-shadow: none;
   width: fit-content;
-  background-color:  rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .dropdown-content a {
   margin-top: 10px;
   text-decoration: none;
   display: block;
-  min-width:inherit;
-  
+  min-width: inherit;
 }
 
-.dropdown:hover .dropdown-content{
-  color:black;
+.dropdown:hover .dropdown-content {
+  color: black;
   display: block;
   width: auto;
   align-content: center;
-  
 }
 
-
-.dropdown:hover .dropdown-content a{
-
+.dropdown:hover .dropdown-content a {
   padding: auto;
   text-align: center;
   display: block;
-  color:black;
+  color: black;
   font-size: 12px;
 }
 
@@ -257,24 +313,20 @@ export default {
   z-index: auto;
 }
 
-
-
 .right-box {
-  padding:auto;
+  padding: auto;
   display: flex;
   flex-wrap: nowrap;
   justify-content: left;
   align-items: center;
-  font-size:14px;
+  font-size: 14px;
 }
 
 .v-btn {
   padding: 12px;
   font-size: 12px;
   border-radius: 10%;
-  
 }
-
 
 .right-box .nav-util {
   display: flex;
@@ -285,13 +337,12 @@ export default {
 .right-btn {
   padding-left: 20px;
   padding-right: 20px;
-  text:fixed;
+  text: fixed;
 }
 
 .hidden {
   display: none;
 }
-
 
 .button {
   display: inline-block;
@@ -327,26 +378,24 @@ export default {
   width: 100%;
   text-align: center;
   opacity: 0;
-  -webkit-transition: .2s,opacity .4s;
-  -moz-transition: .2s,opacity .4s;
-  -o-transition: .2s,opacity .4s;
-  transition: .2s,opacity .4s;
+  -webkit-transition: 0.2s, opacity 0.4s;
+  -moz-transition: 0.2s, opacity 0.4s;
+  -o-transition: 0.2s, opacity 0.4s;
+  transition: 0.2s, opacity 0.4s;
 }
 
 /* :before */
 
 .button:before {
   content: attr(data-hover);
-  -webkit-transform: translate(0%,-100%);
-  -moz-transform: translate(0%,-100%);
-  -ms-transform: translate(0%,-100%);
-  -o-transform: translate(0%,-100%);
-  transform: translate(0%,-100%);
+  -webkit-transform: translate(0%, -100%);
+  -moz-transform: translate(0%, -100%);
+  -ms-transform: translate(0%, -100%);
+  -o-transform: translate(0%, -100%);
+  transform: translate(0%, -100%);
 }
 
 /* :after */
-
-
 
 /* Span on :hover and :active */
 
@@ -368,24 +417,18 @@ export default {
 .button:hover:before,
 .button:active:after {
   opacity: 1;
-  -webkit-transform: translate(0,0);
-  -moz-transform: translate(0,0);
-  -ms-transform: translate(0,0);
-  -o-transform: translate(0,0);
-  transform: translate(0,0);
-  -webkit-transition-delay: .2s;
-  -moz-transition-delay: .2s;
-  -o-transition-delay: .2s;
-  transition-delay: .2s;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+  -webkit-transition-delay: 0.2s;
+  -moz-transition-delay: 0.2s;
+  -o-transition-delay: 0.2s;
+  transition-delay: 0.2s;
 }
 
 /* 
 We hide :before pseudo-element on :active
 */
-
-
-
-
-
-
 </style>
