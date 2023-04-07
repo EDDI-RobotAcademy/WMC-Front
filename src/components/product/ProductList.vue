@@ -113,7 +113,7 @@ export default {
         }
 
         const existingCartItem = cart.find(
-          (item) => item.product_id === product.productId
+          (item) => item.productId === product.productId
         );
 
         if (existingCartItem) {

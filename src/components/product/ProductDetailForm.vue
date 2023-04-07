@@ -16,7 +16,11 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-img :src="mainImage" :alt="'Main Image'" class="main-image"></v-img>
+            <v-img
+              :src="mainImage"
+              :alt="'Main Image'"
+              class="main-image"
+            ></v-img>
           </v-col>
         </v-row>
       </div>
@@ -68,7 +72,7 @@ export default {
       } else if (this.product.stock < 10) {
         return 'Running out of stock';
       } else {
-        return '';
+        return 'In stock';
       }
     },
   },
@@ -103,14 +107,16 @@ export default {
         }
 
         const existingCartItem = cart.find(
-          (item) => item.product_id === product.productId
+          (item) => item.productId === product.productId
         );
+        // console.log(item.productId);
+        console.log("product.productId:" + product.product_id);
 
         if (existingCartItem) {
           existingCartItem.quantity += quantity;
         } else {
           cart.push({
-            product_id: product.productId,
+            productId: product.productId,
             name: product.name,
             image: product.imageDataList[0].imageData
               ? this.getImagePath(product.imageDataList[0].imageData)
@@ -129,6 +135,7 @@ export default {
         console.log(this.authorityName);
       }
     },
+
     getImagePath(imageData) {
       return require(`@/${imageData}`);
     },
@@ -137,7 +144,7 @@ export default {
 </script>
 
 <style scoped>
-.image-box{
+.image-box {
   display: flex;
 }
 .mini-image {
