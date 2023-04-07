@@ -15,6 +15,7 @@ import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.v
 import CartView from "@/views/order/CartView";
 import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
+import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 
 
 Vue.use(VueRouter)
@@ -99,7 +100,14 @@ const routes = [
     path: '/product/detail/:productId',
     name: 'ProductDetailPage',
     component: ProductDetailPage
+  },
+  {
+    path: '/product/listByCategory/:categoryId',
+    name: 'ProductListByCategoryPage',
+    component: () => import('@/views/product/ProductListByCategoryPage.vue'),
+    props: true
   }
+  
   
 
 

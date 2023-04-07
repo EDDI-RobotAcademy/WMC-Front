@@ -136,6 +136,7 @@ export default {
       }
     },
     getImagePath(imageData) {
+      console.log('imageData:', imageData);
       return require(`@/${imageData}`);
     },
   },
