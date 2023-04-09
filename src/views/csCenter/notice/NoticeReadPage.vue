@@ -33,10 +33,19 @@
       methods: {
           ...mapActions(noticeModule, [
               'requestNoticeToSpring',
+              'requestDeleteNoticeToSpring',
           ]),
           onDelete () {
-
-          }
+        if (confirm('공지사항을 삭제하시겠습니까?')) {
+        this.requestDeleteNoticeToSpring(this.noticeId)
+          .then(() => {
+            this.$router.push({ name: 'NoticeListPage' });
+          })
+          .catch(() => {
+            alert('문제 발생!');
+          });
+      }
+    },
       },
       created() {
   this.requestNoticeToSpring(this.noticeId);
