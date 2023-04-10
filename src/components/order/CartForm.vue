@@ -115,7 +115,15 @@ export default {
     },
     removeSelectedItems() {
       this.cartItems = this.cartItems.filter((item) => !item.selected);
+
+      const memberId = localStorage.getItem('memberId');
+      if(memberId){
+      console.log('인증된 사용자 입니다.');
+      const cartKey = `cart_${memberId}`;
+      localStorage.setItem(cartKey, JSON.stringify(this.cartItems));
+    }
     },
+
     updateSum() {
       this.sum = this.cartItems.reduce(
         (acc, item) => acc + (item.selected ? item.quantity * item.price : 0),
