@@ -6,6 +6,7 @@
           <thead>
           <tr>
             <th align="center" width="100">No</th>
+            <th align="center" width="200">카테고리</th>
             <th align="center" width="640">제목</th>
             <th align="center" width="150">작성자</th>
             <th align="center" width="240">작성일자</th>
