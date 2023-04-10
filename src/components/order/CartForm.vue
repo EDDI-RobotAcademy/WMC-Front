@@ -33,7 +33,7 @@
               <router-link
                 :to="{
                   name: 'ProductDetailPage',
-                  params: { productId: item.product_id },
+                  params: { productId: item.productId },
                 }"
                 tag="div"
               >
@@ -66,8 +66,15 @@
       <p>Shipping fee: {{ shippingFee }}</p>
       <p>Total: {{ sum + shippingFee }}</p>
     </div>
-    <v-btn color="grey" class="mr-3">Order All</v-btn>
-    <v-btn color="grey">Order Partly</v-btn>
+
+
+    <!-- <v-btn color="grey" class="mr-3">Order All</v-btn>
+    <v-btn color="grey">Order Partly</v-btn> -->
+    <v-btn icon @click="KakaoPay">
+      <v-img
+        :src="require('/public/kakaopay/payment_icon_yellow_small.png')"
+      />
+    </v-btn>
   </div>
 </template>
 
@@ -109,13 +116,32 @@ export default {
   },
 
   methods: {
+    async KakaoPay() {
+    try {
+      const response = await axios.post('http://localhost:7777/order/kakaoPay', {
+      });
+      console.log(response.data);
+      var box = response.data.next_redirect_pc_url;
+      window.open(box);
+    } catch (error) {
+      console.error('Error processing KakaoPay:', error);
+    }
+  },
     toggleAllItems() {
       this.cartItems.forEach((item) => (item.selected = this.selectAll));
       this.updateSum();
     },
     removeSelectedItems() {
       this.cartItems = this.cartItems.filter((item) => !item.selected);
+
+      const memberId = localStorage.getItem('memberId');
+      if (memberId) {
+        console.log('인증된 사용자 입니다.');
+        const cartKey = `cart_${memberId}`;
+        localStorage.setItem(cartKey, JSON.stringify(this.cartItems));
+      }
     },
+
     updateSum() {
       this.sum = this.cartItems.reduce(
         (acc, item) => acc + (item.selected ? item.quantity * item.price : 0),
