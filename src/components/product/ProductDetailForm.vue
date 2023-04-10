@@ -65,6 +65,7 @@ export default {
       memberId: localStorage.getItem('memberId'),
       authorityName: localStorage.getItem('authorityName'),
       cart: [],
+      mainImage: '',
     };
   },
   computed: {
@@ -77,6 +78,17 @@ export default {
       } else {
         return 'In stock';
       }
+    },
+    
+  },
+  watch: {
+    product: {
+      handler(newValue) {
+        if (newValue && newValue.imageDataList && newValue.imageDataList.length > 0) {
+          this.mainImage = this.getImagePath(newValue.imageDataList[0].imageData);
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {
