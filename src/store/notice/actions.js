@@ -1,6 +1,6 @@
 import {
   REQUEST_NOTICE_LIST_TO_SPRING,
-
+  REQUEST_NOTICE_TO_SPRING
 } from'./mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -34,6 +34,13 @@ export default {
         return axiosInst.get('http://localhost:7777/notice/list')
           .then((res) => {
             commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
+          })
+      },
+
+      requestNoticeToSpring ({ commit }, noticeId) {
+        return axiosInst.get(`http://localhost:7777/notice/${noticeId}`)
+          .then((res) => {
+            commit(REQUEST_NOTICE_TO_SPRING, res.data)
           })
       },
 
