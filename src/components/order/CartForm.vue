@@ -128,6 +128,7 @@ export default {
         console.log(response.data);
         const box = response.data.next_redirect_pc_url;
         window.open(box);
+        this.removeSelectedItems();
       } catch (error) {
         console.error('Error processing KakaoPay:', error);
       }
