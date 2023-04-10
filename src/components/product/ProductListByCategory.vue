@@ -40,13 +40,13 @@
             <v-card-title>{{ product.name }}</v-card-title>
             <v-card-text>{{ product.description }}</v-card-text>
             <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
-            <v-card-actions>
+            <!-- <v-card-actions>
               <div @click.stop>
                 <v-btn small color="#a1887f" @click="addToCart(product)"
                   >장바구니에 담기</v-btn
                 >
               </div>
-            </v-card-actions>
+            </v-card-actions> -->
           </v-card>
         </router-link>
       </v-col>
