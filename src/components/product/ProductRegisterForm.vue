@@ -91,7 +91,7 @@ export default {
       name: '상품명',
       description: 'blah blah blah',
       price: 12345,
-      stock: 0,
+      stock: 10,
       files: [],
       imageUrls: [],
       categories: [],
