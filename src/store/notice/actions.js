@@ -44,4 +44,14 @@ export default {
           })
       },
 
+      requestDeleteNoticeToSpring({}, noticeId) {
+        return axiosInst.delete(`http://localhost:7777/notice/${noticeId}`)
+            .then(() => {
+                alert("공지사항 삭제 성공!");
+            })
+            .catch(() => {
+                alert("문제 발생!");
+            });
+      }
+
 }
