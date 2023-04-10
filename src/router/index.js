@@ -7,9 +7,7 @@ import ProductRegisterPage from '@/views/product/ProductRegisterPage.vue'
 import ProductListPage from '@/views/product/ProductListPage.vue'
 import ProductItemListPage from '@/views/product/productItem/ProductItemListPage.vue'
 import MainProductListPage from '@/views/product/MainProductListPage.vue'
-import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
-import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
-import NoticeReadPage from "@/views/csCenter/notice/NoticeReadPage.vue"
+
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
 import CartView from "@/views/order/CartView";
@@ -66,26 +64,7 @@ const routes = [
     name: 'MainProductListPage',
     component: MainProductListPage
   },
-  {
-    path: '/notice-list',
-    name: 'NoticeListPage',
-    component: NoticeListPage
-  },
-  {
-    path: '/notice-register',
-    name: 'NoticeRegisterPage',
-    component: NoticeRegisterPage
-  },
-  {
-    path: '/notice-read/:noticeId',
-    name: 'NoticeReadPage',
-    components: {
-      default: NoticeReadPage
-    },
-    props: {
-      default: true
-    }
-  },
+
   {
     path: '/question-board',
     name: 'QuestionBoardListPage',
