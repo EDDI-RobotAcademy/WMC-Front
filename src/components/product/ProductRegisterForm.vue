@@ -88,9 +88,9 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      name: '상품명',
-      description: 'blah blah blah',
-      price: 12345,
+      name: 'iGlass',
+      description: '이제까지 나온 최고의 안경입니다.',
+      price: 1000000,
       stock: 10,
       files: [],
       imageUrls: [],
