@@ -53,6 +53,7 @@
                 v-model.number="item.quantity"
                 single-line
                 hide-details
+                @input="updateSum"
               ></v-text-field>
             </td>
             <td>{{ item.price }}</td>
