@@ -3,7 +3,6 @@
     <navigation-menu-page/>
     <v-main>
       <router-view/>
-      <TopButton/>
     </v-main>
     <Footer/>
   </v-app>
@@ -12,7 +11,7 @@
 <script>
 import Footer from '@/components/main/layoutForm/Footer.vue'
 import NavigationMenuPage from '@/components/main/layoutForm/navigation/navBar.vue'
-import TopButton from '@/components/pageButton/TopButton.vue'
+
 
 // import NavigationView from '@/views/lecture/layoutForm/navigation/NavigationView.vue';
 export default {
@@ -23,7 +22,6 @@ export default {
   components: {
     NavigationMenuPage,
     Footer,
-    TopButton
 
   }
 }
