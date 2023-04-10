@@ -33,7 +33,7 @@
               <router-link
                 :to="{
                   name: 'ProductDetailPage',
-                  params: { productId: item.product_id },
+                  params: { productId: item.productId },
                 }"
                 tag="div"
               >
