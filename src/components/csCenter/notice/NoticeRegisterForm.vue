@@ -26,13 +26,6 @@
         </td>
       </tr>
     </table>
-    <div>
-      <button type="submit" class="mr-5 notice-button">등록</button>
-      <router-link :to="{ name: 'NoticeListPage' }" class="notice-button">
-        취소
-      </router-link>
-
-    </div>
   </form>
 </template>
 

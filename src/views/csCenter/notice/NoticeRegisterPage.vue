@@ -1,7 +1,11 @@
 <template>
   <v-container>
       <h2>공지사항 작성</h2>
-      <notice-register-form @submit="onSubmit" />
+      <notice-register-form ref="noticeRegisterForm" @submit="onSubmit" />
+      <button @click="submitForm" class="mr-5 notice-button">등록</button>
+      <router-link :to="{ name: 'NoticeListPage' }" class="notice-button">
+        취소
+      </router-link>
   </v-container>
 </template>
 
@@ -22,6 +26,9 @@ methods: {
     await this.$router.push({
       name: 'NoticeListPage'
     })
+  },
+  submitForm() {
+    this.$refs.noticeRegisterForm.onSubmit();
   }
 }
 };
