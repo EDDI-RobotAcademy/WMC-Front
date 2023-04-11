@@ -10,6 +10,7 @@ import MainProductListPage from '@/views/product/MainProductListPage.vue'
 import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
 import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
 import NoticeReadPage from "@/views/csCenter/notice/NoticeReadPage.vue"
+import NoticeModifyPage from "@/views/csCenter/notice/NoticeModifyPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
 import CartView from "@/views/order/CartView";
@@ -85,6 +86,12 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/notice-modify/:noticeId',
+    name: 'NoticeModifyPage',
+    component: NoticeModifyPage,
+    props: true
   },
   {
     path: '/question-board',

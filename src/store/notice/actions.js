@@ -52,6 +52,29 @@ export default {
             .catch(() => {
                 alert("문제 발생!");
             });
-      }
+      },
+
+      requestModifyNoticeToSpring({ }, payload) {
+        const { noticeId, title, writer, content, files } = payload;
+        let formData = new FormData();
+        formData.append('title', title);
+        formData.append('writer', writer);
+        formData.append('content', content);
+        for (let idx = 0; idx < files.length; idx++) {
+          formData.append('fileList[' + idx + ']', files[idx]);
+        }
+        return axiosInst
+          .put(`http://localhost:7777/notice/modify/${noticeId}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          })
+          .then(() => {
+            alert('공지사항 수정 성공!');
+          })
+          .catch(() => {
+            alert('문제 발생!');
+          });
+      },
 
 }
