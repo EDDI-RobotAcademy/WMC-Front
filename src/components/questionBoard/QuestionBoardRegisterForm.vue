@@ -23,7 +23,9 @@
                 <v-col cols="10">
                   <v-select
                     :items="categoryList"
-                    v-model="categoryType"
+                    v-model="questionCategoryId"
+                    item-value="questionCategoryId"
+                    item-text="questionCategoryType"
                     color="black"
                     placeholder="문의유형을 선택해주세요"
                     outlined>
@@ -162,6 +164,7 @@
   </template>
   
   <script>
+import axios from 'axios';
   import {mapActions, mapState} from "vuex";
   export default {
     name: "QuestionRegisterForm",
@@ -171,7 +174,7 @@
         writer: localStorage.getItem('memberId'),
         content: '',
         files: [],
-        categoryList: ['주문/결제문의', '상품문의', '배송문의', '반품/교환문의', '기타문의'],
+        categoryList: [],
         contentInfo: "1:1 문의 작성 전 확인해주세요." +
             "\n\n 반품 / 환불" +
             "\n - 제품 하자 혹은 이상으로 반품(환불)이 필요한 경우 구체적인 내용을 남겨주세요." +
@@ -181,34 +184,45 @@
             "\n - [마이페이지 -> 주문관리 -> 상세페이지에서 직접 취소하실 수 있습니다." +
             "\n\n 배송" +
             "\n - 배송일 배송시간 지정은 불가능합니다.",
-        categoryType: '',
+            questionCategoryId: null,
       }
     },
     methods: {
+      async fetchCategoryList() {
+        try {
+          const response = await axios.get('http://localhost:7777/categoryList');
+          this.categoryList = response.data;
+        } catch (error){
+          console.error('Error fetching categoryList:', error);
+        }
+
+      },
       ...mapActions([
       
       ]),
       onSubmit() {
         if (this.title && this.content && this.files != '' ) {
-          const {title, writer, content, files, categoryType } = this
+          const {title, writer, content, files, questionCategoryId } = this
           
-          this.$emit('submit', {title, writer, content, files, categoryType })
+          this.$emit('submit', {title, writer, content, files, questionCategoryType: questionCategoryId})
         } else {
           alert("빈칸 없이 작성해주세요!")
           this.$router.push("/question-register")
         }
       },
-      handleFileUpload (files) {
-      this.files = files
-      //this.imageUrls = Array.from(files).map((file) => URL.createObjectURL(file))
-    }
+      
+        handleFileUpload (files) {
+        this.files = files
+        //this.imageUrls = Array.from(files).map((file) => URL.createObjectURL(file))
+      }
     },
+  
     mounted() {
       if (this.$store.state.isAuthenticated === true) {
-        
       } else {
         alert("로그인 상태가 아닙니다.")
       }
+      this.fetchCategoryList();
     },
     computed : {
       ...mapState([

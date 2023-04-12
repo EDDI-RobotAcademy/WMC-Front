@@ -8,12 +8,12 @@ import axiosInst from '@/utility/axiosObject'
 export default {
 
     requestCreateQuestionBoardToSpring({}, payload) {
-        const { title, content, writer, files, categoryType } = payload;
+        const { title, content, writer, files, questionCategoryType } = payload;
         let formData = new FormData();
         formData.append('title', title);
         formData.append('writer', writer);
         formData.append('content', content);
-        formData.append('categoryType', categoryType)
+        formData.append('questionCategoryId', questionCategoryType)
         for (let idx = 0; idx < files.length; idx++) {
           formData.append('fileList[' + idx + ']', files[idx])
         }

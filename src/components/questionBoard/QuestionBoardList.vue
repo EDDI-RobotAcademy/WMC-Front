@@ -6,7 +6,7 @@
           <thead>
           <tr>
             <th align="center" width="100">No</th>
-            <th align="center" width="200">카테고리</th>
+            <!--<th align="center" width="200">카테고리</th>-->
             <th align="center" width="640">제목</th>
             <th align="center" width="150">작성자</th>
             <th align="center" width="240">작성일자</th>
@@ -22,6 +22,10 @@
             <td align="center">
               {{ questionBoard.questionBoardId }}
             </td>
+            <!--
+            <td align="left">
+              {{ questionBoard. }}
+            </td>-->
             <td align="left">
               <router-link :to="{ name: 'QuestionReadPage',params: { questionBoardId: questionBoard.questionBoardId.toString() }}"
               style="color: black; text-decoration: none">
@@ -74,7 +78,6 @@
     computed : {
       ...mapState([
         'isAuthenticated',
-        'resMember',
       ]),
     },
     props: {
@@ -98,7 +101,7 @@
   table.boards thead {
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
-    background: #205C37;
+    background: #967a50;
   }
   
   table.boards thead th {
@@ -125,5 +128,6 @@
   a {
     text-decoration: none;
   }
+  
   
   </style>
