@@ -8,11 +8,14 @@ import axiosInst from '@/utility/axiosObject'
 export default {
 
     requestCreateQuestionBoardToSpring({}, payload) {
-        const { title, content, writer } = payload;
+        const { title, content, writer, files } = payload;
         let formData = new FormData();
         formData.append('title', title);
         formData.append('writer', writer);
         formData.append('content', content);
+        for (let idx = 0; idx < files.length; idx++) {
+          formData.append('fileList[' + idx + ']', files[idx])
+        }
         return axiosInst
           .post('http://localhost:7777/questionBoard/register', formData, {
             headers: {
