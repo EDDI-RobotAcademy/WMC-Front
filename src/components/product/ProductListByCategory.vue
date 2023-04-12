@@ -23,24 +23,32 @@
         sm="6"
         md="4"
       >
-      <router-link :to="{ name: 'ProductDetailPage', params: { productId: product.productId } }" tag="div">
-        <v-card>
-          <v-img
-            :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
-            aspect-ratio="1"
-            class="grey lighten-2"
-          ></v-img>
+        <router-link
+          :to="{
+            name: 'ProductDetailPage',
+            params: { productId: product.productId },
+          }"
+          tag="div"
+        >
+          <v-card>
+            <v-img
+              :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
+              aspect-ratio="1"
+              class="grey lighten-2"
+            ></v-img>
 
-          <v-card-title>{{ product.name }}</v-card-title>
-          <v-card-text>{{ product.description }}</v-card-text>
-          <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
-          <v-card-actions>
-            <v-btn small color="#a1887f" @click="addToCart(product)"
-              >장바구니에 담기</v-btn
-            >
-          </v-card-actions>
-        </v-card>
-      </router-link>
+            <v-card-title>{{ product.name }}</v-card-title>
+            <v-card-text>{{ product.description }}</v-card-text>
+            <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
+            <!-- <v-card-actions>
+              <div @click.stop>
+                <v-btn small color="#a1887f" @click="addToCart(product)"
+                  >장바구니에 담기</v-btn
+                >
+              </div>
+            </v-card-actions> -->
+          </v-card>
+        </router-link>
       </v-col>
     </v-row>
   </v-container>

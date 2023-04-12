@@ -250,8 +250,10 @@ export default {
       });
     },
     goCartPage() {
+      if (this.$router.currentRoute.path !== '/cart') {
       this.$router.push({ name: 'CartView' });
       this.showSearch = false;
+      }
     },
   },
 };
