@@ -39,16 +39,21 @@
           <v-card-actions>
             <v-btn small color="primary" outlined>Like</v-btn>
             <v-spacer></v-spacer>
-            <v-btn small color="secondary" @click="addToCart(product)"
-              >Add to Cart</v-btn
+            <v-btn
+              v-if="product.stock > 0"
+              small
+              color="secondary"
+              @click="addToCart(product)"
             >
+              Add to Cart
+            </v-btn>
+            <v-btn v-else small color="grey" disabled> Out of Stock </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
 
 <script>
 import { mapState } from 'vuex';
@@ -71,7 +76,7 @@ export default {
   computed: {
     ...mapState(['isAuthenticated']),
     stockStatus() {
-      if (this.product.stock === 0) {
+      if (this.product.stock <= 0) {
         return 'Out of stock';
       } else if (this.product.stock < 10) {
         return 'Running out of stock';
@@ -79,13 +84,18 @@ export default {
         return 'In stock';
       }
     },
-    
   },
   watch: {
     product: {
       handler(newValue) {
-        if (newValue && newValue.imageDataList && newValue.imageDataList.length > 0) {
-          this.mainImage = this.getImagePath(newValue.imageDataList[0].imageData);
+        if (
+          newValue &&
+          newValue.imageDataList &&
+          newValue.imageDataList.length > 0
+        ) {
+          this.mainImage = this.getImagePath(
+            newValue.imageDataList[0].imageData
+          );
         }
       },
       immediate: true,
@@ -125,7 +135,7 @@ export default {
           (item) => item.productId === product.productId
         );
         // console.log(item.productId);
-        console.log("product.productId:" + product.product_id);
+        console.log('product.productId:' + product.product_id);
 
         if (existingCartItem) {
           existingCartItem.quantity += quantity;

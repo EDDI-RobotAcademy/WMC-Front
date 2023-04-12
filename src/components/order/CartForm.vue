@@ -53,6 +53,7 @@
                 v-model.number="item.quantity"
                 single-line
                 hide-details
+                @input="updateSum"
               ></v-text-field>
             </td>
             <td>{{ item.price }}</td>
@@ -67,13 +68,10 @@
       <p>Total: {{ sum + shippingFee }}</p>
     </div>
 
-
     <!-- <v-btn color="grey" class="mr-3">Order All</v-btn>
     <v-btn color="grey">Order Partly</v-btn> -->
     <v-btn icon @click="KakaoPay">
-      <v-img
-        :src="require('/public/kakaopay/payment_icon_yellow_small.png')"
-      />
+      <v-img :src="require('/public/kakaopay/payment_icon_yellow_small.png')" />
     </v-btn>
   </div>
 </template>
@@ -117,16 +115,25 @@ export default {
 
   methods: {
     async KakaoPay() {
-    try {
-      const response = await axios.post('http://localhost:7777/order/kakaoPay', {
-      });
-      console.log(response.data);
-      var box = response.data.next_redirect_pc_url;
-      window.open(box);
-    } catch (error) {
-      console.error('Error processing KakaoPay:', error);
-    }
-  },
+      try {
+        const selectedItems = this.cartItems.filter((item) => item.selected);
+        const orderItems = selectedItems.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        }));
+        const response = await axios.post(
+          'http://localhost:7777/order/kakaoPay',
+          orderItems
+        );
+        console.log(response.data);
+        const box = response.data.next_redirect_pc_url;
+        window.open(box);
+        this.removeSelectedItems();
+      } catch (error) {
+        console.error('Error processing KakaoPay:', error);
+      }
+    },
+
     toggleAllItems() {
       this.cartItems.forEach((item) => (item.selected = this.selectAll));
       this.updateSum();
