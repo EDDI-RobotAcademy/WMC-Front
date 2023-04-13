@@ -21,6 +21,10 @@ import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage
 
 Vue.use(VueRouter)
 
+function isManager() {
+  return localStorage.getItem('authorityName') === 'MANAGER';
+}
+
 const routes = [
   {
     path: '/',
@@ -91,7 +95,14 @@ const routes = [
     path: '/notice-modify/:noticeId',
     name: 'NoticeModifyPage',
     component: NoticeModifyPage,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (isManager()) {
+        next();
+      } else {
+        next({ name: 'NoticeListPage' });
+      }
+    }
   },
   {
     path: '/question-board',
