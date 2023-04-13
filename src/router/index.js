@@ -103,7 +103,7 @@ const routes = [
   
 
   {
-    path: '/mypage-view',
+    path: '/my-page-view',
     name: 'MyPageView',
     components: {
       default: MyPageView
