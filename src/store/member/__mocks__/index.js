@@ -1,6 +1,5 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import axiosInst from "@/utility/axiosObject";
 
 Vue.use(Vuex)
 

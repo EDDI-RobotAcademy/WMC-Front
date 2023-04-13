@@ -15,7 +15,7 @@ import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.v
 import CartView from "@/views/order/CartView";
 import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
-import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
+//import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 
 import MyPage from "@/views/mypage/MyPageView.vue"
 
