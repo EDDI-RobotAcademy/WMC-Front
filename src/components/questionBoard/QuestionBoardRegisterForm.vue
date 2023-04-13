@@ -35,6 +35,13 @@
         </tr>
         </tbody>
       </table>
+      <v-file-input
+        label="상품 사진 업로드"
+        multiple
+        show-size
+        @change="handleFileUpload($event)"
+        class="mt-3"
+      ></v-file-input>
       <div>
         <v-btn class="green white--text" rounded depressed small type="submit">
           등록
@@ -45,7 +52,9 @@
           </v-btn>
         </router-link>
       </div>
+      
     </form>
+
   </template>
   
   <script>
@@ -57,6 +66,7 @@
         title: '',
         writer: localStorage.getItem('memberId'),
         content: '',
+        files: [],
       }
     },
     methods: {
@@ -65,14 +75,18 @@
       ]),
       onSubmit() {
         if (this.title && this.content != '') {
-          const {title, writer, content} = this
+          const {title, writer, content, files } = this
           
-          this.$emit('submit', {title, writer, content})
+          this.$emit('submit', {title, writer, content, files })
         } else {
           alert("빈칸 없이 작성해주세요!")
           this.$router.push("/question-register")
         }
       },
+      handleFileUpload (files) {
+      this.files = files
+      //this.imageUrls = Array.from(files).map((file) => URL.createObjectURL(file))
+    }
     },
     mounted() {
       if (this.$store.state.isAuthenticated === true) {

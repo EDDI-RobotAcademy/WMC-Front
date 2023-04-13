@@ -1,50 +1,58 @@
 <template>
-  <v-row>
-    <v-col cols="12" sm="8" md="8">
-      <div v-if="product" class="image-box">
-        <v-row>
-          <v-col>
-            <v-img
-              v-for="(image, index) in product.imageDataList"
-              :key="index"
-              :src="getImagePath(image.imageData)"
-              :alt="'Image ' + index"
-              class="mini-image"
-              @mouseover="changeMainImage(getImagePath(image.imageData))"
-            ></v-img>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-img
-              :src="mainImage"
-              :alt="'Main Image'"
-              class="main-image"
-            ></v-img>
-          </v-col>
-        </v-row>
-      </div>
-    </v-col>
-    <v-col cols="12" sm="4" md="4" v-if="product">
-      <v-card flat>
-        <v-card-title>{{ product.name }}</v-card-title>
-        <v-divider></v-divider>
-        <v-card-text>{{ product.description }}</v-card-text>
-        <v-divider></v-divider>
-        <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
-        <v-divider></v-divider>
-        <v-card-text>{{ stockStatus }}</v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-btn small color="primary" outlined>Like</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn small color="secondary" @click="addToCart(product)"
-            >Add to Cart</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" sm="8" md="8">
+        <div v-if="product" class="image-box">
+          <v-row>
+            <v-col>
+              <v-img
+                v-for="(image, index) in product.imageDataList"
+                :key="index"
+                :src="getImagePath(image.imageData)"
+                :alt="'Image ' + index"
+                class="mini-image"
+                @mouseover="changeMainImage(getImagePath(image.imageData))"
+              ></v-img>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-img
+                :src="mainImage"
+                :alt="'Main Image'"
+                class="main-image"
+              ></v-img>
+            </v-col>
+          </v-row>
+        </div>
+      </v-col>
+      <v-col cols="12" sm="4" md="4" v-if="product">
+        <v-card flat>
+          <v-card-title>{{ product.name }}</v-card-title>
+          <v-divider></v-divider>
+          <v-card-text>{{ product.description }}</v-card-text>
+          <v-divider></v-divider>
+          <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
+          <v-divider></v-divider>
+          <v-card-text>{{ stockStatus }}</v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn small color="primary" outlined>Like</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn
+              v-if="product.stock > 0"
+              small
+              color="secondary"
+              @click="addToCart(product)"
+            >
+              Add to Cart
+            </v-btn>
+            <v-btn v-else small color="grey" disabled> Out of Stock </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -62,18 +70,35 @@ export default {
       memberId: localStorage.getItem('memberId'),
       authorityName: localStorage.getItem('authorityName'),
       cart: [],
+      mainImage: '',
     };
   },
   computed: {
     ...mapState(['isAuthenticated']),
     stockStatus() {
-      if (this.product.stock === 0) {
+      if (this.product.stock <= 0) {
         return 'Out of stock';
       } else if (this.product.stock < 10) {
         return 'Running out of stock';
       } else {
         return 'In stock';
       }
+    },
+  },
+  watch: {
+    product: {
+      handler(newValue) {
+        if (
+          newValue &&
+          newValue.imageDataList &&
+          newValue.imageDataList.length > 0
+        ) {
+          this.mainImage = this.getImagePath(
+            newValue.imageDataList[0].imageData
+          );
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {
@@ -110,7 +135,7 @@ export default {
           (item) => item.productId === product.productId
         );
         // console.log(item.productId);
-        console.log("product.productId:" + product.product_id);
+        console.log('product.productId:' + product.product_id);
 
         if (existingCartItem) {
           existingCartItem.quantity += quantity;
