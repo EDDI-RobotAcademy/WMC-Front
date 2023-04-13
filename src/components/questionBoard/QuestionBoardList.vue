@@ -6,7 +6,7 @@
           <thead>
           <tr>
             <th align="center" width="100">No</th>
-            <!--<th align="center" width="200">카테고리</th>-->
+            <th align="center" width="200">문의유형</th>
             <th align="center" width="640">제목</th>
             <th align="center" width="150">작성자</th>
             <th align="center" width="240">작성일자</th>
@@ -22,10 +22,10 @@
             <td align="center">
               {{ questionBoard.questionBoardId }}
             </td>
-            <!--
+            
             <td align="left">
-              {{ questionBoard. }}
-            </td>-->
+              {{ questionBoard.questionCategoryType }}
+            </td>
             <td align="left">
               <router-link :to="{ name: 'QuestionReadPage',params: { questionBoardId: questionBoard.questionBoardId.toString() }}"
               style="color: black; text-decoration: none">

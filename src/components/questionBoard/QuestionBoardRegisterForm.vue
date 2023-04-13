@@ -108,57 +108,7 @@
             </v-row>
             </div>
           </div>
-      </v-card>
-
-      <!--
-      <table class="boards">
-        <thead>
-        <tr>
-          <th scope="cols">
-            제목
-          </th>
-          <th scope="cols">
-            <input type="text" size="40" v-model="title"
-                   placeholder="제목을 입력해 주세요."
-                   onfocus="this.placeholder=''"
-                   onblur="this.placeholder='제목을 입력해 주세요.'">
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <th scope="row">
-            작성자
-          </th>
-          <td>
-            {{ writer }}
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">내용</th>
-          <td>
-            <textarea cols="50" rows="20" v-model="content"
-                      placeholder="내용을 입력해 주세요."
-                      onfocus="this.placeholder=''"
-                      onblur="this.placeholder='내용을 입력해 주세요.'">
-            </textarea>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      
-      
-      <div>
-        <v-btn class="green white--text" rounded depressed small type="submit">
-          등록
-        </v-btn>
-        <router-link :to="{ name: 'QuestionBoardListPage' }">
-          <v-btn class="green white--text" rounded depressed small>
-            취소
-          </v-btn>
-        </router-link>
-      </div>
-   -->   
+      </v-card>  
     </form>
 
   </template>
@@ -185,6 +135,7 @@ import axios from 'axios';
             "\n\n 배송" +
             "\n - 배송일 배송시간 지정은 불가능합니다.",
             questionCategoryId: null,
+            questionCategoryType: null,
       }
     },
     methods: {
