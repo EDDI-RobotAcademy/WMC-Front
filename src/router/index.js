@@ -5,18 +5,19 @@ import SignUpView from '@/views/account/SignUpView.vue'
 import SignInView from '@/views/account/SignInView.vue'
 import ProductRegisterPage from '@/views/product/ProductRegisterPage.vue'
 import ProductListPage from '@/views/product/ProductListPage.vue'
-import ProductItemListPage from '@/views/product/productItem/ProductItemListPage.vue'
+
 import MainProductListPage from '@/views/product/MainProductListPage.vue'
 import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
 import NoticeRegisterPage from '@/views/csCenter/notice/NoticeRegisterPage.vue'
 import NoticeReadPage from '@/views/csCenter/notice/NoticeListPage.vue'
-import MyPageView from '@/views/myPage/MyPageView.vue'
+
 import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
 import CartView from "@/views/order/CartView";
 import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
 import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 
+import MyPage from "@/views/mypage/MyPageView.vue"
 
 Vue.use(VueRouter)
 
@@ -37,11 +38,6 @@ const routes = [
     component: SignInView
   },
   {
-    path: '/my-page',
-    name: 'MyPageView',
-    component: MyPageView
-  },
-  {
     path: '/cart',
     name: 'CartView',
     component: CartView
@@ -56,11 +52,7 @@ const routes = [
     name: 'ProductListPage',
     component: ProductListPage
   },
-  {
-    path: '/product-item-list-page',
-    name: 'ProductItemListPage',
-    component: ProductItemListPage
-  },
+ 
   {
     path: '/main-product-list-page',
     name: 'MainProductListPage',
@@ -106,11 +98,17 @@ const routes = [
     name: 'ProductListByCategoryPage',
     component: () => import('@/views/product/ProductListByCategoryPage.vue'),
     props: true
-  }
+  },
   
   
 
-
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    components: {
+      default: MyPage
+    }
+  },
 ]
 
 const router = new VueRouter({
