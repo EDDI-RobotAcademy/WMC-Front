@@ -8,11 +8,12 @@ import axiosInst from '@/utility/axiosObject'
 export default {
 
     requestCreateQuestionBoardToSpring({}, payload) {
-        const { title, content, writer, files } = payload;
+        const { title, content, writer, files, questionCategoryType } = payload;
         let formData = new FormData();
         formData.append('title', title);
         formData.append('writer', writer);
         formData.append('content', content);
+        formData.append('questionCategoryId', questionCategoryType)
         for (let idx = 0; idx < files.length; idx++) {
           formData.append('fileList[' + idx + ']', files[idx])
         }
@@ -23,7 +24,7 @@ export default {
             },
           })
           .then(() => {
-            alert('상품 등록 성공!');
+            alert('질문을 등록하였습니다');
           })
           .catch(() => {
             alert('문제 발생!');
