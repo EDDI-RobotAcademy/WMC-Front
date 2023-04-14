@@ -19,36 +19,40 @@
           <textarea cols="50" rows="20" v-model="content"  class="mb-5 notice-textarea"/>
         </td>
       </tr>
+      <tr>
+        <td>파일 업로드</td>
+        <td>
+          <input type="file" id="file" multiple show-size @change="handleFileUpload($event)" class="mb-5"/>
+        </td>
+      </tr>
     </table>
-    <div>
-      <button type="submit" class="mr-5 notice-button">등록</button>
-      <router-link :to="{ name: 'NoticeListPage' }" class="notice-button">
-        취소
-      </router-link>
-
-    </div>
   </form>
 </template>
 
 <script>
 
 export default {
-  name: 'NoticeRegisterForm',
-  data () {
-    return {
-      title: '제목을 입력하세요.',
-      writer: 'WMC',
-      content: '내용을 입력하세요.',
-      files: []
-    }
-  },
-  methods: {
-    onSubmit () {
-      const { title, writer, content, files } = this
-      this.$emit('submit', { title, writer, content, files })
+    name: "NoticeRegisterForm",
+    data () {
+        return {
+            title: '제목을 입력하세요.',
+            writer: 'WMC',
+            content: '내용을 입력하세요.',
+            files: [],
+        }
+    },
+    methods: {
+        onSubmit () {
+            const { title, writer, content, files } = this
+            this.$emit('submit', { title, writer, content, files })
+            
+        },
+        handleFileUpload(event) {
+          this.files = event.target.files;
+        },
     }
   }
-}
+
 </script>
 
 <style scoped>
