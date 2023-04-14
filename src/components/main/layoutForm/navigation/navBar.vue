@@ -57,9 +57,10 @@
             type="button"
             data-hover="악세서리"
           >
-            <span>ACC</span>
+            <span>&nbsp;ACC&nbsp;</span>
           </router-link>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
@@ -70,28 +71,25 @@
             <span>REVIEW</span>
           </button>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
-          >
+            onclick="location.href='http://localhost:8080/#/product-list-page'">
             <span>STORE</span>
           </button>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
-          >
+            onclick="location.href='http://localhost:8080/#/product-list-page'">
             <span>BRAND</span>
           </button>
-          <div class="dropdown-content">
-            <a href="http://localhost:8080/#/notice-list">공지사항</a>
-          </div>
         </div>
         <div class="dropdown">
           <button
@@ -106,6 +104,17 @@
       </v-spacer>
 
       <div class="right-box">
+        <div class="dropdown">
+          <button
+            class="button"
+            type="button"
+            data-hover="고객센터"
+            onclick="location.href='http://localhost:8080/#/notice-list'"
+          >
+            <span>CS CENTER</span>
+          </button>
+        
+        </div>
         <div class="nav-util">
           <v-icon> mdi-magnify</v-icon>
           <button
@@ -113,8 +122,7 @@
             large
             elevation="0"
             text
-            @click="goCartPage"
-          >
+            @click="goCartPage">
             <v-icon> mdi-cart-outline</v-icon>
           </button>
         </div>
@@ -153,7 +161,7 @@
             v-if="isAuthenticated == true"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/my-page'"
+            onclick="location.href='http://localhost:8080/#/my-page-view'"
           >
             <span>마이페이지</span>
           </button>
