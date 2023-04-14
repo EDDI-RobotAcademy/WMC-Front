@@ -2,14 +2,16 @@
     <v-container>
       <div>
         <h3>게시물 목록</h3>
+        
+
         <table class="boards" border="1">
           <thead>
           <tr>
-            <th align="center" width="100">No</th>
-            <th align="center" width="200">문의유형</th>
-            <th align="center" width="640">제목</th>
-            <th align="center" width="150">작성자</th>
-            <th align="center" width="240">작성일자</th>
+            <th scope="col" align="center" width="100">No</th>
+            <th scope="col" align="center" width="200">문의유형</th>
+            <th scope="col" align="center" width="640">제목</th>
+            <th scope="col" align="center" width="150">작성자</th>
+            <th scope="col" align="center" width="240">작성일자</th>
           </tr>
           </thead>
           <tbody>
@@ -18,7 +20,8 @@
               현재 등록된 게시물이 없습니다!
             </td>
           </tr>
-          <tr v-else v-for="questionBoard in questionBoards" :key="questionBoard.questionBoardId">
+          <!--<tr v-else v-for="questionBoard in questionBoards" :key="questionBoard.questionBoardId">-->
+          <tr v-else v-for="(questionBoard, index) in calData" :key="index">
             <td align="center">
               {{ questionBoard.questionBoardId }}
             </td>
@@ -46,6 +49,13 @@
           </tr>
           </tbody>
         </table>
+        <v-pagination
+        v-model="curPageNum"
+        :length="numOfPages"
+        color="#5D4037"
+        class="mt-10"
+        flat
+        ></v-pagination>
       </div>
     </v-container>
   </template>
@@ -57,7 +67,10 @@
     name: "QuestionBoardList",
     data() {
       return {
+        dataPerPage: 6,
+        curPageNum: 1,
         isLogin: false
+        
       }
     },
     mounted () {
@@ -79,6 +92,18 @@
       ...mapState([
         'isAuthenticated',
       ]),
+      startOffset() {
+          return (this.curPageNum - 1) * this.dataPerPage;
+      },
+      endOffset() {
+          return this.startOffset + this.dataPerPage;
+      },
+      numOfPages() {
+          return Math.ceil(this.questionBoards.length / this.dataPerPage);
+      },
+      calData() {
+          return this.questionBoards.slice(this.startOffset, this.endOffset);
+      },
     },
     props: {
       questionBoards: {
