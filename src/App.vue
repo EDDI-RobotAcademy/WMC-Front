@@ -24,7 +24,6 @@ export default {
     NavigationMenuPage,
     Footer,
     TopButton
-
   }
 }
 </script>

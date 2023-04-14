@@ -20,13 +20,13 @@ export default {
     }
   },
   requestCreateProductToSpring ({}, payload) {
-    const { name, description, price, stock, category, files } = payload
+    const { name, description, price, stock, categoryId, files } = payload
     const formData = new FormData()
     formData.append('name', name)
     formData.append('description', description)
     formData.append('price', price)
     formData.append('stock', stock)
-    formData.append('categoryId', category)
+    formData.append('categoryId', categoryId)
     for (let idx = 0; idx < files.length; idx++) {
       formData.append('fileList[' + idx + ']', files[idx])
     }
