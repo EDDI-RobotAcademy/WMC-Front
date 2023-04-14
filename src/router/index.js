@@ -5,20 +5,26 @@ import SignUpView from '@/views/account/SignUpView.vue'
 import SignInView from '@/views/account/SignInView.vue'
 import ProductRegisterPage from '@/views/product/ProductRegisterPage.vue'
 import ProductListPage from '@/views/product/ProductListPage.vue'
-import ProductItemListPage from '@/views/product/productItem/ProductItemListPage.vue'
+
 import MainProductListPage from '@/views/product/MainProductListPage.vue'
 import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
-import NoticeRegisterPage from '@/views/csCenter/notice/NoticeRegisterPage.vue'
-import NoticeReadPage from '@/views/csCenter/notice/NoticeListPage.vue'
+import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
+import NoticeReadPage from "@/views/csCenter/notice/NoticeReadPage.vue"
+import NoticeModifyPage from "@/views/csCenter/notice/NoticeModifyPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
 import QuestionBoardListPage from "@/views/questionBoard/QuestionBoardListPage.vue"
 import CartView from "@/views/order/CartView";
 import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
-import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
+//import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 
+import MyPageView from '@/views/mypage/MyPageView.vue'
 
 Vue.use(VueRouter)
+
+function isManager() {
+  return localStorage.getItem('authorityName') === 'MANAGER';
+}
 
 const routes = [
   {
@@ -37,11 +43,6 @@ const routes = [
     component: SignInView
   },
   {
-    path: '/my-page',
-    name: 'MyPageView',
-    component: MyPageView
-  },
-  {
     path: '/cart',
     name: 'CartView',
     component: CartView
@@ -56,11 +57,7 @@ const routes = [
     name: 'ProductListPage',
     component: ProductListPage
   },
-  {
-    path: '/product-item-list-page',
-    name: 'ProductItemListPage',
-    component: ProductItemListPage
-  },
+ 
   {
     path: '/main-product-list-page',
     name: 'MainProductListPage',
@@ -77,13 +74,26 @@ const routes = [
     component: NoticeRegisterPage
   },
   {
-    path: '/notice-read',
+    path: '/notice-read/:noticeId',
     name: 'NoticeReadPage',
-    component: {
+    components: {
       default: NoticeReadPage
     },
     props: {
       default: true
+    }
+  },
+  {
+    path: '/notice-modify/:noticeId',
+    name: 'NoticeModifyPage',
+    component: NoticeModifyPage,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (isManager()) {
+        next();
+      } else {
+        next({ name: 'NoticeListPage' });
+      }
     }
   },
   {
@@ -106,11 +116,17 @@ const routes = [
     name: 'ProductListByCategoryPage',
     component: () => import('@/views/product/ProductListByCategoryPage.vue'),
     props: true
-  }
+  },
   
   
 
-
+  {
+    path: '/my-page-view',
+    name: 'MyPageView',
+    components: {
+      default: MyPageView
+    }
+  },
 ]
 
 const router = new VueRouter({
