@@ -121,9 +121,13 @@ export default {
           productId: item.productId,
           quantity: item.quantity,
         }));
+        const requestBody = {
+          orderItems: orderItems,
+          token: JSON.parse(localStorage.getItem('userInfo')),
+        };
         const response = await axios.post(
           'http://localhost:7777/order/kakaoPay',
-          orderItems
+          requestBody
         );
         console.log(response.data);
         const box = response.data.next_redirect_pc_url;
