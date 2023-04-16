@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import MyPageForm from '@/components/myPage/MyPageForm.vue';
-import MyPageTab from '@/components/myPage/MyPageTab.vue';
+import MyPageForm from '@/components/myPage/MyPageForm';
+import MyPageTab from '@/components/myPage/MyPageTab';
 import { mapActions } from 'vuex';
 
 const memberModule = 'memberModule';
