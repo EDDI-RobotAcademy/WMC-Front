@@ -1,6 +1,5 @@
 
 import {
-
   REQUEST_MY_PAGE_MEMBER_INFO
 } from './mutation-types';
 
@@ -13,10 +12,10 @@ export default {
       const length = token.length;
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
-        const response = axiosInst.post(`/member/account/`, token)
+        axiosInst.post(`/member/account/`, token)
             .then((res) => {
                 commit(REQUEST_MY_PAGE_MEMBER_INFO, res.data);
-                
+                console.log("asdf");
                 console.log(res.data);
                 console.log(res.data.email);
                 console.log(res.data.username);
