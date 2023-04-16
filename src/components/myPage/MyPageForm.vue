@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 const memberModule = 'memberModule';
 
 export default {
@@ -62,25 +62,6 @@ export default {
       return this.$store.state.memberModule.isAuthenticated;
     },
   },
-
-  async mounted() {
-    if (this.isAuthenticated === true) {
-      let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      let memberId = userInfo.memberId;
-
-      console.log("MyPageInfo" + memberId);
-
-      
-      await this.requestMyPageMemberInfo(memberId);
-    }
-  },
-  methods: {
-  ...mapActions(memberModule, ["requestMyPageMemberInfo"]),
-  async requestMyPageMemberInfo(memberId) {
-    await this.$store.dispatch("memberModule/requestMyPageMemberInfo", memberId);
-  },
-},
-
 };
 </script>
 

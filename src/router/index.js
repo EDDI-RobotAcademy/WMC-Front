@@ -18,8 +18,6 @@ import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegist
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
 //import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 
-import MyPageView from '@/views/mypage/MyPageView.vue'
-
 Vue.use(VueRouter)
 
 function isManager() {
