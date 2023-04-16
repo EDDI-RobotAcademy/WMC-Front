@@ -222,6 +222,11 @@ export default {
     } else {
       this.$store.state.isAuthenticated = false;
     }
+    if(localStorage.getItem('userInfo') && localStorage.getItem('authorityName').includes('MANAGER')){
+      this.$store.state.isManager = true;
+    } else {
+      this.$store.state.isManager = false;
+    }
   },
   methods: {
     async fetchProductsByCategory(categoryId) {
@@ -254,6 +259,7 @@ export default {
         localStorage.removeItem('memberId');
         localStorage.removeItem('authorityName');
         this.$store.state.isAuthenticated = false;
+        this.$store.state.isManager = false;
       });
     },
     resign() {
