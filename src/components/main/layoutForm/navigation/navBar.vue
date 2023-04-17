@@ -158,7 +158,7 @@
           </button>
           <button
             class="right-btn"
-            v-if="isAuthenticated == true"
+            v-if="authorityName === 'MEMBER'"
             text
             color="grey"
             onclick="location.href='http://localhost:8080/#/my-page-view'"
@@ -180,6 +180,7 @@ export default {
     return {
       isTrue: false,
       navigation_drawer: false,
+      authorityName: localStorage.getItem('authorityName'),
       isNavHidden: false,
       links: [
         { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
