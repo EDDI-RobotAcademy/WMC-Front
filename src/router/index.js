@@ -71,6 +71,15 @@ const routes = [
     path: '/notice-register',
     name: 'NoticeRegisterPage',
     component: NoticeRegisterPage,
+
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (isManager()) {
+        next();
+      } else {
+        next({ name: 'NoticeListPage' });
+      }
+    }
   },
   {
     path: '/notice-read/:noticeId',

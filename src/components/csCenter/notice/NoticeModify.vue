@@ -16,11 +16,11 @@
       <tr>
         <td>본문</td>
         <td>
-          <textarea cols="50" rows="20" v-model="content" class="mb-5 notice-textarea" />
+          <div ref="contentEditable" contentEditable="true" v-html="content" class="mb-5 notice-textarea"></div>
         </td>
       </tr>
       <tr>
-        <td>이미지</td>
+        <td>기존 이미지</td>
         <td>
           <div v-for="(image, index) in notice.images" :key="index" class="image-wrapper">
             <img :src="getImagePath(image.noticeImageData)" alt="Notice Image" class="notice-image" />
@@ -58,19 +58,49 @@ export default {
       files: [],
     };
   },
+  created() {
+    this.addImagesToContent();
+  },
   methods: {
     onSubmit() {
-      const { title, writer, content, files } = this;
+      const { title, writer, files } = this;
+      const content = this.$refs.contentEditable.innerHTML;
       this.$emit("submit", { title, writer, content, files });
     },
+    updateContent() {
+      this.content = this.$refs.contentEditable.innerHTML;
+    },
     handleFileUpload(event) {
-      this.files = event.target.files;
+      const files = event.target.files;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            const imgTag = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%; display: block; margin: 10px 0;">`;
+            this.$refs.contentEditable.innerHTML += imgTag;
+            this.updateContent();
+          };
+          reader.readAsDataURL(file);
+        }
+      }
     },
     getImagePath(imageData) {
-      console.log("imageData:", imageData);
       return require(`@/${imageData}`);
     },
+    addImagesToContent() {
+      if (this.notice.images) {
+        const imagesHtml = this.notice.images
+          .map(image => {
+            const imagePath = this.getImagePath(image.noticeImageData);
+            return `<img src="${imagePath}" alt="Notice Image" style="max-width: 100%; display: block; margin: 10px 0;">`;
+          })
+          .join('');
+        this.content += imagesHtml;
+      }
+    },
   },
+
 };
 </script>
 
@@ -97,5 +127,17 @@ export default {
   max-height: 100px;
   border: 1px solid #ccc;
   border-radius: 3px;
+}
+
+.notice-textarea {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  min-height: 500px;
+  min-width: 600px;
+  overflow-y: auto;
+  resize: vertical;
 }
 </style>

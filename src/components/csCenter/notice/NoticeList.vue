@@ -1,45 +1,47 @@
 <template>
-  <div style="border-bottom: 1px dotted lightgray;">
-    <h3></h3>
-    <table>
-      <tr height="40">
-        <th align="center" width="100">No</th>
-        <th align="center" width="640">제목</th>
-        <th align="center" width="150">작성자</th>
-        <th align="center" width="300">등록일자</th>
-      </tr>
-      <tr v-if="!notices || (Array.isArray(notices) && notices.length === 0)">
-        <td colspan="4">
-          현재 등록된 공지사항이 없습니다!
-        </td>
-      </tr>
-      <tr v-else v-for="notice in paginatedNotices" :key="notice.noticeId">
-        <td align="center">
-          {{ notice.noticeId }}
-        </td>
-        <td align="left">
-          <router-link :to="{ name: 'NoticeReadPage', params: { noticeId: notice.noticeId.toString() } }">
-            {{ notice.title }}
-          </router-link>
-        </td>
-        <td align="center">
-          {{ notice.writer }}
-        </td>
-        <td align="center">
-          {{ new Date(notice.regDate).toLocaleDateString('ko-KR', {
-            year: 'numeric', month: '2-digit', day: '2-digit'
-          }).replace(/\./g, '') }}
-        </td>
-      </tr>
-    </table>
-    <div class="pagination">
+  <v-container>
+    <div>
+      <h3></h3>
+      <table>
+        <tr>
+          <th align="center" width="100">No</th>
+          <th align="center" width="640">제목</th>
+          <th align="center" width="150">작성자</th>
+          <th align="center" width="300">등록일자</th>
+        </tr>
+        <tr v-if="!notices || (Array.isArray(notices) && notices.length === 0)">
+          <td colspan="4">
+            현재 등록된 공지사항이 없습니다!
+          </td>
+        </tr>
+        <tr v-else v-for="notice in paginatedNotices" :key="notice.noticeId">
+          <td align="center">
+            {{ notice.noticeId }}
+          </td>
+          <td align="center">
+            <router-link class="no_underline" :to="{ name: 'NoticeReadPage', params: { noticeId: notice.noticeId.toString() } }">
+              {{ notice.title }}
+            </router-link>
+          </td>
+          <td align="center">
+            {{ notice.writer }}
+          </td>
+          <td align="center">
+            {{ new Date(notice.regDate).toLocaleDateString('ko-KR', {
+              year: 'numeric', month: '2-digit', day: '2-digit'
+            }).replace(/\./g, '') }}
+          </td>
+        </tr>
+      </table>
+      <div class="pagination">
         <button @click="prevPage" :disabled="currentPage === 1">이전</button>
         <button v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }" @click="goToPage(page)">
           {{ page }}
         </button>
         <button @click="nextPage" :disabled="currentPage === totalPages">다음</button>
       </div>
-  </div>
+    </div>
+  </v-container>
 </template>
 
 <script>
@@ -66,15 +68,15 @@ export default {
     },
     totalPages() {
       return Math.ceil(this.notices.length / this.pageSize);
-      }
+    }
+  },
+  methods: {
+    goToPage(page) {
+      this.currentPage = page;
     },
-    methods: {
-      goToPage(page) {
-        this.currentPage = page;
-      },
-      prevPage() {
-        if (this.currentPage > 1) {
-          this.currentPage--;
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
       }
     },
     nextPage() {
@@ -88,15 +90,33 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  border-bottom: 3px solid black;
+
+table {
+  width: 100%;
+  border: 3px solid black;
   margin-bottom: 10px;
 }
 
+td:not(:last-child),
+th:not(:last-child) {
+  border-right: 1px solid lightgray;
+}
+
+tr {
+  height: 70px;
+}
+
+
 tr:not(:first-child) {
-  border-top: 1px dotted lightgray;
+  border-top: 1px solid lightgray;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.no_underline {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
 
 .pagination {
