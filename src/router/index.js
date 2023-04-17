@@ -18,6 +18,7 @@ import QuestionBoardRegisterPage from '@/views/questionBoard/QuestionBoardRegist
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue';
 import ManagerPageView from '@/views/managerPage/ManagerPageView.vue';
 import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
+import SalesGraph from '@/views/managerPage/SalesGraph.vue';
 
 Vue.use(VueRouter);
 
@@ -141,6 +142,11 @@ const routes = [
     path: '/most-sold-product',
     name: 'MostSoldProductPage',
     component: MostSoldProductPage,
+  },
+  {
+    path: '/sales-graph',
+    name: 'SalesGraph',
+    component: SalesGraph,
   },
 ];
 

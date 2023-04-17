@@ -12,6 +12,9 @@
     <div>
       <BodyBannerCarouselPage />
     </div>
+    <div>
+      <BarChart />
+    </div>
     <v-container>
       <div id="home"></div>
       <nav>
@@ -30,6 +33,7 @@ import MainBannerCarouselPage from '@/components/carousel/MainBannerCarouselPage
 import MainProductListPage from '@/views/product/MainProductListPage.vue';
 import BodyBannerCarouselPage from '../components/carousel/BodyBannerCarouselPage.vue';
 import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
+import BarChart from '@/components/managerPage/BarChart.vue';
 
 export default {
   name: 'Home',
@@ -40,6 +44,7 @@ export default {
     MainProductListPage,
     BodyBannerCarouselPage,
     MostSoldProductPage,
-  },
+    BarChart
+},
 };
 </script>
