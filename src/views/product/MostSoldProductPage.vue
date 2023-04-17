@@ -2,7 +2,7 @@
   <div style="padding:24px;">
     <br/>
     <br/>
-    <h4 class="body-text">인기상품
+    <h4 class="body-text title">인기상품
       <button>&nbsp;<&nbsp; </button>
       <button> &nbsp;></button>
     </h4>
@@ -44,4 +44,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
