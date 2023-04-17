@@ -172,7 +172,7 @@
             v-if="isAuthenticated && isManager"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/admin-page-view'"
+            onclick="location.href='http://localhost:8080/#/manager-page-view'"
           >
             <span>관리자 페이지</span>
           </button>

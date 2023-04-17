@@ -36,27 +36,24 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import { mapState } from 'vuex';
-import axios from 'axios';
-
 export default {
-  name: 'MainProductList',
-  components: {
-    Carousel,
-    Slide,
-  },
-  props: {
-    products: {
-      type: Array,
+    name: 'MostSoldProductList',
+    comments: {
+        Carousel,
+        Slide,
     },
-  },
-
-  methods: {
-    getImagePath(imageData) {
+    props: {
+        products: {
+            type: Array,
+        },
+    },
+    methods: {
+        getImagePath(imageData) {
       console.log('imageData:', imageData);
       return require(`@/${imageData}`);
     },
-  },
-};
+    }
+}
 </script>
 
 <style>
