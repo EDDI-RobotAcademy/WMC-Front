@@ -49,6 +49,9 @@ export default {
                   if (res.data) {
                     console.log('인증된 사용자 입니다.')
                     const [memberId, authorityName] = res.data.split(':')
+                    if(authorityName === 'MANAGER') {
+                      this.$store.state.isManager = true
+                    }
                     localStorage.setItem('memberId', memberId)
                     localStorage.setItem('authorityName', authorityName)
                     const user = localStorage.getItem('memberId')

@@ -57,9 +57,10 @@
             type="button"
             data-hover="악세서리"
           >
-            <span>ACC</span>
+            <span>&nbsp;ACC&nbsp;</span>
           </router-link>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
@@ -70,6 +71,7 @@
             <span>REVIEW</span>
           </button>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
@@ -80,6 +82,7 @@
             <span>STORE</span>
           </button>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
@@ -89,9 +92,6 @@
           >
             <span>BRAND</span>
           </button>
-          <div class="dropdown-content">
-            <a href="http://localhost:8080/#/notice-list">공지사항</a>
-          </div>
         </div>
         <div class="dropdown">
           <button
@@ -106,6 +106,16 @@
       </v-spacer>
 
       <div class="right-box">
+        <div class="dropdown">
+          <button
+            class="button"
+            type="button"
+            data-hover="고객센터"
+            onclick="location.href='http://localhost:8080/#/notice-list'"
+          >
+            <span>CS CENTER</span>
+          </button>
+        </div>
         <div class="nav-util">
           <v-icon> mdi-magnify</v-icon>
           <button
@@ -150,12 +160,21 @@
           </button>
           <button
             class="right-btn"
-            v-if="isAuthenticated == true"
+            v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/my-page'"
+            onclick="location.href='http://localhost:8080/#/my-page-view'"
           >
             <span>마이페이지</span>
+          </button>
+          <button
+            class="right-btn"
+            v-if="isAuthenticated && isManager"
+            text
+            color="grey"
+            onclick="location.href='http://localhost:8080/#/admin-page-view'"
+          >
+            <span>관리자 페이지</span>
           </button>
         </div>
       </div>
@@ -193,7 +212,7 @@ export default {
   components: {},
 
   computed: {
-    ...mapState(['isAuthenticated']),
+    ...mapState(['isAuthenticated', 'isManager']),
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -202,6 +221,11 @@ export default {
       this.$store.state.isAuthenticated = true;
     } else {
       this.$store.state.isAuthenticated = false;
+    }
+    if(localStorage.getItem('userInfo') && localStorage.getItem('authorityName').includes('MANAGER')){
+      this.$store.state.isManager = true;
+    } else {
+      this.$store.state.isManager = false;
     }
   },
   methods: {
@@ -235,6 +259,7 @@ export default {
         localStorage.removeItem('memberId');
         localStorage.removeItem('authorityName');
         this.$store.state.isAuthenticated = false;
+        this.$store.state.isManager = false;
       });
     },
     resign() {
@@ -251,8 +276,8 @@ export default {
     },
     goCartPage() {
       if (this.$router.currentRoute.path !== '/cart') {
-      this.$router.push({ name: 'CartView' });
-      this.showSearch = false;
+        this.$router.push({ name: 'CartView' });
+        this.showSearch = false;
       }
     },
   },
