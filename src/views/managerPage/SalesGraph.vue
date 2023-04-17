@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1>상품별 판매 추이</h1>
+    <br><br>
     <bar-chart :data="chartData" :options="chartOptions"></bar-chart>
   </div>
 </template>
@@ -57,7 +59,7 @@ export default {
       datasets: [
         {
           label: 'Sales',
-          backgroundColor: '#f87979',
+          backgroundColor: '#4285f4',
           data,
         },
       ],
