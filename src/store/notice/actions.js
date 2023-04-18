@@ -4,6 +4,8 @@ import {
 } from'./mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
 
@@ -16,8 +18,8 @@ export default {
     for (let idx = 0; idx < files.length; idx++) {
       formData.append('fileList[' + idx + ']', files[idx]);
     }
-    return axiosInst
-      .post('http://localhost:7777/notice/register', formData, {
+    return mainRequest
+      .post('/notice/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -31,21 +33,21 @@ export default {
   },
 
       requestNoticeListToSpring({ commit }) {
-        return axiosInst.get('http://localhost:7777/notice/list')
+        return mainRequest.get('/notice/list')
           .then((res) => {
             commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
           })
       },
 
       requestNoticeToSpring ({ commit }, noticeId) {
-        return axiosInst.get(`http://localhost:7777/notice/${noticeId}`)
+        return mainRequest.get(`/notice/${noticeId}`)
           .then((res) => {
             commit(REQUEST_NOTICE_TO_SPRING, res.data)
           })
       },
 
       requestDeleteNoticeToSpring({}, noticeId) {
-        return axiosInst.delete(`http://localhost:7777/notice/${noticeId}`)
+        return mainRequest.delete(`/notice/${noticeId}`)
             .then(() => {
                 alert("공지사항 삭제 성공!");
             })
@@ -63,8 +65,8 @@ export default {
         for (let idx = 0; idx < files.length; idx++) {
           formData.append('fileList[' + idx + ']', files[idx]);
         }
-        return axiosInst
-          .put(`http://localhost:7777/notice/modify/${noticeId}`, formData, {
+        return mainRequest
+          .put(`/notice/modify/${noticeId}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

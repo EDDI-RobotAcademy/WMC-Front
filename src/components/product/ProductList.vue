@@ -57,7 +57,6 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import { mapState } from 'vuex';
-import axios from 'axios';
 
 export default {
   name: 'ProductList',
@@ -104,45 +103,7 @@ export default {
       });
     },
 
-    addToCart(product, quantity = 1) {
-      if (!this.isAuthenticated) {
-        alert('로그인 먼저 하세용^_^');
-        this.$router.push('/sign-in');
-        return;
-      }
-
-      if (this.memberId && this.authorityName) {
-        const cartKey = `cart_${this.memberId}`;
-        let cart = localStorage.getItem(cartKey);
-        if (!cart) {
-          cart = [];
-        } else {
-          cart = JSON.parse(cart);
-        }
-
-        const existingCartItem = cart.find(
-          (item) => item.productId === product.productId
-        );
-
-        if (existingCartItem) {
-          existingCartItem.quantity += quantity;
-        } else {
-          cart.push({
-            productId: product.productId,
-            name: product.name,
-            image: product.firstPhoto
-              ? this.getImagePath(product.firstPhoto)
-              : '',
-            price: product.price,
-            quantity,
-          });
-        }
-
-        localStorage.setItem(cartKey, JSON.stringify(cart));
-        console.log('Cart:', cart);
-        alert('장바구니에 추가되었습니다!');
-      }
-    },
+    
     getImagePath(imageData) {
       return require(`@/${imageData}`);
     },

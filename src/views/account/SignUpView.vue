@@ -6,8 +6,9 @@
 
 <script>
 
-import axios from 'axios'
 import SignUpForm from '@/components/account/SignUpForm.vue'
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
   name: 'SignUpPage',
@@ -18,7 +19,7 @@ export default {
     onSubmit (payload) {
       const { email, password, username, birthdate, authorityName, managerCheck, managerCode, city, street, addressDetail, zipcode, phoneNumber } = payload
 
-      axios.post('http://localhost:7777/member/sign-up', {
+      mainRequest.post('/member/sign-up', {
         email, password, username, birthdate, authorityName, managerCheck, managerCode, city, street, addressDetail, zipcode, phoneNumber
       })
         .then((res) => {

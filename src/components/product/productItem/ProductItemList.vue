@@ -32,6 +32,8 @@
 import { Carousel, Slide } from 'vue-carousel'
 import { mapState } from 'vuex'
 import axios from 'axios'
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
   name: 'ProductItemList',
@@ -78,7 +80,7 @@ export default {
         return
       }
       const token = JSON.parse(localStorage.getItem('userInfo')) // localStorage에 userInfo에 매핑되어있는 token을 가져옴(redis key)
-      axios.post('http://localhost:7777/cart/validate', token).then((res) => {
+      mainRequest.post('/cart/validate', token).then((res) => {
         if (res.data) {
           console.log('인증된 사용자 입니다.')
           const cartKey = `cart_${res.data}`

@@ -85,6 +85,8 @@
 
 <script>
 import axios from 'axios';
+import mainRequest from "@/api/mainRequest";
+
 export default {
   data () {
     return {
@@ -104,7 +106,7 @@ export default {
   methods: {
     async fetchCategories() {
       try {
-        const response = await axios.get('http://localhost:7777/categories');
+        const response = await mainRequest.get('/categories');
         this.categories = response.data;
       } catch (error) {
         console.error('Error fetching categories:', error);

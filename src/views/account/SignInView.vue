@@ -7,8 +7,9 @@
 <script>
 import LoginForm from '@/components/account/SignInForm.vue'
 import Vue from 'vue'
-import axios from 'axios'
 import cookies from 'vue-cookies'
+import mainRequest from "@/api/mainRequest";
+
 
 Vue.use(cookies)
 
@@ -33,8 +34,8 @@ export default {
     onSubmit (payload) {
       if (!this.isLogin) {
         const { email, password } = payload
-        axios
-          .post('http://localhost:7777/member/sign-in', { email, password })
+        mainRequest
+          .post('/member/sign-in', { email, password })
           .then((res) => {
             if (res.data) {
               alert('로그인 성공!')
@@ -43,8 +44,8 @@ export default {
               localStorage.setItem('userInfo', JSON.stringify(res.data))
               this.isLogin = true
               const token = JSON.parse(localStorage.getItem('userInfo'))
-              axios
-                .post('http://localhost:7777/cart/validate', token)
+              mainRequest
+                .post('/cart/validate', token)
                 .then((res) => {
                   if (res.data) {
                     console.log('인증된 사용자 입니다.')

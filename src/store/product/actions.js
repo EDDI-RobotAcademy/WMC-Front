@@ -6,14 +6,16 @@ import {
   REQUEST_MOST_SOLD_PRODUCT_LIST,
 } from './mutation-types';
 
-import axiosInst from '@/utility/axiosObject';
+// import mainRequest from '@/utility/axiosObject';
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
   async fetchProductById(_, productId) {
     console.log('asdf');
     try {
-      const response = await axiosInst.get(
-        `http://localhost:7777/product/detail/`,
+      const response = await mainRequest.get(
+        `/product/detail/`,
         {
           params: { productId },
         }
@@ -34,8 +36,8 @@ export default {
     for (let idx = 0; idx < files.length; idx++) {
       formData.append('fileList[' + idx + ']', files[idx]);
     }
-    return axiosInst
-      .post('http://localhost:7777/product/register', formData, {
+    return mainRequest
+      .post('/product/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -48,8 +50,8 @@ export default {
       });
   },
   requestProductListByCategory({ commit }, categoryId) {
-    return axiosInst
-      .get('http://localhost:7777/product/listByCategory', {
+    return mainRequest
+      .get('/product/listByCategory', {
         params: { categoryId },
       })
       .then((res) => {
@@ -57,23 +59,23 @@ export default {
       });
   },
   requestProductListToSpring({ commit }) {
-    return axiosInst.get('http://localhost:7777/product/list').then((res) => {
+    return mainRequest.get('/product/list').then((res) => {
       commit(REQUEST_PRODUCT_LIST_TO_SPRING, res.data);
     });
   },
   requestProductItemListToSpring({ commit }) {
-    return axiosInst.get('http://localhost:7777/product/list').then((res) => {
+    return mainRequest.get('/product/list').then((res) => {
       commit(REQUEST_PRODUCT_ITEM_LIST_TO_SPRING, res.data);
     });
   },
   requestMainProductListToSpring({ commit }) {
-    return axiosInst.get('http://localhost:7777/product/list').then((res) => {
+    return mainRequest.get('/product/list').then((res) => {
       commit(REQUEST_MAIN_PRODUCT_LIST_TO_SPRING, res.data);
     });
   },
   requestMostSoldProductListToSpring({ commit }) {
-    return axiosInst
-      .get('http://localhost:7777/product/mostsoldlist')
+    return mainRequest
+      .get('/product/mostsoldlist')
       .then((res) => {
         commit(REQUEST_MOST_SOLD_PRODUCT_LIST, res.data);
       });
