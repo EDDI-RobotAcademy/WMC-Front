@@ -185,6 +185,8 @@
 <script>
 import { mapState } from 'vuex';
 import axios from 'axios';
+import mainRequest from "@/api/mainRequest";
+
 export default {
   name: 'NavigationMenuPage',
   data() {
@@ -253,7 +255,7 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token + ', length: ' + token.length);
-      axios.post('http://localhost:7777/member/logout', token).then(() => {
+      mainRequest.post('/member/logout', token).then(() => {
         alert('로그아웃 완료');
         localStorage.removeItem('userInfo');
         localStorage.removeItem('memberId');
@@ -268,7 +270,7 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token);
-      axios.post('http://localhost:7777/member/resign', token).then(() => {
+      mainRequest.post('/member/resign', token).then(() => {
         alert('회원탈퇴 완료');
         localStorage.removeItem('userInfo');
         this.$store.state.isAuthenticated = false;

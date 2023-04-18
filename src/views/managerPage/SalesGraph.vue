@@ -3,12 +3,15 @@
     <h1>상품별 판매 추이</h1>
     <br /><br />
     <bar-chart :data="chartData" :options="chartOptions"></bar-chart>
+    <bar-chart :data="chartData" :options="chartOptions"></bar-chart>
   </div>
 </template>
 
 <script>
 import BarChart from '@/components/managerPage/BarChart';
 import axios from 'axios';
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
   name: 'SalesGraph',
@@ -46,8 +49,8 @@ export default {
     };
   },
   async created() {
-    const response = await axios.get(
-      'http://localhost:7777/manager/sales-data'
+    const response = await mainRequest.get(
+      '/manager/sales-data'
     );
     const mostSoldProducts = response.data;
 
