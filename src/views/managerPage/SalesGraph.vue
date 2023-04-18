@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>상품별 판매 추이</h1>
-    <br><br>
+    <br /><br />
     <bar-chart :data="chartData" :options="chartOptions"></bar-chart>
   </div>
 </template>
@@ -52,7 +52,8 @@ export default {
     const mostSoldProducts = response.data;
 
     const labels = mostSoldProducts.map((product) => product.name);
-    const data = mostSoldProducts.map((product) => product.sold);
+    const soldData = mostSoldProducts.map((product) => product.sold);
+    const stockData = mostSoldProducts.map((product) => product.stock);
 
     this.chartData = {
       labels,
@@ -60,7 +61,12 @@ export default {
         {
           label: 'Sales',
           backgroundColor: '#4285f4',
-          data,
+          data: soldData,
+        },
+        {
+          label: 'Stock',
+          backgroundColor: 'green',
+          data: stockData,
         },
       ],
     };
