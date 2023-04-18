@@ -135,6 +135,15 @@ export default {
         this.removeSelectedItems();
       } catch (error) {
         console.error('Error processing KakaoPay:', error);
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.includes('재고가 충분치 않습니다')
+        ) {
+          alert('재고가 부족합니다. 다시 시도해주세요.');
+        } else {
+          alert('에러 발생. 다시 시도해주세요');
+        }
       }
     },
 
