@@ -34,7 +34,6 @@
             <v-img
               :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
               aspect-ratio="1"
-              class="grey lighten-2"
             ></v-img>
 
             <v-card-title>{{ product.name }}</v-card-title>
