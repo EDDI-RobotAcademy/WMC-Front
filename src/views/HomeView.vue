@@ -11,6 +11,7 @@
     </div>
     <div>
       <BodyBannerCarouselPage />
+      <h1>test입니다</h1>
     </div>
     <div>
       <BarChart />
