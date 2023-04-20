@@ -27,6 +27,9 @@ export default {
                 console.log(res.data.street);
                 console.log(res.data.addressDetail);
                 console.log(res.data.zipcode);
+               
+                
+                
             })
             .catch((res) => {
                 console.log(res.data);
