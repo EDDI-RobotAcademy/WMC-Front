@@ -77,7 +77,7 @@
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='http://localhost:8080/#/map-store-view'"
           >
             <span>STORE</span>
           </button>
