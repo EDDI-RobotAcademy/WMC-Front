@@ -47,7 +47,7 @@ export default {
       },
 
       requestDeleteNoticeToSpring({}, noticeId) {
-        return mainRequest.delete(`/notice/${noticeId}`)
+        return mainRequest.delete(`/notice/delete/${noticeId}`)
             .then(() => {
                 alert("공지사항 삭제 성공!");
             })
