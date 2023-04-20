@@ -16,13 +16,21 @@
       <tr>
         <td>본문</td>
         <td>
-          <div ref="contentEditable" contentEditable="true" class="mb-5 notice-textarea" @input="updateContent"></div>
+          <textarea cols="50" rows="20" v-model="content" class="mb-5 notice-textarea" />
         </td>
       </tr>
       <tr>
         <td>파일 업로드</td>
         <td>
           <input type="file" id="file" multiple show-size @change="handleFileUpload($event)" class="mb-5" />
+        </td>
+      </tr>
+      <tr>
+        <td>업로드된 이미지</td>
+        <td>
+          <div v-for="(image, index) in uploadedImages" :key="index" class="image-wrapper">
+            <img :src="image" alt="Uploaded Image" class="notice-image">
+          </div>
         </td>
       </tr>
     </table>
@@ -39,29 +47,25 @@ export default {
       writer: 'WMC',
       content: '내용을 입력하세요.',
       files: [],
+      uploadedImages: [],
     }
   },
   methods: {
     onSubmit() {
-      const { title, writer, content, files } = this
-      this.$emit('submit', { title, writer, content, files })
-
-    },
-    updateContent() {
-      this.content = this.$refs.contentEditable.innerHTML;
+      const { title, writer, content, files } = this;
+      this.$emit('submit', { title, writer, content, files });
     },
     handleFileUpload(event) {
-      const files = event.target.files;
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (file.type.startsWith("image/")) {
+          this.files = event.target.files;
+
+          for (let i = 0; i < this.files.length; i++) {
+        if (this.files[i].type.startsWith("image/")) {
           const reader = new FileReader();
           reader.onload = e => {
-            const imgTag = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%; display: block; margin: 10px 0;">`;
-            this.$refs.contentEditable.innerHTML += imgTag;
-            this.updateContent();
+            const imageData = e.target.result;
+            this.uploadedImages.push(imageData);
           };
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(this.files[i]);
         }
       }
     },
@@ -101,5 +105,17 @@ table {
   min-width: 600px;
   overflow-y: auto;
   resize: vertical;
+}
+
+.image-wrapper {
+  display: inline-block;
+  margin: 5px;
+}
+
+.notice-image {
+  max-width: 100px;
+  max-height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 </style>
