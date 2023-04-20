@@ -295,6 +295,8 @@
 
 <script>
 import axios from 'axios'
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
   name: 'SignUpForm',
@@ -434,8 +436,8 @@ export default {
 
       if (emailValid) {
         const { email } = this
-        axios
-          .post(`http://localhost:7777/member/check-email/${email}`)
+        mainRequest
+          .post(`/member/check-email/${email}`)
           .then((res) => {
             if (res.data) {
               alert('사용 가능한 이메일입니다!')
@@ -449,8 +451,8 @@ export default {
     },
     checkManagerCode () {
       const { managerCode } = this
-      axios
-        .post(`http://localhost:7777/member/check-manager/${managerCode}`)
+      mainRequest
+        .post(`/member/check-manager/${managerCode}`)
         .then((res) => {
           if (res.data) {
             alert('관리자 코드 확인하였습니다.')

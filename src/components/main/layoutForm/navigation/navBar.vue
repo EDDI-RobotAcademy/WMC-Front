@@ -66,7 +66,7 @@
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>REVIEW</span>
           </button>
@@ -77,7 +77,7 @@
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>STORE</span>
           </button>
@@ -88,7 +88,7 @@
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>BRAND</span>
           </button>
@@ -98,7 +98,7 @@
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>ARCHIVE</span>
           </button>
@@ -111,7 +111,7 @@
             class="button"
             type="button"
             data-hover="고객센터"
-            onclick="location.href='http://localhost:8080/#/notice-list'"
+            onclick="location.href='/#/notice-list'"
           >
             <span>CS CENTER</span>
           </button>
@@ -133,7 +133,7 @@
           v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='http://localhost:8080/#/sign-in'"
+          onclick="location.href='/#/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -144,7 +144,7 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='http://localhost:8080/#/'"
+            onclick="location.href='/#/'"
           >
             <span>로그아웃</span>
           </button>
@@ -154,7 +154,7 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='http://localhost:8080/#/sign-up'"
+            onclick="location.href='/#/sign-up'"
           >
             <span>회원가입</span>
           </button>
@@ -163,7 +163,7 @@
             v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/my-page-view'"
+            onclick="location.href='/#/my-page-view'"
           >
             <span>마이페이지</span>
           </button>
@@ -172,7 +172,7 @@
             v-if="isAuthenticated && isManager"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/admin-page-view'"
+            onclick="location.href='/#/manager-page-view'"
           >
             <span>관리자 페이지</span>
           </button>
@@ -185,6 +185,8 @@
 <script>
 import { mapState } from 'vuex';
 import axios from 'axios';
+import mainRequest from "@/api/mainRequest";
+
 export default {
   name: 'NavigationMenuPage',
   data() {
@@ -254,7 +256,7 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token + ', length: ' + token.length);
-      axios.post('http://localhost:7777/member/logout', token).then(() => {
+      mainRequest.post('/member/logout', token).then(() => {
         alert('로그아웃 완료');
         localStorage.removeItem('userInfo');
         localStorage.removeItem('memberId');
@@ -269,7 +271,7 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token);
-      axios.post('http://localhost:7777/member/resign', token).then(() => {
+      mainRequest.post('/member/resign', token).then(() => {
         alert('회원탈퇴 완료');
         localStorage.removeItem('userInfo');
         this.$store.state.isAuthenticated = false;

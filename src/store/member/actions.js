@@ -4,6 +4,8 @@ import {
 } from './mutation-types';
 
 import axiosInst from '@/utility/axiosObject';
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
    requestMemberInfo({commit}) {
@@ -12,7 +14,7 @@ export default {
       const length = token.length;
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
-        axiosInst.post(`/member/account/`, token)
+        mainRequest.post(`/member/account/`, token)
             .then((res) => {
                 commit(REQUEST_MY_PAGE_MEMBER_INFO, res.data);
                 console.log("asdf");
