@@ -22,10 +22,6 @@ import SalesGraph from '@/views/managerPage/SalesGraph.vue';
 
 Vue.use(VueRouter);
 
-// function isManager() {
-//   return localStorage.getItem('authorityName') === 'MANAGER';
-// }
-
 const routes = [
   {
     path: '/',
@@ -72,15 +68,6 @@ const routes = [
     path: '/notice-register',
     name: 'NoticeRegisterPage',
     component: NoticeRegisterPage,
-
-    props: true,
-    beforeEnter: (to, from, next) => {
-      if (isManager()) {
-        next();
-      } else {
-        next({ name: 'NoticeListPage' });
-      }
-    }
   },
   {
     path: '/notice-read/:noticeId',
@@ -96,14 +83,6 @@ const routes = [
     path: '/notice-modify/:noticeId',
     name: 'NoticeModifyPage',
     component: NoticeModifyPage,
-    props: true,
-    beforeEnter: (to, from, next) => {
-      if (isManager()) {
-        next();
-      } else {
-        next({ name: 'NoticeListPage' });
-      }
-    },
   },
   {
     path: '/question-board',
