@@ -8,7 +8,8 @@
       <div class="mt-10 notice_list">
             <div class="d-flex justify-space-between">
               <h2 class="ml-5">NOTICE</h2>
-              <div class="mt-10 mb-10" v-if="isManager">
+              <!-- <div class="mt-10 mb-10" v-if="isManager"> -->
+                <div class="mt-10 mb-10">
                 <router-link :to="{ name: 'NoticeRegisterPage' }" style="color: black;">
                   공지사항 작성
                 </router-link>
