@@ -24,22 +24,22 @@
           <div class="col-md-6">
             <ul class="no_dot">
               <li>
-                <router-link to="/notice-list" class="no_underline" style="color: black;">Notice</router-link>
+                <router-link to="/notice-list" class="no_underline">Notice</router-link>
                 <span>공지사항</span>
               </li>
-
+              
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
-                <span>추가할것</span>
+                <router-link to="/question-board" class="no_underline">Q & A</router-link>
+                <span>문의하기</span>
               </li>
 
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
-                <span>추가할것</span>
+                <router-link to="/my-page" class="no_underline">Mypage</router-link>
+                <span>내정보</span>
               </li>
 
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
+                <router-link to="#" class="no_underline">addcontent</router-link>
                 <span>추가할것</span>
               </li>
             </ul>
@@ -48,22 +48,22 @@
           <div class="col-md-6">
             <ul class="no_dot">
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
+                <router-link to="#" class="no_underline">addcontent</router-link>
                 <span>추가할것</span>
               </li>
 
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
+                <router-link to="#" class="no_underline">addcontent</router-link>
                 <span>추가할것</span>
               </li>
 
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
+                <router-link to="#" class="no_underline">addcontent</router-link>
                 <span>추가할것</span>
               </li>
 
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
+                <router-link to="#" class="no_underline">addcontent</router-link>
                 <span>추가할것</span>
               </li>
             </ul>
@@ -165,6 +165,8 @@ export default {
 
 .no_underline {
   text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
 </style>
 

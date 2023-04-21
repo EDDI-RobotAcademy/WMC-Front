@@ -57,48 +57,48 @@
             type="button"
             data-hover="악세서리"
           >
-            <span>ACC</span>
+            <span>&nbsp;ACC&nbsp;</span>
           </router-link>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>REVIEW</span>
           </button>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>STORE</span>
           </button>
         </div>
+
         <div class="dropdown">
           <button
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>BRAND</span>
           </button>
-          <div class="dropdown-content">
-            <a href="http://localhost:8080/#/notice-list">공지사항</a>
-          </div>
         </div>
         <div class="dropdown">
           <button
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
+            onclick="location.href='/#/product-list-page'"
           >
             <span>ARCHIVE</span>
           </button>
@@ -106,6 +106,16 @@
       </v-spacer>
 
       <div class="right-box">
+        <div class="dropdown">
+          <button
+            class="button"
+            type="button"
+            data-hover="고객센터"
+            onclick="location.href='/#/notice-list'"
+          >
+            <span>CS CENTER</span>
+          </button>
+        </div>
         <div class="nav-util">
           <v-icon> mdi-magnify</v-icon>
           <button
@@ -123,7 +133,7 @@
           v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='http://localhost:8080/#/sign-in'"
+          onclick="location.href='/#/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -134,7 +144,7 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='http://localhost:8080/#/'"
+            onclick="location.href='/#/'"
           >
             <span>로그아웃</span>
           </button>
@@ -144,18 +154,27 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='http://localhost:8080/#/sign-up'"
+            onclick="location.href='/#/sign-up'"
           >
             <span>회원가입</span>
           </button>
           <button
             class="right-btn"
-            v-if="isAuthenticated == true"
+            v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/my-page'"
+            onclick="location.href='/#/my-page-view'"
           >
             <span>마이페이지</span>
+          </button>
+          <button
+            class="right-btn"
+            v-if="isAuthenticated && isManager"
+            text
+            color="grey"
+            onclick="location.href='/#/manager-page-view'"
+          >
+            <span>관리자 페이지</span>
           </button>
         </div>
       </div>
@@ -166,6 +185,8 @@
 <script>
 import { mapState } from 'vuex';
 import axios from 'axios';
+import mainRequest from "@/api/mainRequest";
+
 export default {
   name: 'NavigationMenuPage',
   data() {
@@ -193,7 +214,7 @@ export default {
   components: {},
 
   computed: {
-    ...mapState(['isAuthenticated']),
+    ...mapState(['isAuthenticated', 'isManager']),
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -202,6 +223,11 @@ export default {
       this.$store.state.isAuthenticated = true;
     } else {
       this.$store.state.isAuthenticated = false;
+    }
+    if(localStorage.getItem('userInfo') && localStorage.getItem('authorityName').includes('MANAGER')){
+      this.$store.state.isManager = true;
+    } else {
+      this.$store.state.isManager = false;
     }
   },
   methods: {
@@ -229,12 +255,13 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token + ', length: ' + token.length);
-      axios.post('http://localhost:7777/member/logout', token).then(() => {
+      mainRequest.post('/member/logout', token).then(() => {
         alert('로그아웃 완료');
         localStorage.removeItem('userInfo');
         localStorage.removeItem('memberId');
         localStorage.removeItem('authorityName');
         this.$store.state.isAuthenticated = false;
+        this.$store.state.isManager = false;
       });
     },
     resign() {
@@ -243,7 +270,7 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token);
-      axios.post('http://localhost:7777/member/resign', token).then(() => {
+      mainRequest.post('/member/resign', token).then(() => {
         alert('회원탈퇴 완료');
         localStorage.removeItem('userInfo');
         this.$store.state.isAuthenticated = false;
@@ -251,8 +278,8 @@ export default {
     },
     goCartPage() {
       if (this.$router.currentRoute.path !== '/cart') {
-      this.$router.push({ name: 'CartView' });
-      this.showSearch = false;
+        this.$router.push({ name: 'CartView' });
+        this.showSearch = false;
       }
     },
   },

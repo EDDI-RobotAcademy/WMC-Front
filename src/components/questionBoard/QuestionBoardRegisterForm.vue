@@ -115,6 +115,8 @@
   
   <script>
 import axios from 'axios';
+import mainRequest from "@/api/mainRequest";
+
   import {mapActions, mapState} from "vuex";
   export default {
     name: "QuestionRegisterForm",
@@ -141,7 +143,7 @@ import axios from 'axios';
     methods: {
       async fetchCategoryList() {
         try {
-          const response = await axios.get('http://localhost:7777/categoryList');
+          const response = await mainRequest.get('/categoryList');
           this.categoryList = response.data;
         } catch (error){
           console.error('Error fetching categoryList:', error);
