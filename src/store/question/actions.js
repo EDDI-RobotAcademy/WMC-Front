@@ -1,6 +1,8 @@
 import {
     REQUEST_QUESTION_BOARD_LIST_TO_SPRING,
     REQUEST_QUESTION_BOARD_TO_SPRING,
+    REQUEST_QUESTION_BOARD_BY_CATEGORY,
+
 } from'./mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
@@ -37,6 +39,39 @@ export default {
             .then((res) => {
                 commit(REQUEST_QUESTION_BOARD_LIST_TO_SPRING, res.data)
             })
-    },
+      },
+
+      async fetchQuestionById(_, questionBoardId){
+        try{
+          const response = await axiosInst.get(`http://localhost:7777/questionBoard/read/`, {
+            params: { questionBoardId },
+          });
+          return response.date;
+        }catch (error) {
+          console.error('에러', error);
+        }
+      },
+
+      requestQuestionBoardToSpring ({ commit }, questionBoardId) {
+        console.log('requestQuestionBoardListToSpring()')
+        return axiosInst.get(`http://localhost:7777/questionBoard/${questionBoardId}`)
+            .then((res) => {
+                commit(REQUEST_QUESTION_BOARD_TO_SPRING, res.data)
+            })
+      },
+
+      requestQuestionBoardByCategory({ commit }, questionCategoryId) {
+        return axiosInst.get('http://localhost:7777/questionBoard/questionListByCategory', {
+          params: { questionCategoryId }
+        }).then((res) => {
+          commit(REQUEST_QUESTION_BOARD_BY_CATEGORY, res.data)
+        })
+      },
+      
+      
+  
+
+
+
       
 };

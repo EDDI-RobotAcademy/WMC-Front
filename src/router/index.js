@@ -17,8 +17,8 @@ import CartView from "@/views/order/CartView";
 import QuestionBoardRegisterPage from "@/views/questionBoard/QuestionBoardRegisterPage.vue"
 import ProductDetailPage from '@/views/product/ProductDetailPage.vue'
 //import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
+import QuestionBoardReadPage from '@/views/questionBoard/QuestionBoardReadPage.vue'
 
-import MyPageView from '@/views/mypage/MyPageView.vue'
 
 Vue.use(VueRouter)
 
@@ -106,6 +106,13 @@ const routes = [
     name: 'QuestionBoardRegisterPage',
     component: QuestionBoardRegisterPage
   },
+  {
+    path: '/question-read/:questionBoardId',
+    name: 'QuestionBoardReadPage',
+    component: QuestionBoardReadPage,
+    props:true,
+  },
+
   {
     path: '/product/detail/:productId',
     name: 'ProductDetailPage',

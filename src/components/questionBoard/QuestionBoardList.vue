@@ -30,7 +30,11 @@
               {{ questionBoard.questionCategoryType }}
             </td>
             <td align="left">
-              <router-link :to="{ name: 'QuestionReadPage',params: { questionBoardId: questionBoard.questionBoardId.toString() }}"
+              <router-link 
+                :to="{ 
+                  name: 'QuestionBoardReadPage', 
+                  params: { questionBoardId: questionBoard.questionBoardId },
+                }"
               style="color: black; text-decoration: none">
                 <div v-if="isLogin == false" @click.prevent="readAccess">
                   {{ questionBoard.title }}
@@ -73,6 +77,11 @@
         
       }
     },
+    props: {
+      questionBoards: {
+        type: Array,
+      }
+    },
     mounted () {
       if (this.$store.state.isAuthenticated != false) {
         this.isLogin = true
@@ -86,8 +95,15 @@
           alert("로그인이 필요한 기능입니다.")
           this.$router.push("/sign-in")
         }
-      }
+        
+      },
+      goToProductDetail(questionBoard) {
+      this.$router.push({
+        name: 'QuestionBOardReadPage',
+        params: { questionBoardId: questionBoard.questionBoardId },
+      });
     },
+  },
     computed : {
       ...mapState([
         'isAuthenticated',
@@ -105,12 +121,9 @@
           return this.questionBoards.slice(this.startOffset, this.endOffset);
       },
     },
-    props: {
-      questionBoards: {
-        type: Array
-      }
-    }
-  }
+    
+  
+}
   </script>
   
   <style scoped>
