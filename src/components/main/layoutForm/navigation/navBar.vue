@@ -3,7 +3,7 @@
     <v-app-bar
       flat
       color="rgba(255,255,255,0.5)"
-      class="flex-grow-0"
+      class="flex-grow-0 scrollable-nav"
       height="50"
       app
     >
@@ -460,4 +460,33 @@ export default {
 /* 
 We hide :before pseudo-element on :active
 */
+.scrollable-nav {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.scrollable-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-nav {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@media screen and (max-width: 768px) {
+  .scrollable-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .scrollable-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollable-nav {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 </style>
