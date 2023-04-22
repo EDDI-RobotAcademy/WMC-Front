@@ -88,7 +88,6 @@ import mainRequest from '@/api/mainRequest';
 import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
 
-
 export default {
   data() {
     return {
@@ -141,12 +140,14 @@ export default {
       this.imageUrls = Array.from(files).map((file) =>
         URL.createObjectURL(file)
       );
-      this.fileNames = Array.from(files).map(() => uuidv4());
+      this.fileNames = Array.from(files).map(
+        (file) => uuidv4() + '.' + file.name.split('.').pop()
+      );
     },
 
     async uploadMultipleFilesToS3(files) {
-      const uploadPromises = Array.from(files).map((file) =>
-        this.uploadFileToS3(file)
+      const uploadPromises = Array.from(files).map((file, index) =>
+        this.uploadFileToS3(file, this.fileNames[index])
       );
       await Promise.all(uploadPromises);
     },
@@ -179,11 +180,9 @@ export default {
         }
       });
     },
-    uploadFileToS3(file) {
+    uploadFileToS3(file, uniqueFileName) {
       return new Promise((resolve, reject) => {
         this.awsS3Config(() => {
-          const uniqueFileName = uuidv4() + '.' + file.name.split('.').pop();
-
           this.s3.upload(
             {
               Key: uniqueFileName,
