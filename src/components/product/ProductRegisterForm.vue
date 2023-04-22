@@ -84,11 +84,13 @@
 </template>
 
 <script>
-import axios from 'axios';
-import mainRequest from "@/api/mainRequest";
+import mainRequest from '@/api/mainRequest';
+import AWS from 'aws-sdk';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default {
-  data () {
+  data() {
     return {
       name: 'iGlass',
       description: '이제까지 나온 최고의 안경입니다.',
@@ -96,8 +98,17 @@ export default {
       stock: 10,
       files: [],
       imageUrls: [],
+      fileNames: [],
       categories: [],
       categoryId: null,
+      file: null,
+      awsBucketName: 'wmc-s3-bucket',
+      awsBucketRegion: 'ap-northeast-2',
+      awsIdentityPoolId: 'ap-northeast-2:8de0e190-db24-44d8-88b5-2e897cd0af39',
+      s3: null,
+      awsFileList: [],
+      startAfterAwsS3Bucket: null,
+      awsS3NextToken: null,
     };
   },
   mounted() {
@@ -112,15 +123,17 @@ export default {
         console.error('Error fetching categories:', error);
       }
     },
-    registerProduct() {
+    async registerProduct() {
       const { name, description, price, stock, categoryId, files } = this;
+      await this.uploadMultipleFilesToS3(files);
+
       this.$emit('submit', {
         name,
         description,
         price,
         stock,
         categoryId,
-        files,
+        fileNames: this.fileNames,
       });
     },
     handleFileUpload(files) {
@@ -128,6 +141,93 @@ export default {
       this.imageUrls = Array.from(files).map((file) =>
         URL.createObjectURL(file)
       );
+      this.fileNames = Array.from(files).map(() => uuidv4());
+    },
+
+    async uploadMultipleFilesToS3(files) {
+      const uploadPromises = Array.from(files).map((file) =>
+        this.uploadFileToS3(file)
+      );
+      await Promise.all(uploadPromises);
+    },
+    awsS3Config(callback) {
+      AWS.config.update({ region: this.awsBucketRegion });
+
+      const cognitoCredentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: this.awsIdentityPoolId,
+      });
+
+      cognitoCredentials.get((err) => {
+        if (err) {
+          console.log('Error fetching credentials:', err);
+          return;
+        }
+
+        AWS.config.credentials = cognitoCredentials;
+
+        this.s3 = new AWS.S3({
+          apiVersion: '2006-03-01',
+          params: {
+            Bucket: this.awsBucketName,
+          },
+        });
+
+        console.log('Credentials: ', AWS.config.credentials);
+
+        if (callback) {
+          callback();
+        }
+      });
+    },
+    uploadFileToS3(file) {
+      return new Promise((resolve, reject) => {
+        this.awsS3Config(() => {
+          const uniqueFileName = uuidv4() + '.' + file.name.split('.').pop();
+
+          this.s3.upload(
+            {
+              Key: uniqueFileName,
+              Body: file,
+              ACL: 'public-read',
+            },
+            (err, data) => {
+              if (err) {
+                console.log(err);
+                reject(err);
+                return alert(
+                  '업로드 중 문제 발생 (사진 파일에 문제가 있음)',
+                  err.message
+                );
+              }
+              console.log('File uploaded:', data);
+              resolve(data);
+            }
+          );
+        });
+      });
+    },
+
+    uploadAwsS3() {
+      this.awsS3Config(() => {
+        this.s3.upload(
+          {
+            Key: this.file.name,
+            Body: this.file,
+            ACL: 'public-read',
+          },
+          (err, data) => {
+            if (err) {
+              console.log(err);
+              return alert(
+                '업로드 중 문제 발생 (사진 파일에 문제가 있음)',
+                err.message
+              );
+            }
+            alert('업로드 성공!');
+            this.getAwsS3Files();
+          }
+        );
+      });
     },
   },
 };
