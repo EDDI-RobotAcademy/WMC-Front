@@ -30,10 +30,10 @@
           }"
           tag="div"
         >
-          <v-card>
+          <v-card flat>
             <v-img
               :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
-              aspect-ratio="1"
+              aspect-ratio=".8"
             ></v-img>
             <v-card-title>{{ product.name }}</v-card-title>
             <v-card-text>{{ product.description }}</v-card-text>
