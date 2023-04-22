@@ -4,7 +4,7 @@
       <MainBannerCarouselPage />
     </div>
     <div>
-      <aws-sdk-file-upload/>
+      <!-- <aws-sdk-file-upload/> -->
       <MainProductListPage />
     </div>
     <div>
