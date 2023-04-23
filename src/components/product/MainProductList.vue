@@ -1,10 +1,7 @@
 <template>
   <div class="main-container">
     <carousel :perPage="4" :navigationEnabled="true">
-      <slide
-        v-for="product in products"
-        :key="product.productId"
-      >
+      <slide v-for="product in products" :key="product.productId">
         <router-link
           :to="{
             name: 'ProductDetailPage',
@@ -30,24 +27,24 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import { mapState } from 'vuex';
+
 export default {
-    name: 'MostSoldProductList',
-    components: {
-        Carousel,
-        Slide,
+  name: 'MostSoldProductList',
+  components: {
+    Carousel,
+    Slide,
+  },
+  props: {
+    products: {
+      type: Array,
     },
-    props: {
-        products: {
-            type: Array,
-        },
+  },
+  methods: {
+    getImagePath(imageData) {
+      return `https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com/${imageData}`;
     },
-    methods: {
-        getImagePath(imageData) {
-      console.log('imageData:', imageData);
-      return require(`@/${imageData}`);
-    },
-    }
-}
+  },
+};
 </script>
 
 <style>
@@ -72,5 +69,4 @@ export default {
   padding-top: 0px;
   padding-bottom: 0px;
 }
-
 </style>

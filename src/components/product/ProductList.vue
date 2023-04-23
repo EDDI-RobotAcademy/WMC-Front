@@ -30,22 +30,14 @@
           }"
           tag="div"
         >
-          <v-card>
+          <v-card flat>
             <v-img
               :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
-              aspect-ratio="1"
+              aspect-ratio=".8"
             ></v-img>
-
             <v-card-title>{{ product.name }}</v-card-title>
             <v-card-text>{{ product.description }}</v-card-text>
             <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
-            <!-- <v-card-actions>
-              <div @click.stop>
-                <v-btn small color="#a1887f" @click="addToCart(product)"
-                  >장바구니에 담기</v-btn
-                >
-              </div>
-            </v-card-actions> -->
           </v-card>
         </router-link>
       </v-col>
@@ -56,6 +48,7 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import { mapState } from 'vuex';
+import AWS from 'aws-sdk';
 
 export default {
   name: 'ProductList',
@@ -73,6 +66,10 @@ export default {
       memberId: localStorage.getItem('memberId'),
       authorityName: localStorage.getItem('authorityName'),
       cart: [],
+      awsBucketName: 'wmc-s3-bucket',
+      awsBucketRegion: 'ap-northeast-2',
+      awsIdentityPoolId: 'ap-northeast-2:8de0e190-db24-44d8-88b5-2e897cd0af39',
+      awsFileList: [],
     };
   },
 
@@ -102,9 +99,61 @@ export default {
       });
     },
 
-    
     getImagePath(imageData) {
-      return require(`@/${imageData}`);
+      const s3BucketBaseUrl =
+        'https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com';
+      const imageURL = `${s3BucketBaseUrl}/${imageData}`;
+      console.log('Image URL:', imageURL);
+      return imageURL;
+    },
+
+    awsS3Config(callback) {
+      AWS.config.update({ region: this.awsBucketRegion });
+
+      const cognitoCredentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: this.awsIdentityPoolId,
+      });
+
+      cognitoCredentials.get((err) => {
+        if (err) {
+          console.log('Error fetching credentials:', err);
+          return;
+        }
+
+        AWS.config.credentials = cognitoCredentials;
+
+        this.s3 = new AWS.S3({
+          apiVersion: '2006-03-01',
+          params: {
+            Bucket: this.awsBucketName,
+          },
+        });
+
+        console.log('Credentials: ', AWS.config.credentials);
+
+        if (callback) {
+          callback();
+        }
+      });
+    },
+    getAwsS3Files() {
+      this.awsS3Config(() => {
+        let res = this.s3.listObjects(
+          {
+            Delimiter: '/',
+            MaxKeys: 1,
+          },
+          (err, data) => {
+            if (err) {
+              return alert('AWS 버킷내에 문제가 있습니다: ' + err.message);
+            } else {
+              this.awsFileList = data.Contents;
+              console.log('s3 리스트: ', data);
+              this.startAfterAwsS3Bucket = data.NextMarker;
+            }
+          }
+        );
+      });
     },
   },
 };
