@@ -126,6 +126,7 @@
               color="gray"
               append-icon="mdi-magnify"
               @click:append="search"
+              class="search-input"
             />
           </div>
           <div v-else>
@@ -506,6 +507,10 @@ We hide :before pseudo-element on :active
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.nav-util .search-input {
+    width: 200px;
+    margin: auto;
+  }
 @media screen and (max-width: 768px) {
   .scrollable-nav {
     overflow-x: auto;
@@ -520,5 +525,6 @@ We hide :before pseudo-element on :active
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
 }
 </style>
