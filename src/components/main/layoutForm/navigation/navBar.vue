@@ -66,7 +66,7 @@
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>REVIEW</span>
           </button>
@@ -77,7 +77,7 @@
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>STORE</span>
           </button>
@@ -88,7 +88,7 @@
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>BRAND</span>
           </button>
@@ -98,7 +98,7 @@
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>ARCHIVE</span>
           </button>
@@ -111,7 +111,7 @@
             class="button"
             type="button"
             data-hover="고객센터"
-            onclick="location.href='/#/notice-list'"
+            onclick="location.href='/notice-list'"
           >
             <span>CS CENTER</span>
           </button>
@@ -133,7 +133,7 @@
           v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='/#/sign-in'"
+          onclick="location.href='/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -144,7 +144,7 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='/#/'"
+            onclick="location.href='/'"
           >
             <span>로그아웃</span>
           </button>
@@ -154,7 +154,7 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='/#/sign-up'"
+            onclick="location.href='/sign-up'"
           >
             <span>회원가입</span>
           </button>
@@ -163,7 +163,7 @@
             v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='/#/my-page-view'"
+            onclick="location.href='/my-page-view'"
           >
             <span>마이페이지</span>
           </button>
@@ -172,7 +172,7 @@
             v-if="isAuthenticated && isManager"
             text
             color="grey"
-            onclick="location.href='/#/manager-page-view'"
+            onclick="location.href='/manager-page-view'"
           >
             <span>관리자 페이지</span>
           </button>
