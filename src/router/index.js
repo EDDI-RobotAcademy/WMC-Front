@@ -19,6 +19,7 @@ import ProductDetailPage from '@/views/product/ProductDetailPage.vue';
 import ManagerPageView from '@/views/managerPage/ManagerPageView.vue';
 import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
+import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
 
 Vue.use(VueRouter);
 
@@ -147,6 +148,12 @@ const routes = [
     path: '/sales-graph',
     name: 'SalesGraph',
     component: SalesGraph,
+  },
+  {
+    path: "/product-search",
+    name: "ProductsSearchView",
+    component: ProductsSearchView,
+    props: true,
   },
 ];
 

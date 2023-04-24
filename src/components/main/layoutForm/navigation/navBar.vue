@@ -117,7 +117,22 @@
           </button>
         </div>
         <div class="nav-util">
-          <v-icon> mdi-magnify</v-icon>
+          <div v-if="showSearch">
+            <v-text-field
+              v-model="keyword"
+              ref="keyword"
+              label="검색어를 입력해주세요"
+              type="text"
+              color="gray"
+              append-icon="mdi-magnify"
+              @click:append="search"
+            />
+          </div>
+          <div v-else>
+            <v-btn large elevation="0" text @click="btnSearch">
+              <v-icon> mdi-magnify</v-icon>
+            </v-btn>
+          </div>
           <button
             class="right-btn"
             large
@@ -183,14 +198,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import axios from 'axios';
-import mainRequest from "@/api/mainRequest";
+import { mapState, mapActions } from 'vuex';
+import mainRequest from '@/api/mainRequest';
+
+const productModule = 'productModule';
 
 export default {
   name: 'NavigationMenuPage',
   data() {
     return {
+      showSearch: false,
+      keyword: '',
       isTrue: false,
       navigation_drawer: false,
       isNavHidden: false,
@@ -224,13 +242,17 @@ export default {
     } else {
       this.$store.state.isAuthenticated = false;
     }
-    if(localStorage.getItem('userInfo') && localStorage.getItem('authorityName').includes('MANAGER')){
+    if (
+      localStorage.getItem('userInfo') &&
+      localStorage.getItem('authorityName').includes('MANAGER')
+    ) {
       this.$store.state.isManager = true;
     } else {
       this.$store.state.isManager = false;
     }
   },
   methods: {
+    ...mapActions(productModule, ['requestProductsToSpring']),
     async fetchProductsByCategory(categoryId) {
       try {
         this.$router.push({
@@ -281,6 +303,17 @@ export default {
         this.$router.push({ name: 'CartView' });
         this.showSearch = false;
       }
+    },
+    btnSearch() {
+      this.showSearch = true;
+      this.$router.push('/product-search');
+    },
+    btnNoSearch() {
+      this.showSearch = false;
+    },
+    async search() {
+      const keyword = this.$refs.keyword.value;
+      await this.requestProductsToSpring(keyword);
     },
   },
 };
@@ -488,5 +521,4 @@ We hide :before pseudo-element on :active
     scrollbar-width: none;
   }
 }
-
 </style>
