@@ -37,8 +37,8 @@ export default {
       currentTab: 'SalesGraph',
       navi: [
         { menu: '판매현황', tab: 'SalesGraph' },
-        { menu: "회원정보수정", tab: "MyPageForm" },
-        { menu: "상품재고관리", tab: "ProductList" },
+        { menu: '회원정보수정", tab: "MyPageForm' },
+        { menu: '상품재고관리', tab: 'ProductList' },
         // { menu: "주문관리", tab: "OrderList" },
         // { menu: "리뷰관리", tab: "ReviewList" },
       ],

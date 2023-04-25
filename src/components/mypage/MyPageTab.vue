@@ -2,6 +2,7 @@
   <v-container>
         <v-tabs
           v-model="active_tab"
+          fixed-tabs
           background-color="white"
           color="#205C37"
           vertical
@@ -19,11 +20,11 @@
 
 <script>
 export default {
-  name: "MyPageTab",
+  name: 'MyPageTab',
   props: {
     name: {
       type: String,
-      default: "",
+      default:'',
     },
     index: {
       type: Number,
@@ -33,9 +34,9 @@ export default {
   data() {
     return {
       active_tab: 0,
-      currentTab: "MyPageForm",
+      currentTab: 'MyPageForm',
       navi: [
-        { menu: "회원정보", tab: "MyPageForm" },
+        { menu: '회원정보', tab: 'MyPageForm' },
       
       ],
     };
