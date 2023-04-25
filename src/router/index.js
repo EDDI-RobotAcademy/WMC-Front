@@ -19,10 +19,12 @@ import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
 import NoticeReadPage from "@/views/csCenter/notice/NoticeReadPage.vue"
 import NoticeModifyPage from "@/views/csCenter/notice/NoticeModifyPage.vue"
 import MyPageView from '@/views/myPage/MyPageView.vue'
-import PasswordCheckPage from '@/views/myPage/PasswordCheckPage.vue'
+
 //import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 import MapStoreView from '@/views/storeMap/MapStoreView.vue'
 import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
+
+import ConsultButton from '@/components/pageButton/ConsultButton.vue'
 
 
 Vue.use(VueRouter);
@@ -154,26 +156,27 @@ const routes = [
     component: SalesGraph,
   },
   {
-    path: '/password-check-page',
-    name: 'PasswordCheckPage',
-    components: {
-      defailt: PasswordCheckPage
-    }
-  },
-  {
     path: '/map-store-view',
     name: 'MapStoreView',
     components: {
       default: MapStoreView
     }
-  }
-]
+  },
+  {
+    path: '/consult-button',
+    name: 'ConsultButton',
+    component: ConsultButton
+  },
+
+  {
     path: "/product-search",
     name: "ProductsSearchView",
     component: ProductsSearchView,
     props: true,
   },
+
 ];
+
 
 const router = new VueRouter({
   routes,
