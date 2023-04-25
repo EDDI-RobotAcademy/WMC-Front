@@ -11,16 +11,11 @@
           <v-tab
             :key="i"
             v-for="(item, i) in navi"
-            v-on:click="currentTab = item.tab"
+            @click="$emit('tab-changed', item.tab)"
           >
             {{ item.menu }}
           </v-tab>
         </v-tabs>
-      </v-col>
-      <v-col cols="10">
-        <keep-alive>
-          <component :is="componentLoader"></component>
-        </keep-alive>
       </v-col>
     </v-row>
   </v-container>
@@ -53,13 +48,11 @@ export default {
     this.active_tab = this.index;
     console.log("navi : " + this.currentTab);
   },
-  computed: {
-    componentLoader() {
-      const tab = this.currentTab;
-      return () => import(`@/components/myPage/${tab}`);
+  methods: {
+    changeTab(tab) {
+      this.currentTab = tab;
     },
   },
-  methods: {},
 };
 </script>
 
