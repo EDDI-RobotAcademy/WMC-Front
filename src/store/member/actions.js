@@ -17,19 +17,6 @@ export default {
         mainRequest.post(`/member/account/`, token)
             .then((res) => {
                 commit(REQUEST_MY_PAGE_MEMBER_INFO, res.data);
-                console.log("asdf");
-                console.log(res.data);
-                console.log(res.data.email);
-                console.log(res.data.username);
-                console.log(res.data.birthdate);
-                console.log(res.data.phoneNumber);
-                console.log(res.data.city);
-                console.log(res.data.street);
-                console.log(res.data.addressDetail);
-                console.log(res.data.zipcode);
-               
-                
-                
             })
             .catch((res) => {
                 console.log(res.data);
@@ -37,4 +24,35 @@ export default {
             })
   
       },
+   
+      async passwordCheck({},payload ) {
+        const {memberId, password} = payload;
+        await axiosInst.post(`/member/passwordCheck`, {
+          memberId,password
+      })
+      .then ((res)=> {
+        if(res.data) {
+          alert("이전 비밀번호가 일치합니다");
+            return true;
+          } else {
+            alert("이전 비밀번호가 불일치합니다");
+            return false;
+        }
+      } ) 
+    },
+
+    async updatePassword({ commit }, newPassword) {
+      try {
+        const response = await axiosInst.put(`/member/${memberId}/password`, {
+          currentPassword: this.password,
+          newPassword: newPassword,
+          newPasswordConfirm: this.newPasswordConfirm,
+        });
+        commit('updateMember', response.data);
+        return true;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    }
   };
