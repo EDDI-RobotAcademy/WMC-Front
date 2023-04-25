@@ -77,7 +77,7 @@
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='/product-list-page'"
+            onclick="location.href='/map-store-view'"
           >
             <span>STORE</span>
           </button>
@@ -212,6 +212,7 @@ export default {
       keyword: '',
       isTrue: false,
       navigation_drawer: false,
+      authorityName: localStorage.getItem('authorityName'),
       isNavHidden: false,
       links: [
         { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
