@@ -315,6 +315,8 @@ export default {
     async search() {
       const keyword = this.$refs.keyword.value;
       await this.requestProductsToSpring(keyword);
+      this.$router.push('/product-search');
+
     },
   },
 };
