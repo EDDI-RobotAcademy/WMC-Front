@@ -19,6 +19,8 @@ import ProductDetailPage from '@/views/product/ProductDetailPage.vue';
 import ManagerPageView from '@/views/managerPage/ManagerPageView.vue';
 import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
+import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
+import MapStoreView from '@/views/storeMap/MapStoreView.vue';
 
 Vue.use(VueRouter);
 
@@ -80,7 +82,7 @@ const routes = [
       } else {
         next({ name: 'NoticeListPage' });
       }
-    }
+    },
   },
   {
     path: '/notice-read/:noticeId',
@@ -147,6 +149,19 @@ const routes = [
     path: '/sales-graph',
     name: 'SalesGraph',
     component: SalesGraph,
+  },
+  {
+    path: '/product-search',
+    name: 'ProductsSearchView',
+    component: ProductsSearchView,
+    props: true,
+  },
+  {
+    path: '/map-store-view',
+    name: 'MapStoreView',
+    components: {
+      default: MapStoreView,
+    },
   },
 ];
 

@@ -4,9 +4,9 @@ import {
   REQUEST_PRODUCT_ITEM_LIST_TO_SPRING,
   REQUEST_MAIN_PRODUCT_LIST_TO_SPRING,
   REQUEST_MOST_SOLD_PRODUCT_LIST,
+  REQUEST_SEARCH_RESULTS,
 } from './mutation-types';
 
-// import mainRequest from '@/utility/axiosObject';
 import mainRequest from '@/api/mainRequest';
 
 export default {
@@ -20,6 +20,18 @@ export default {
     } catch (error) {
       console.error('에러났다:', error);
     }
+  },
+  requestProductsToSpring({ commit }, keyword) {
+    console.log('상품 검색 키워드: ' + keyword);
+    let url = `/product/search`;
+    if (keyword != undefined) {
+      url += '?keyword=' + encodeURIComponent(keyword);
+    }
+    return mainRequest.get(url).then((res) => {
+      commit(REQUEST_SEARCH_RESULTS, res.data);
+      console.log('상품 리스트 조회');
+      console.log(res.data);
+    });
   },
   requestCreateProductToSpring({}, payload) {
     const { name, description, price, stock, categoryId, fileNames } = payload;

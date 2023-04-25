@@ -62,62 +62,93 @@
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='/#/product-list-page'"
           >
             <span>REVIEW</span>
-          </button>
+        </router-link>
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name: 'MapStoreView',
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='/#/product-list-page'"
           >
             <span>STORE</span>
-          </button>
+        </router-link>
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='/#/product-list-page'"
           >
             <span>BRAND</span>
-          </button>
+        </router-link>
         </div>
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='/#/product-list-page'"
           >
             <span>ARCHIVE</span>
-          </button>
+        </router-link>
         </div>
       </v-spacer>
 
       <div class="right-box">
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'NoticeListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="고객센터"
-            onclick="location.href='/#/notice-list'"
           >
             <span>CS CENTER</span>
-          </button>
+        </router-link>
         </div>
         <div class="nav-util">
-          <v-icon> mdi-magnify</v-icon>
+          <div v-if="showSearch">
+            <v-text-field
+              v-model="keyword"
+              ref="keyword"
+              label="검색어를 입력해주세요"
+              type="text"
+              color="gray"
+              append-icon="mdi-magnify"
+              @click:append="search"
+              class="search-input"
+            />
+          </div>
+          <div v-else>
+            <v-btn large elevation="0" text @click="btnSearch">
+              <v-icon> mdi-magnify</v-icon>
+            </v-btn>
+          </div>
           <button
             class="right-btn"
             large
@@ -144,7 +175,6 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='/#/'"
           >
             <span>로그아웃</span>
           </button>
@@ -183,16 +213,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import axios from 'axios';
-import mainRequest from "@/api/mainRequest";
+import { mapState, mapActions } from 'vuex';
+import mainRequest from '@/api/mainRequest';
+
+const productModule = 'productModule';
 
 export default {
   name: 'NavigationMenuPage',
   data() {
     return {
+      showSearch: false,
+      keyword: '',
       isTrue: false,
       navigation_drawer: false,
+      authorityName: localStorage.getItem('authorityName'),
       isNavHidden: false,
       links: [
         { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
@@ -224,13 +258,17 @@ export default {
     } else {
       this.$store.state.isAuthenticated = false;
     }
-    if(localStorage.getItem('userInfo') && localStorage.getItem('authorityName').includes('MANAGER')){
+    if (
+      localStorage.getItem('userInfo') &&
+      localStorage.getItem('authorityName').includes('MANAGER')
+    ) {
       this.$store.state.isManager = true;
     } else {
       this.$store.state.isManager = false;
     }
   },
   methods: {
+    ...mapActions(productModule, ['requestProductsToSpring']),
     async fetchProductsByCategory(categoryId) {
       try {
         this.$router.push({
@@ -281,6 +319,19 @@ export default {
         this.$router.push({ name: 'CartView' });
         this.showSearch = false;
       }
+    },
+    btnSearch() {
+      this.showSearch = true;
+      this.$router.push('/product-search');
+    },
+    btnNoSearch() {
+      this.showSearch = false;
+    },
+    async search() {
+      const keyword = this.$refs.keyword.value;
+      await this.requestProductsToSpring(keyword);
+      this.$router.push('/product-search');
+
     },
   },
 };
@@ -473,6 +524,10 @@ We hide :before pseudo-element on :active
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.nav-util .search-input {
+    width: 200px;
+    margin: auto;
+  }
 @media screen and (max-width: 768px) {
   .scrollable-nav {
     overflow-x: auto;
@@ -487,6 +542,6 @@ We hide :before pseudo-element on :active
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-}
 
+}
 </style>
