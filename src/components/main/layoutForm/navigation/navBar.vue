@@ -62,59 +62,74 @@
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='/product-list-page'"
           >
             <span>REVIEW</span>
-          </button>
+        </router-link>
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name: 'MapStoreView',
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='/map-store-view'"
           >
             <span>STORE</span>
-          </button>
+        </router-link>
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='/product-list-page'"
           >
             <span>BRAND</span>
-          </button>
+        </router-link>
         </div>
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='/product-list-page'"
           >
             <span>ARCHIVE</span>
-          </button>
+        </router-link>
         </div>
       </v-spacer>
 
       <div class="right-box">
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'NoticeListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="고객센터"
-            onclick="location.href='/notice-list'"
           >
             <span>CS CENTER</span>
-          </button>
+        </router-link>
         </div>
         <div class="nav-util">
           <div v-if="showSearch">
@@ -149,7 +164,7 @@
           v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='/sign-in'"
+          onclick="location.href='/#/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -170,7 +185,7 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='/sign-up'"
+            onclick="location.href='/#/sign-up'"
           >
             <span>회원가입</span>
           </button>
@@ -179,7 +194,7 @@
             v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='/my-page-view'"
+            onclick="location.href='/#/my-page-view'"
           >
             <span>마이페이지</span>
           </button>
@@ -188,7 +203,7 @@
             v-if="isAuthenticated && isManager"
             text
             color="grey"
-            onclick="location.href='/manager-page-view'"
+            onclick="location.href='/#/manager-page-view'"
           >
             <span>관리자 페이지</span>
           </button>
