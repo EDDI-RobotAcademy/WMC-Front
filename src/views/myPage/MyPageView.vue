@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MyPageTab from '@/components/myPage/MyPageTab';
+import MyPageTab from '@/components/myPage/MyPageTab.vue';
 import { mapActions } from 'vuex';
 
 const memberModule = 'memberModule';
