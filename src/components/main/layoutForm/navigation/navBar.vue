@@ -175,7 +175,6 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='/'"
           >
             <span>로그아웃</span>
           </button>
