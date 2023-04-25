@@ -24,7 +24,7 @@ import MyPageView from '@/views/myPage/MyPageView.vue'
 import MapStoreView from '@/views/storeMap/MapStoreView.vue'
 import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
 
-import ConsultButton from '@/components/pageButton/ConsultButton.vue'
+//import ConsultButton from '@/components/pageButton/ConsultButton.vue'
 
 
 Vue.use(VueRouter);
@@ -162,12 +162,7 @@ const routes = [
       default: MapStoreView
     }
   },
-  {
-    path: '/consult-button',
-    name: 'ConsultButton',
-    component: ConsultButton
-  },
-
+  
   {
     path: "/product-search",
     name: "ProductsSearchView",
