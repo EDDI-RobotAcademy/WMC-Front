@@ -66,7 +66,7 @@
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>REVIEW</span>
           </button>
@@ -77,7 +77,7 @@
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='http://localhost:8080/#/map-store-view'"
+            onclick="location.href='/map-store-view'"
           >
             <span>STORE</span>
           </button>
@@ -88,7 +88,7 @@
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>BRAND</span>
           </button>
@@ -98,7 +98,7 @@
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='/#/product-list-page'"
+            onclick="location.href='/product-list-page'"
           >
             <span>ARCHIVE</span>
           </button>
@@ -111,13 +111,29 @@
             class="button"
             type="button"
             data-hover="고객센터"
-            onclick="location.href='/#/notice-list'"
+            onclick="location.href='/notice-list'"
           >
             <span>CS CENTER</span>
           </button>
         </div>
         <div class="nav-util">
-          <v-icon> mdi-magnify</v-icon>
+          <div v-if="showSearch">
+            <v-text-field
+              v-model="keyword"
+              ref="keyword"
+              label="검색어를 입력해주세요"
+              type="text"
+              color="gray"
+              append-icon="mdi-magnify"
+              @click:append="search"
+              class="search-input"
+            />
+          </div>
+          <div v-else>
+            <v-btn large elevation="0" text @click="btnSearch">
+              <v-icon> mdi-magnify</v-icon>
+            </v-btn>
+          </div>
           <button
             class="right-btn"
             large
@@ -133,7 +149,7 @@
           v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='/#/sign-in'"
+          onclick="location.href='/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -144,7 +160,7 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='/#/'"
+            onclick="location.href='/'"
           >
             <span>로그아웃</span>
           </button>
@@ -154,7 +170,7 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='/#/sign-up'"
+            onclick="location.href='/sign-up'"
           >
             <span>회원가입</span>
           </button>
@@ -163,7 +179,7 @@
             v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='/#/my-page-view'"
+            onclick="location.href='/my-page-view'"
           >
             <span>마이페이지</span>
           </button>
@@ -172,7 +188,7 @@
             v-if="isAuthenticated && isManager"
             text
             color="grey"
-            onclick="location.href='/#/manager-page-view'"
+            onclick="location.href='/manager-page-view'"
           >
             <span>관리자 페이지</span>
           </button>
@@ -183,14 +199,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import axios from 'axios';
-import mainRequest from "@/api/mainRequest";
+import { mapState, mapActions } from 'vuex';
+import mainRequest from '@/api/mainRequest';
+
+const productModule = 'productModule';
 
 export default {
   name: 'NavigationMenuPage',
   data() {
     return {
+      showSearch: false,
+      keyword: '',
       isTrue: false,
       navigation_drawer: false,
       authorityName: localStorage.getItem('authorityName'),
@@ -225,13 +244,17 @@ export default {
     } else {
       this.$store.state.isAuthenticated = false;
     }
-    if(localStorage.getItem('userInfo') && localStorage.getItem('authorityName').includes('MANAGER')){
+    if (
+      localStorage.getItem('userInfo') &&
+      localStorage.getItem('authorityName').includes('MANAGER')
+    ) {
       this.$store.state.isManager = true;
     } else {
       this.$store.state.isManager = false;
     }
   },
   methods: {
+    ...mapActions(productModule, ['requestProductsToSpring']),
     async fetchProductsByCategory(categoryId) {
       try {
         this.$router.push({
@@ -282,6 +305,19 @@ export default {
         this.$router.push({ name: 'CartView' });
         this.showSearch = false;
       }
+    },
+    btnSearch() {
+      this.showSearch = true;
+      this.$router.push('/product-search');
+    },
+    btnNoSearch() {
+      this.showSearch = false;
+    },
+    async search() {
+      const keyword = this.$refs.keyword.value;
+      await this.requestProductsToSpring(keyword);
+      this.$router.push('/product-search');
+
     },
   },
 };
@@ -474,6 +510,10 @@ We hide :before pseudo-element on :active
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.nav-util .search-input {
+    width: 200px;
+    margin: auto;
+  }
 @media screen and (max-width: 768px) {
   .scrollable-nav {
     overflow-x: auto;
@@ -488,6 +528,6 @@ We hide :before pseudo-element on :active
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-}
 
+}
 </style>

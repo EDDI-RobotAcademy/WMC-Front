@@ -22,6 +22,8 @@ import MyPageView from '@/views/myPage/MyPageView.vue'
 import PasswordCheckPage from '@/views/myPage/PasswordCheckPage.vue'
 //import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
 import MapStoreView from '@/views/storeMap/MapStoreView.vue'
+import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
+
 
 Vue.use(VueRouter);
 
@@ -166,6 +168,12 @@ const routes = [
     }
   }
 ]
+    path: "/product-search",
+    name: "ProductsSearchView",
+    component: ProductsSearchView,
+    props: true,
+  },
+];
 
 const router = new VueRouter({
   routes,
