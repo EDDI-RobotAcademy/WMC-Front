@@ -67,6 +67,29 @@ export default {
           commit(REQUEST_QUESTION_BOARD_BY_CATEGORY, res.data)
         })
       },
+
+
+    // 댓글 리스트 UI
+    requestQuestionCommentListFromSpring ({ commit }, questionNo) {
+      console.log('requestQuestionCommentListFromSpring()')
+
+      return axios.get(`http://localhost:7777/ztz/boards/question/comment/${questionNo}`)
+          .then((res) => {
+              commit(REQUEST_QUESTION_COMMENT_LIST_FROM_SPRING, res.data)
+          })
+    },
+
+    // 댓글 리스트 등록
+    requestQuestionCommentRegisterToSpring ({ }, payload) {
+        console.log('requestQuestionCommentRegisterToSpring()')
+        const { comment, questionNo, memberId } = payload
+        console.log("댓글 등록" + questionNo)
+        return axios.post('http://localhost:7777/ztz/boards/question/comment/register',
+            { comment : comment, question_no : questionNo, member_no : memberId})
+            .then(() => {
+                alert('댓글 등록을 완료하였습니다.')
+            })
+    },
       
       
   
