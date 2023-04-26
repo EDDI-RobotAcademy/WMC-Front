@@ -6,6 +6,12 @@ import SignInView from '@/views/account/SignInView.vue';
 import ProductRegisterPage from '@/views/product/ProductRegisterPage.vue';
 import ProductListPage from '@/views/product/ProductListPage.vue';
 
+import MainProductListPage from '@/views/product/MainProductListPage.vue';
+import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue';
+import NoticeRegisterPage from '@/views/csCenter/notice/NoticeRegisterPage.vue';
+import NoticeReadPage from '@/views/csCenter/notice/NoticeReadPage.vue';
+import NoticeModifyPage from '@/views/csCenter/notice/NoticeModifyPage.vue';
+import MyPageView from '@/views/myPage/MyPageView.vue';
 import QuestionBoardListPage from '@/views/questionBoard/QuestionBoardListPage.vue';
 import CartView from '@/views/order/CartView';
 import QuestionBoardRegisterPage from '@/views/questionBoard/QuestionBoardRegisterPage.vue';
@@ -13,19 +19,8 @@ import ProductDetailPage from '@/views/product/ProductDetailPage.vue';
 import ManagerPageView from '@/views/managerPage/ManagerPageView.vue';
 import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
-import MainProductListPage from '@/views/product/MainProductListPage.vue'
-import NoticeListPage from '@/views/csCenter/notice/NoticeListPage.vue'
-import NoticeRegisterPage from "@/views/csCenter/notice/NoticeRegisterPage.vue"
-import NoticeReadPage from "@/views/csCenter/notice/NoticeReadPage.vue"
-import NoticeModifyPage from "@/views/csCenter/notice/NoticeModifyPage.vue"
-import MyPageView from '@/views/myPage/MyPageView.vue'
-
-//import ProductListByCategoryPage from '@/views/product/ProductListByCategoryPage.vue'
-import MapStoreView from '@/views/storeMap/MapStoreView.vue'
 import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
-
-//import ConsultButton from '@/components/pageButton/ConsultButton.vue'
-
+import MapStoreView from '@/views/storeMap/MapStoreView.vue';
 
 Vue.use(VueRouter);
 
@@ -87,7 +82,7 @@ const routes = [
       } else {
         next({ name: 'NoticeListPage' });
       }
-    }
+    },
   },
   {
     path: '/notice-read/:noticeId',
@@ -156,18 +151,17 @@ const routes = [
     component: SalesGraph,
   },
   {
+    path: '/product-search',
+    name: 'ProductsSearchView',
+    component: ProductsSearchView,
+    props: true,
+  },
+  {
     path: '/map-store-view',
     name: 'MapStoreView',
     components: {
-      default: MapStoreView
-    }
-  },
-  
-  {
-    path: "/product-search",
-    name: "ProductsSearchView",
-    component: ProductsSearchView,
-    props: true,
+      default: MapStoreView,
+    },
   },
 
 ];
