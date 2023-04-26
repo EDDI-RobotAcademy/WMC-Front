@@ -140,15 +140,19 @@ export default {
       let memberId = JSON.parse(localStorage.getItem('memberId'));
 
       // 이전 비밀번호 확인
-      if (!await this.passwordCheck({ memberId, password })) {
+      let passwordChecked = await this.passwordCheck({ memberId, password }) 
+      console.log(Boolean (passwordChecked));
+
+      if ( Boolean (passwordChecked)) {
+        console.log('asdfasdf')
         return;
-      }
+      }  
 
-      const result = await this.updatePassword(
-        newPassword
-        
-      )
+      
 
+      const result = await this.updatePassword({ 
+        memberId, newPassword 
+      })
       if (result) {
         // 비밀번호가 변경되었다는 메시지 출력
         alert("비밀번호가 변경되었습니다.");
