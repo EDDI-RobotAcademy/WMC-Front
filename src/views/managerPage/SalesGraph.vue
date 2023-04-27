@@ -9,7 +9,6 @@
 
 <script>
 import BarChart from '@/components/managerPage/BarChart';
-import axios from 'axios';
 import mainRequest from "@/api/mainRequest";
 
 
@@ -34,7 +33,7 @@ export default {
             ticks: {
               fontSize: 14,
               beginAtZero: true,
-              stepSize: 1, // This will show only integer ticks, removing the 0.5 values
+              stepSize: 1,
             },
           },
         },
