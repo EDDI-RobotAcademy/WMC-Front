@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div></div>
 </template>
 
@@ -19,4 +19,4 @@ export default {
 .mypage-card {
   width: 50%;
 }
-</style>
+</style> -->
