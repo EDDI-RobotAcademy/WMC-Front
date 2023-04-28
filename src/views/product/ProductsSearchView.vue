@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-row>
       <v-col
         v-if="
           !searchResults ||
