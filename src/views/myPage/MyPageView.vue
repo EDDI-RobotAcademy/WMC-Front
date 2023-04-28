@@ -13,7 +13,7 @@
   </template>
   
   <script>
-  //에러확인중
+
   import MyPageTab from '@/components/myPage/MyPageTab.vue';
   import MyPageForm from '@/components/myPage/MyPageForm.vue';
   import { mapActions } from 'vuex';
