@@ -41,18 +41,18 @@ export default {
       } ) 
     },
 
-    async updatePassword({ commit }, newPassword) {
-      try {
-        const response = await axiosInst.put(`/member/${memberId}/password`, {
-          currentPassword: this.password,
-          newPassword: newPassword,
-          newPasswordConfirm: this.newPasswordConfirm,
-        });
-        commit('updateMember', response.data);
-        return true;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
+    async updatePassword({}, { memberId, newPassword }) {
+    try {
+      console.log(memberId, newPassword )
+
+      const response = await axiosInst.put(`/member/passwordUpdate`, {
+        newPassword,
+        memberId
+      });
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
-  };
+  }
+};
