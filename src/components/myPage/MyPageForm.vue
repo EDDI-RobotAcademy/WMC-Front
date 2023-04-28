@@ -135,25 +135,25 @@
         // 새로운 비밀번호와 비밀번호 확인 값이 일치하는지 검증
         if (newPassword !== newPasswordConfirm) {
           alert("새로운 비밀번호와 비밀번호 확인 값이 다릅니다.");
-          return;
         }
         let memberId = JSON.parse(localStorage.getItem('memberId'));
   
         // 이전 비밀번호 확인
         let passwordChecked = await this.passwordCheck({ memberId, password }) 
-        console.log(Boolean (passwordChecked));
-  
-        if ( Boolean (passwordChecked)) {
-          console.log('asdfasdf')
+        let isChecked = Boolean(passwordChecked);
+        console.log("passwordChecked 호출 "+ isChecked);
+        if (!isChecked) {
           return;
         }  
-  
+        console.log('반환하는지 확인해봅시다')
         
   
-        const result = await this.updatePassword({ 
+        let result = await this.updatePassword({ 
           memberId, newPassword 
         })
-        if (result) {
+        let isUpdate = Boolean(result);
+        console.log("updatePassword 호출" + isUpdate);
+        if (isUpdate) {
           // 비밀번호가 변경되었다는 메시지 출력
           alert("비밀번호가 변경되었습니다.");
           this.showDialog = false;
