@@ -16,7 +16,7 @@
 import ManagerPageForm from '@/components/managerPage/ManagerPageForm.vue';
 import ManagerPageTab from '@/components/managerPage/ManagerPageTab.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
-// import BarChart from '@/components/managerPage/BarChart.vue';
+import OrderList from '@/views/managerPage/OrderList.vue';
 
 import { mapActions } from 'vuex';
 
@@ -28,6 +28,7 @@ export default {
     ManagerPageForm,
     ManagerPageTab,
     SalesGraph,
+    OrderList,
     // BarChart,
   },
   data() {

@@ -163,7 +163,9 @@ const routes = [
       default: MapStoreView,
     },
   },
+
 ];
+
 
 const router = new VueRouter({
   routes,

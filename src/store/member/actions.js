@@ -3,7 +3,7 @@ import {
   REQUEST_MY_PAGE_MEMBER_INFO
 } from './mutation-types';
 
-import axiosInst from '@/utility/axiosObject';
+
 import mainRequest from "@/api/mainRequest";
 
 
@@ -27,7 +27,7 @@ export default {
    
       async passwordCheck({},payload ) {
         const {memberId, password} = payload;
-        await axiosInst.post(`/member/passwordCheck`, {
+        await mainRequest.post(`/member/passwordCheck`, {
           memberId,password
       })
       .then ((res)=> {
@@ -41,18 +41,18 @@ export default {
       } ) 
     },
 
-    async updatePassword({ commit }, newPassword) {
-      try {
-        const response = await axiosInst.put(`/member/${memberId}/password`, {
-          currentPassword: this.password,
-          newPassword: newPassword,
-          newPasswordConfirm: this.newPasswordConfirm,
-        });
-        commit('updateMember', response.data);
-        return true;
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
+    async updatePassword({}, { memberId, newPassword }) {
+    try {
+      console.log(memberId, newPassword )
+
+      const response = await mainRequest.put(`/member/passwordUpdate`, {
+        newPassword,
+        memberId
+      });
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
     }
-  };
+  }
+};
