@@ -3,7 +3,7 @@ import {
   REQUEST_MY_PAGE_MEMBER_INFO
 } from './mutation-types';
 
-
+import axiosInst from '@/utility/axiosObject';
 import mainRequest from "@/api/mainRequest";
 
 
@@ -27,29 +27,36 @@ export default {
    
       async passwordCheck({},payload ) {
         const {memberId, password} = payload;
-        await mainRequest.post(`/member/passwordCheck`, {
-          memberId,password
-      })
-      .then ((res)=> {
-        if(res.data) {
-          alert("이전 비밀번호가 일치합니다");
-            return true;
-          } else {
-            alert("이전 비밀번호가 불일치합니다");
-            return false;
-        }
-      } ) 
+        return mainRequest.post(`/member/passwordCheck`, {
+            memberId,password
+          })
+          .then ((res)=> {
+            if(res.data) {
+              alert("이전 비밀번호가 일치합니다");
+              return true;
+            } else {
+              alert("이전 비밀번호가 불일치합니다 " + (res.data));
+              return false;
+            } 
+          }) 
+      
     },
 
     async updatePassword({}, { memberId, newPassword }) {
     try {
       console.log(memberId, newPassword )
 
-      const response = await mainRequest.put(`/member/passwordUpdate`, {
+      return mainRequest.put(`/member/passwordUpdate`, {
         newPassword,
         memberId
+      })
+      .then ((res)=> {
+        if(res.data) {
+          return true;
+        } else {
+          return false;
+        } 
       });
-      return true;
     } catch (error) {
       console.error(error);
       return false;

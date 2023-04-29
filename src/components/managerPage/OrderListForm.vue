@@ -4,8 +4,11 @@
     <v-data-table
       :headers="headers"
       :items="orders"
-      :items-per-page="5"
+      :items-per-page="50"
       class="elevation-1"
+      :footer-props="{
+        itemsPerPageOptions: [50, 100, -1],
+      }"
     >
       <template v-slot:item.address="{ item }">
         <td>{{ formattedAddress(item.address) }}</td>
@@ -22,23 +25,23 @@ export default {
   data() {
     return {
       headers: [
-        { text: "Order ID", value: "orderId" },
-        { text: "Product Name", value: "productName" },
-        { text: "Price", value: "price" },
-        { text: "Quantity", value: "quantity" },
-        { text: "Order Date", value: "orderDate" },
-        { text: "Member Name", value: "memberName" },
-        { text: "Address", value: "address" },
-        { text: "Phone Number", value: "phoneNumber" },
-        { text: "Zipcode", value: "address.zipcode" },
+        { text: 'Order ID', value: 'orderId' },
+        { text: 'Product Name', value: 'productName' },
+        { text: 'Price', value: 'price' },
+        { text: 'Quantity', value: 'quantity' },
+        { text: 'Order Date', value: 'orderDate' },
+        { text: 'Member Name', value: 'memberName' },
+        { text: 'Address', value: 'address' },
+        { text: 'Phone Number', value: 'phoneNumber' },
+        { text: 'Zipcode', value: 'address.zipcode' },
       ],
     };
   },
   methods: {
     formattedAddress(address) {
-      const street = address.street || "";
-      const city = address.city || "";
-      const addressDetail = address.addressDetail || "";
+      const street = address.street || '';
+      const city = address.city || '';
+      const addressDetail = address.addressDetail || '';
 
       return `${street}, ${addressDetail}, ${city}`.trim();
     },
@@ -46,5 +49,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
