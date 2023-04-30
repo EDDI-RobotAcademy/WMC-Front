@@ -35,6 +35,10 @@ export default {
       type: Object,
       required: true,
     },
+    images: {
+      type: Array,
+      default: () => [],
+    },
   },
 
   computed: {
@@ -49,7 +53,7 @@ export default {
   methods: {
     getImagePath(imageData) {
       console.log('imageData:', imageData)
-      return require(`@/assets/noticeImages/${imageData}`);
+      return `https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com/${imageData}`;
     }
   },
 }
