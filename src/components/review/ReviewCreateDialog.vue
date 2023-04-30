@@ -1,51 +1,54 @@
 <template>
-  <v-app>
-    <v-container class="product-registration-page">
-      <v-row>
-        <v-col cols="12" sm="8" md="6">
-          <h1>상품 등록</h1>
-          <v-form @submit.prevent="registerProduct">
-            <v-text-field
-              label="상품명"
-              v-model="name"
-              required
-              outlined
-              class="mt-3"
-            ></v-text-field>
-            <v-textarea
-              label="상품설명"
-              v-model="description"
-              required
-              outlined
-              class="mt-3"
-            ></v-textarea>
-            <v-text-field
-              label="가격"
-              v-model="price"
-              required
-              outlined
-              type="number"
-              class="mt-3"
-            ></v-text-field>
-            <v-text-field
-              label="재고"
-              v-model="stock"
-              required
-              outlined
-              type="number"
-              class="mt-3"
-            ></v-text-field>
-            <v-select
-              label="카테고리 선택"
-              v-model="categoryId"
-              :items="categories"
-              item-text="name"
-              item-value="categoryId"
-              required
-              outlined
-              class="mt-3"
-            ></v-select>
-
+  <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="800px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="grey"
+          dark
+          v-bind="attrs"
+          v-on="on"
+          @click="openReviewDialog"
+        >
+         리뷰 등록하기 
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">리뷰 등록</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12" sm="6" >
+              <v-text-field
+             :value="product.name"
+             readonly
+              ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6" >
+                <v-text-field
+                label="카테고리"
+                :value="product.name"
+                readonly
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                label="작성자"
+                :value="product.name"
+                readonly></v-text-field>
+              </v-col>
+              <v-col cols="12">
+              <v-rating label="별점" v-model="reviewData.rating" required />
+              </v-col>
+              <v-col cols="12">
+              <v-textarea label="본문"  v-model="reviewData.content" required />
+            </v-col>
+            <v-col>
             <v-file-input
               label="상품 사진 업로드"
               multiple
@@ -53,15 +56,8 @@
               @change="handleFileUpload($event)"
               class="mt-3"
             ></v-file-input>
-            <v-btn type="submit" color="primary" class="mb-3 mt-3"
-              >상품등록하기</v-btn
-            >
-            <router-link to="{ name: 'ProductListPage' }">
-              <v-btn color="secondary" outlined class="mt-3">취소</v-btn>
-            </router-link>
-          </v-form>
-        </v-col>
-        <v-col cols="12" sm="4" md="6">
+          </v-col>
+          <v-col cols="12" sm="4" md="6">
           <v-row>
             <v-col
               v-for="(url, index) in imageUrls"
@@ -77,23 +73,43 @@
             </v-col>
           </v-row>
         </v-col>
-      </v-row>
-    </v-container>
-  </v-app>
-</template>
+            </v-row>
+          </v-container>
+          
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false"
+          >
+            닫기
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="onSubmit(reviewData)">
+            등록하기 
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
 
+</template>
 <script>
 import mainRequest from '@/api/mainRequest';
 import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
+import { mapActions,mapState } from 'vuex';
+const memberModule = 'memberModule';
+const reviewModule = 'reviewModule'
 
 export default {
   data() {
     return {
-      name: 'iGlass',
-      description: '이제까지 나온 최고의 안경입니다.',
-      price: 1000000,
-      stock: 10,
+      dialog: false,
       files: [],
       imageUrls: [],
       fileNames: [],
@@ -107,32 +123,30 @@ export default {
       awsFileList: [],
       startAfterAwsS3Bucket: null,
       awsS3NextToken: null,
+      reviewData: {
+        productName: '',
+        productCategory: '',
+        writer: '',
+        rating: 3,
+        content: '',
+      },
     };
   },
-  mounted() {
-    this.fetchCategories();
-  },
-  methods: {
-    async fetchCategories() {
-      try {
-        const response = await mainRequest.get('/categories');
-        this.categories = response.data;
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    },
-    async registerProduct() {
-      const { name, description, price, stock, categoryId, files } = this;
-      await this.uploadMultipleFilesToS3(files);
 
-      this.$emit('submit', {
-        name,
-        description,
-        price,
-        stock,
-        categoryId,
-        fileNames: this.fileNames,
-      });
+  props: {
+    product: Object,
+  },
+  
+  computed: {
+
+},
+  methods: {
+    onSubmit(){
+      const { productName, productCategory,writer,rating,content,files } = this
+      this.$emit('submit', { productName, productCategory,writer,rating,content,files  })
+    },
+    openReviewDialog() {
+      this.$emit('openReviewDialog');
     },
     handleFileUpload(files) {
       this.files = files;
@@ -231,8 +245,5 @@ export default {
 };
 </script>
 
-<style scoped>
-.mt-3 {
-  margin-top: 1rem;
-}
+<style>
 </style>

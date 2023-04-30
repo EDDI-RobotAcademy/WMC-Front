@@ -24,6 +24,18 @@ export default {
             })
   
       },
+      async fetchUsername() {
+        const memberId = localStorage.getItem("id");
+        if (memberId) {
+          try {
+            const response = await axiosInst.get(`/member/username/${memberId}`);
+            this.username = response.data.username;
+            console.log("해당 memberId로 username을 가져오는 데 성공했습니다");
+          } catch (error) {
+            console.error("문제가 발생했습니다:", error);
+          }
+        }
+      },
    
       async passwordCheck({},payload ) {
         const {memberId, password} = payload;

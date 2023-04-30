@@ -21,6 +21,9 @@ import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
 import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
 import MapStoreView from '@/views/storeMap/MapStoreView.vue';
+import ReviewPage from '@/views/review/ReviewPage.vue';
+
+
 
 Vue.use(VueRouter);
 
@@ -163,6 +166,11 @@ const routes = [
       default: MapStoreView,
     },
   },
+    {
+      path: '/review',
+      name: 'ReviewPage',
+      component: ReviewPage,
+    },
 
 ];
 
