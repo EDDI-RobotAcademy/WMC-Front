@@ -19,6 +19,11 @@ import ProductDetailPage from '@/views/product/ProductDetailPage.vue';
 import ManagerPageView from '@/views/managerPage/ManagerPageView.vue';
 import MostSoldProductPage from '@/views/product/MostSoldProductPage.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
+import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
+import MapStoreView from '@/views/storeMap/MapStoreView.vue';
+import ReviewPage from '@/views/review/ReviewPage.vue';
+
+
 
 Vue.use(VueRouter);
 
@@ -68,6 +73,15 @@ const routes = [
     path: '/notice-register',
     name: 'NoticeRegisterPage',
     component: NoticeRegisterPage,
+
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (isManager()) {
+        next();
+      } else {
+        next({ name: 'NoticeListPage' });
+      }
+    }
   },
   {
     path: '/notice-read/:noticeId',
@@ -127,7 +141,27 @@ const routes = [
     name: 'SalesGraph',
     component: SalesGraph,
   },
+  {
+    path: '/product-search',
+    name: 'ProductsSearchView',
+    component: ProductsSearchView,
+    props: true,
+  },
+  {
+    path: '/map-store-view',
+    name: 'MapStoreView',
+    components: {
+      default: MapStoreView,
+    },
+  },
+    {
+      path: '/review',
+      name: 'ReviewPage',
+      component: ReviewPage,
+    },
+
 ];
+
 
 const router = new VueRouter({
   routes,

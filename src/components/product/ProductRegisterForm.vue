@@ -62,7 +62,6 @@
           </v-form>
         </v-col>
         <v-col cols="12" sm="4" md="6">
-          <h2 class="mt-3">Selected Files</h2>
           <v-row>
             <v-col
               v-for="(url, index) in imageUrls"

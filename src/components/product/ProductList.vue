@@ -16,8 +16,8 @@
       >
         현재 등록된 상품이 없습니다!
       </v-col>
+      <template v-else>
       <v-col
-        v-else
         v-for="product in products"
         :key="product.productId"
         cols="12"
@@ -42,6 +42,7 @@
           </v-card>
         </router-link>
       </v-col>
+    </template>
     </v-row>
   </v-container>
 </template>
