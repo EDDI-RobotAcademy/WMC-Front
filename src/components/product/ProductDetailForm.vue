@@ -57,8 +57,17 @@
 
 <script>
 import { mapState } from 'vuex';
+import ReviewList from '@/components/review/ReviewList.vue'
+import ReviewDetailDialog from '@/components/review/ReviewDetailDialog.vue'
+
+
 
 export default {
+  components: {
+    ReviewList,
+    ReviewDetailDialog
+
+  },
   props: {
     product: Object,
   },
