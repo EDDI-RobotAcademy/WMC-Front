@@ -6,6 +6,6 @@ export default {
     members: [],
     member: {},
 
-
+    manager: false,
     isAuthenticated: false,
 }

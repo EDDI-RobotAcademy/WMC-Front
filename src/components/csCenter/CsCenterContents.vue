@@ -83,7 +83,7 @@ export default {
   
 <style scoped>
 .page_box {
-  border: 2px solid #b2b2b2b2;
+  border-top: 2px solid #b2b2b2b2;
   border-bottom: none;
   padding: 10px;
   display: flex;
@@ -122,6 +122,8 @@ export default {
 .no_dot li {
   position: relative;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .no_dot li::after {
@@ -136,7 +138,8 @@ export default {
 
 .cs_wrapper {
   display: flex;
-  border: 2px solid #b2b2b2b2;
+  border-top: 2px solid #b2b2b2b2;
+  border-bottom: 2px solid #b2b2b2b2;
   padding: 10px;
 }
 
@@ -167,6 +170,13 @@ export default {
   text-decoration: none;
   color: black;
   font-weight: bold;
+  transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease; /* color와 font-size 변경에 대한 전환 추가 */
+}
+
+.no_underline:hover {
+  transform: scale(1.1);
+  color: black; /* 마우스 오버 시 글자색 변경 */
+  font-size: 16px; /* 마우스 오버 시 글자 크기 변경 */
 }
 </style>
 
