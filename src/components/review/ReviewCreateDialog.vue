@@ -1,10 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="800px"
-    >
+    <v-dialog v-model="dialog" persistent max-width="800px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="grey"
@@ -13,7 +9,7 @@
           v-on="on"
           @click="openReviewDialog"
         >
-         리뷰 등록하기 
+          리뷰 등록하기
         </v-btn>
       </template>
       <v-card>
@@ -23,88 +19,81 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6" >
-              <v-text-field
-             :value="product.name"
-             readonly
-              ></v-text-field>
+              <v-col cols="12" sm="6">
+                <v-text-field :value="product.name" readonly></v-text-field>
               </v-col>
-              <v-col cols="12" sm="6" >
+              <v-col cols="12" sm="6">
                 <v-text-field
-                label="카테고리"
-                :value="product.name"
-                readonly
+                  label="카테고리"
+                  :value="product.name"
+                  readonly
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                label="작성자"
-                :value="product.name"
-                readonly></v-text-field>
+                  label="작성자"
+                  :value="product.name"
+                  readonly
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
-              <v-rating label="별점" v-model="reviewData.rating" required />
+                <v-rating label="별점" v-model="reviewData.rating" required />
               </v-col>
               <v-col cols="12">
-              <v-textarea label="본문"  v-model="reviewData.content" required />
-            </v-col>
-            <v-col>
-            <v-file-input
-              label="상품 사진 업로드"
-              multiple
-              show-size
-              @change="handleFileUpload($event)"
-              class="mt-3"
-            ></v-file-input>
-          </v-col>
-          <v-col cols="12" sm="4" md="6">
-          <v-row>
-            <v-col
-              v-for="(url, index) in imageUrls"
-              :key="index"
-              cols="6"
-              sm="4"
-            >
-              <v-img
-                :src="url"
-                :alt="'Image ' + index"
-                aspect-ratio="1"
-              ></v-img>
-            </v-col>
-          </v-row>
-        </v-col>
+                <v-textarea
+                  label="본문"
+                  v-model="reviewData.content"
+                  required
+                />
+              </v-col>
+              <v-col>
+                <v-file-input
+                  label="상품 사진 업로드"
+                  multiple
+                  show-size
+                  @change="handleFileUpload($event)"
+                  class="mt-3"
+                ></v-file-input>
+              </v-col>
+              <v-col cols="12" sm="4" md="6">
+                <v-row>
+                  <v-col
+                    v-for="(url, index) in imageUrls"
+                    :key="index"
+                    cols="6"
+                    sm="4"
+                  >
+                    <v-img
+                      :src="url"
+                      :alt="'Image ' + index"
+                      aspect-ratio="1"
+                    ></v-img>
+                  </v-col>
+                </v-row>
+              </v-col>
             </v-row>
           </v-container>
-          
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
+          <v-btn color="blue darken-1" text @click="dialog = false">
             닫기
           </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="onSubmit(reviewData)">
-            등록하기 
+          <v-btn color="blue darken-1" text @click="onSubmit(reviewData)">
+            등록하기
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-row>
-
 </template>
 <script>
 import mainRequest from '@/api/mainRequest';
 import AWS from 'aws-sdk';
 import { v4 as uuidv4 } from 'uuid';
-import { mapActions,mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 const memberModule = 'memberModule';
-const reviewModule = 'reviewModule'
+const reviewModule = 'reviewModule';
 
 export default {
   data() {
@@ -124,8 +113,6 @@ export default {
       startAfterAwsS3Bucket: null,
       awsS3NextToken: null,
       reviewData: {
-        productName: '',
-        productCategory: '',
         writer: '',
         rating: 3,
         content: '',
@@ -136,15 +123,33 @@ export default {
   props: {
     product: Object,
   },
-  
-  computed: {
 
-},
+  computed: {},
   methods: {
-    onSubmit(){
-      const { productName, productCategory,writer,rating,content,files } = this
-      this.$emit('submit', { productName, productCategory,writer,rating,content,files  })
-    },
+    ...mapActions('reviewModule', ['requestCreateReviewToSpring']),
+    onSubmit() {
+  const content = this.reviewData.content;
+  // const fileNames = this.fileNames;
+  const rating = this.reviewData.rating;
+  const productId = this.product.productId;
+  const payload = {
+    productId: productId,
+    token: JSON.parse(localStorage.getItem('userInfo')),
+    rating,
+    content,
+    fileNames: this.fileNames,
+  };
+  console.log(payload);
+  this.requestCreateReviewToSpring(payload)
+    .then(() => {
+      this.dialog = false;
+    })
+    .catch(() => {
+      console.error('Error submitting the review.');
+    });
+},
+
+
     openReviewDialog() {
       this.$emit('openReviewDialog');
     },
@@ -245,5 +250,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
