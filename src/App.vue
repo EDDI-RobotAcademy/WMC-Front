@@ -2,6 +2,7 @@
   <v-app>
     <navigation-menu-page/>
     <v-main>
+      <!--ConsultButton/-->
       <router-view/>
       <TopButton/>
     </v-main>
@@ -10,11 +11,12 @@
 </template>
 
 <script>
+
 import Footer from '@/components/main/layoutForm/Footer.vue'
 import NavigationMenuPage from '@/components/main/layoutForm/navigation/navBar.vue'
 import TopButton from '@/components/pageButton/TopButton.vue'
+import ConsultButton from '@/components/pageButton/ConsultButton.vue';
 
-// import NavigationView from '@/views/lecture/layoutForm/navigation/NavigationView.vue';
 export default {
   name: 'App',
   data: () => ({
@@ -23,7 +25,9 @@ export default {
   components: {
     NavigationMenuPage,
     Footer,
-    TopButton
+    TopButton,
+    ConsultButton
+  //KakaoMap
   }
 }
 </script>
