@@ -2,40 +2,55 @@
     <div>
         <div>
             <div v-if="questionBoard">
-            <div>
-                {{ questionBoard.questionType }}
+                <div>
+                    {{ questionBoard.questionType }}
+                </div>
+                <div>
+                    <span>
+                        <h1>{{ questionBoard.title}}</h1>
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        {{ questionBoard.writer}}
+                    </span>
+                </div>
             </div>
-            <div>
-                <span>
-                    <h1>{{ questionBoard.title}}</h1>
-                </span>
-            </div>
-            <div>
-                <span>
-                    {{ questionBoard.writer}}
-                </span>
-            </div>
-            <div>
-                <span v-if="questionBoard.regDate" style="color: gray; font-size: 13px;">{{ questionBoard.regDate.slice(0, 10) }} {{ questionBoard.regDate.slice(11, 16) }}</span>
-                <span style="float: right;">
-                    <!--<v-btn v-if="loginCheck()" @click="onModify" icon>-->
-                    <v-btn icon>
-                        <v-icon>mdi-pencil7</v-icon>
-                    </v-btn>
-                    <!--<v-btn v-if="loginCheck()" @click="onDelete" icon>-->
-                    <v-btn icon>
-                        <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                </span>
-            </div>
-        </div>
             <v-divider class="mt-3 mb-3"></v-divider>
-            <div>
-                <v-btn class="brown darken-2 white--text mb-5" :to="{ name: 'QuestionBoardListPage' }" style="float: right;">
-                  목록
-                </v-btn>
-            </div>
         </div>
+        <div>
+            <v-btn
+            class="red white--text"
+            rounded
+            depressed
+            small
+            @click="deleteQuestionBoard(questionBoard.questionBoardId)"
+            >
+            삭제
+            </v-btn>
+            <router-link :to="{ name: 'QuestionBoardUpdatePage', params: { questionBoardId: questionBoard.questionBoardId} }">
+                <v-btn class="green white--text" rounded depressed small>
+                수정
+                </v-btn>
+            </router-link>
+            <router-link :to="{ name: 'QuestionBoardListPage', params: { questionCategoryId: questionBoard.questionBoardId } }">
+                <v-btn class="grey white--text" rounded depressed small>
+                목록
+                </v-btn>
+                <v-btn
+                v-if="isManager()"
+                class="brown darken-2 white--text mb-5 mr-2"
+                :to="{
+                    name: 'QuestionBoardRegisterPage',
+                    params: { parentBoardId: questionBoard.questionBoardId} }"
+                    style="float: right;">
+                답글 달기
+                </v-btn>   
+            </router-link>
+            
+        </div>
+        
+        
     </div>
 </template>
 
@@ -44,8 +59,13 @@ export default {
     name: 'QuestionBoardRead',
     props: {
         questionBoard: Object,
+        required: true
     },
     methods: {
+        isManager() {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            return userInfo && userInfo.authorityName ==='MANAGER'
+          }
 
     },
     created() {
@@ -53,3 +73,6 @@ export default {
     }
 }
 </script>
+<style scoped>
+
+</style>

@@ -33,7 +33,7 @@
               <router-link 
                 :to="{ 
                   name: 'QuestionBoardReadPage', 
-                  params: { questionBoardId: questionBoard.questionBoardId },
+                  params: { questionBoardId: questionBoard.questionBoardId.toString() },
                 }"
               style="color: black; text-decoration: none">
                 <div v-if="isLogin == false" @click.prevent="readAccess">
@@ -103,7 +103,7 @@
         params: { questionBoardId: questionBoard.questionBoardId },
       });
     },
-  },
+    },
     computed : {
       ...mapState([
         'isAuthenticated',

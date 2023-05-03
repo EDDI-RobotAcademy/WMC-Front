@@ -1,34 +1,17 @@
 <template>
     <v-container>
         <div>
-            <question-board-read :questionBoard="questionBoard" v-if="questionBoard"/>
+            <question-board-read v-if="questionBoard" :questionBoard="questionBoard" />
+            <p v-else>로딩중...</p>
            
             
            
            <!-- <router-link v-if="isManager" :to="{ name: 'NoticeModifyPage', params: { questionBoardId, questionBoard }}">수정</router-link>-->
            <!--<router-link :to="{ name:QuestionBoardListPage}">돌아가기</router-link>-->
            <br />
-            <div>
-                <v-btn
-                class="red white--text"
-                rounded
-                depressed
-                small
-                @click="deleteQuestionBoard(questionBoard.questionBoardId)"
-                >
-                삭제
-                </v-btn>
-                <router-link :to="{ name: 'QuestionBoardUpdatePage', params: { questionBoardId: questionBoard.questionBoardId } }">
-                    <v-btn class="green white--text" rounded depressed small>
-                    수정
-                    </v-btn>
-                </router-link>
-                <router-link :to="{ name: 'QuestionBoardListPage', params: { questionCategoryId: questionBoard.questionCategoryId } }">
-                    <v-btn class="grey white--text" rounded depressed small>
-                    목록
-                    </v-btn>
-                </router-link>
-            </div>
+
+            
+            <!--댓글 목록-->
             <div class="boards">
                 <div>
                   <div class="ml-3">
@@ -36,21 +19,19 @@
                   </div>
                   <div class="comment">
                     <question-comment-list
-                        :question-board=questionBoard
-                        :questionComments="questionComments"/>
+                        :questionComments="questionComments" />
                   </div>
                 </div>
+            </div>    
+
+            <!--댓글 등록-->
+            <div>
+            <!--관리자만 댓글 권한이 있다.-->
+            <question-comment-register-form  
+                @submit="onSubmit"
+                :questionBoard="questionBoard"
+            />
             </div>
-              <!--관리자만 댓글 권한이 있다.-->
-                <question-comment-register-form
-                    @submit="onSubmitRegister"
-
-                />
-
-                
-              <div>
-
-              </div>
         </div>
     </v-container>
 </template>
@@ -62,25 +43,31 @@ import QuestionCommentList from '@/components/questionBoard/comment/QuestionComm
 import QuestionCommentRegisterForm from '@/components/questionBoard/comment/QuestionCommentRegisterForm.vue';
 import { mapActions, mapState } from 'vuex';
 
+import axios from 'axios'
+
 const questionModule ='questionModule';
+
 
 export default {
     name: "QuestionBoardReadPage",
-    components: { QuestionBoardRead },
-    props: {
-        questionBoardId: {
-        type: String,
-        required: true,
-        },
-    },
-    components: {
+    components: { 
+        QuestionBoardRead,
         QuestionCommentRegisterForm,
-        QuestionCommentList,
+        QuestionCommentList
+     },
+     
+    props: {
+    questionBoardId: {
+    type: String,  // 이 부분을 String 타입으로 수정
+    required: true
+  }
+        
     },
 
     mounted() {
         this.requestQuestionBoardToSpring(this.questionBoardId);
     },
+    
     computed: {
         /*
         isManager() {
@@ -99,20 +86,51 @@ export default {
         'requestQuestionCommentRegisterToSpring',
 
     ]),
-
-    async onSubmitRegister( payload ){
+/*
+    async onSubmit( payload ){
         const { comment, memberId } = payload
         const questionBoardId = this.questionBoardId
-        console.log("댓글 등록" + questionBoardId)
+        console.log("댓글 등록할 boardId:" + questionBoardId +"memberId check" + memberId)
+        console.log('댓글 내용 확인 :' + comment)
         await this.requestQuestionCommentRegisterToSpring( { comment, questionBoardId, memberId} )
         await this.$route.push({
             name: 'QuestionBoardReadPage', params: { questionBoardId: this.questionBoardId }
         })
     },
+    
+*/
+
+/*
+    async onSubmit( payload ){
+        const { writer, comment } = payload
+        const questionBoardId = this.questionBoardId;
+        console.log("댓글 등록할 boardId:" + questionBoardId)
+        console.log('댓글 내용 확인 :' + comment)
+        console.log('작성자 :' + writer)
+        const self = this;  // this를 self에 할당
+        await this.requestQuestionCommentRegisterToSpring( { writer, comment, questionBoardId } )
+        await self.$router.push({  // self를 사용하여 $route 객체에 접근
+            name: 'QuestionCommentRegisterForm', params: { questionBoardId: self.questionBoardId }
+        })
+    },
+*/
+
+    async onSubmit( payload ){
+        const { writer, comment } = payload
+        const questionBoardId = this.questionBoardId;
+        console.log("댓글 등록할 boardId:" + questionBoardId)
+        console.log('댓글 내용 확인 :' + comment)
+        console.log('작성자 :' + writer)
+        await this.requestQuestionCommentRegisterToSpring( { writer, comment, questionBoardId } )
+        await this.$router.push({
+            name: 'QuestionBoardReadPage', params: { questionBoardId: questionBoard.questionBoardId }
+        })
+    },
+    
 },
 created() {
-    //this.requestQuestionBoardToSpring(this.questionBoardId);
-    this.requestQuestionCommentListFromSpring(this.questionBoardId)
+    console.log('questionBoardId : ' + this.questionBoardId)
+    this.requestQuestionBoardToSpring(this.questionBoardId);
 },
 
 

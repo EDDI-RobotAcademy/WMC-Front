@@ -107,10 +107,14 @@ const routes = [
     component: QuestionBoardRegisterPage
   },
   {
-    path: '/question-read/:questionBoardId',
+    path: '/question/:questionBoardId',
     name: 'QuestionBoardReadPage',
-    component: QuestionBoardReadPage,
-    props:true,
+    components: { 
+      default: QuestionBoardReadPage
+    },
+    props: {
+      default: true
+    }
   },
 
   {
