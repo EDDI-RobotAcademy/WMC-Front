@@ -41,12 +41,12 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-col>
-                  <v-btn  color="white" @click="showDialog = true">비밀번호 수정</v-btn>
-                </v-col>
-              <v-col>
-                  <v-btn  color="white" @click="showAddressDialog = true">주소 수정</v-btn>
-                </v-col>
+                  <v-btn text color="grey" v-on:click="showDialog = true"><span>비밀번호 수정</span></v-btn>
+             
+                  <v-btn text color="grey" v-on:click="showAddressDialog = true"><span>주소 수정</span></v-btn>
+               
+                <v-btn text color="grey" v-on:click="resign"><span>회원 탈퇴</span></v-btn>
+
               </v-row>
               </v-card>
             <v-dialog v-model="showDialog" max-width="500px">
@@ -147,6 +147,7 @@
                   <v-btn color="blue darken-1" text @click="showAddressDialog = false">취소</v-btn>
                   <v-btn color="blue darken-1" text @click="onSubmitAddress()">확인</v-btn>
                 </v-card-actions>
+             
               </v-card>
             </v-dialog>
 
@@ -155,6 +156,7 @@
     </div>
   </template>
   <script>
+  import mainRequest from "@/api/mainRequest";
   import { mapState , mapActions} from 'vuex';
   const memberModule = 'memberModule';
   
@@ -197,7 +199,7 @@
       },
     },
     methods: {
-      ...mapActions(memberModule, ['updatePassword','passwordCheck','updateAddress']),
+      ...mapActions(memberModule, ['updatePassword','passwordCheck','updateAddress','reqResign']),
 
       callDaumAddressApi() {
       new window.daum.Postcode({
@@ -249,7 +251,19 @@
         alert('상세정보를 입력하세요!');
       }
     },
-    
+
+    async resign() {
+  let token = JSON.parse(localStorage.getItem('userInfo'));
+  if(confirm("정말로 회원 탈퇴 하시겠습니까?")) {
+    console.log("폼 코드 : " + token);
+    await this.reqResign(token);
+    window.location.reload(true);
+    window.location.href = '/';
+  }
+
+},
+
+
     async onSubmitPassword() {
       if (this.$refs.form.validate()) {
         // 현재 비밀번호, 새로운 비밀번호, 비밀번호 확인 값을 가져옴
@@ -286,8 +300,13 @@
          // 서버 업데이트 실패시 에러 메시지 출력
          alert("비밀번호 변경에 실패했습니다.");
         }
+
+        
       }
+      
+      
     }
+    
   }
 };
 </script>
