@@ -71,14 +71,14 @@ export default {
 
 
     // 댓글 리스트 UI
-    /*requestQuestionCommentListFromSpring ({ commit }, questionCommentNo) {
+    requestQuestionCommentListFromSpring ({ commit }, questionBoardId) {
       console.log('requestQuestionCommentListFromSpring()')
 
-      return axios.get(`http://localhost:7777/questionBoard/question/comment/${questionCommentNo}`)
+      return axiosInst.get(`/questionBoard/comment/${questionBoardId}`)
           .then((res) => {
               commit(REQUEST_QUESTION_COMMENT_LIST_FROM_SPRING, res.data)
           })
-    },*/
+    },
 
     // 댓글 리스트 등록
     requestQuestionCommentRegisterToSpring ({ }, payload) {
@@ -94,11 +94,6 @@ export default {
             .catch(() => {
               alert('댓글 등록 실패')
             })
-    },
-        
-    async requestQuestionCommentListFromSpring({ commit }, questionBoardId) {
-      const response = await axios.get(`http://localhost:7777/questionBoard/${questionBoardId}/comment`);
-      commit('REQUEST_QUESTION_COMMENT_LIST_FROM_SPRING', response.data);
     },
 
 

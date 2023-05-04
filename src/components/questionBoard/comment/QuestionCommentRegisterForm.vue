@@ -39,6 +39,7 @@ export default {
     return {
       comment: '',
       writer: '',
+      questionBoardId: '',
       rules: [v => !!v || "내용을 입력해주세요.", v => v.length <= 200 || "최대 200자까지 입력 가능합니다."],
     };
   },
@@ -49,14 +50,17 @@ export default {
       this.$emit("submit", { comment: this.comment, memberId: memberId }); // submit 이벤트와 함께 댓글과 memberId를 상위 컴포넌트로 전달
       this.comment = ""; // 댓글 등록 후 폼 초기화
     },*/
-    onSubmit() {
+    async onSubmit() {
         const { comment, writer } = this
         this.$emit("submit", { comment, writer})
         console.log("질문게시판 ID : " + this.questionBoard.questionBoardId)
         console.log("댓글 : " + this.comment)
         console.log("작성자 : " + this.writer)
         this.comment = ""; // 댓글 등록 후 폼 초기화
-        },
+        this.writer = "";
+        this.$router.push(`/question/${questionBoardId}`)
+        
+      },
     },
 
     created() {

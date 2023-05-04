@@ -19,7 +19,8 @@
                   </div>
                   <div class="comment">
                     <question-comment-list
-                        :questionComments="questionComments" />
+                        :questionComments="questionComments"
+                         />
                   </div>
                 </div>
             </div>    
@@ -54,14 +55,13 @@ export default {
         QuestionBoardRead,
         QuestionCommentRegisterForm,
         QuestionCommentList
-     },
-     
+    },
+
     props: {
-    questionBoardId: {
-    type: String,  // 이 부분을 String 타입으로 수정
-    required: true
-  }
-        
+        questionBoardId: {
+        type: String,  // 이 부분을 String 타입으로 수정
+        required: true
+        },
     },
 
     mounted() {
@@ -125,27 +125,16 @@ export default {
         await this.$router.push({
             name: 'QuestionBoardReadPage', params: { questionBoardId: questionBoard.questionBoardId }
         })
+        this.questionComments.push(payload);
     },
     
 },
 created() {
     console.log('questionBoardId : ' + this.questionBoardId)
     this.requestQuestionBoardToSpring(this.questionBoardId);
+    this.requestQuestionCommentListFromSpring(this.questionBoardId);
 },
 
-
-    /*
-    methods: {
-        ...mapActions(questionModule,[
-            'requestQuestionBoardToSpring'
-        ]),
-    },*/
-    /*
-    async created () {
-        console.log('questionBoardId : ' + this.questionBoardId)
-        await this.requestQuestionBoardToSpring(this.questionBoardId)
-    }
-    */
 
     
 };

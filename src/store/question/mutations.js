@@ -21,7 +21,11 @@ export default {
     state.questionBoard = passingData
   },
 
-  [REQUEST_QUESTION_COMMENT_LIST_FROM_SPRING] (state, passingData) {
-    state.questionComments = passingData
+  //[REQUEST_QUESTION_COMMENT_LIST_FROM_SPRING] (state, passingData) {
+   // state.questionComments = passingData
+//},
+
+[REQUEST_QUESTION_COMMENT_LIST_FROM_SPRING](state, questionComments) { // 댓글 목록 업데이트 메서드 추가
+  state.questionComments = questionComments;
 },
 }

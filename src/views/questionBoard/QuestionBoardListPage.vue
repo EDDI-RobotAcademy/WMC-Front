@@ -77,10 +77,6 @@
       }
       
     },
-
-    create () {
-      this.requestQuestionBoardListToSpring()
-    },
     
     methods: {
       registerAccess() {
