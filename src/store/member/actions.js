@@ -8,6 +8,7 @@ import mainRequest from "@/api/mainRequest";
 
 
 export default {
+
    requestMemberInfo({commit}) {
       let token = localStorage.getItem('userInfo');
       
@@ -73,5 +74,48 @@ export default {
       console.error(error);
       return false;
     }
+  },
+
+async updateAddress({}, payload) {
+  try {
+
+    console.log(payload)
+
+    return mainRequest.put('/member/addressUpdate',payload)
+    .then ((res)=> {
+      if(res.data) {
+        alert('주소 수정에 성공하였습니다.');
+        return true;
+      } else {
+        alert('주소 수정에 실패하였습니다.');
+        return false;
+      }
+    });
+  }catch (error) {
+    console.error(error);
+    return false;
   }
+},
+
+async reqResign({}, token) {
+  try {
+    console.log("액션코드 : " + JSON.stringify(token));
+    let json = { token};
+    const response = await mainRequest.delete('/member/delete', { data: json });
+    if (response.data) {
+      alert("회원탈퇴 완료");
+      localStorage.removeItem("memberId");
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("authorityName");
+      
+    } else {
+      alert('탈퇴에 실패하였습니다.');
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
 };
