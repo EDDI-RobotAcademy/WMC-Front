@@ -10,20 +10,17 @@ import mainRequest from "@/api/mainRequest";
 export default {
 
   requestCreateNoticeToSpring({}, payload) {
-    const { title, writer, content, files } = payload;
-    let formData = new FormData();
-    formData.append('title', title);
-    formData.append('writer', writer);
-    formData.append('content', content);
-    for (let idx = 0; idx < files.length; idx++) {
-      formData.append('fileList[' + idx + ']', files[idx]);
-    }
+    const { title, writer, content, fileNames } = payload;
+
+    const noticeData = {
+      title,
+      writer,
+      content,
+      fileNames,
+    };
+
     return mainRequest
-      .post('/notice/register', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
+      .post('/notice/register', noticeData)
       .then(() => {
         alert('공지사항 등록 성공!');
       })
@@ -47,7 +44,7 @@ export default {
       },
 
       requestDeleteNoticeToSpring({}, noticeId) {
-        return mainRequest.delete(`/notice/${noticeId}`)
+        return mainRequest.delete(`/notice/delete/${noticeId}`)
             .then(() => {
                 alert("공지사항 삭제 성공!");
             })

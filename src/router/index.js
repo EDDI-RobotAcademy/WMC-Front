@@ -27,9 +27,16 @@ import ReviewPage from '@/views/review/ReviewPage.vue';
 
 Vue.use(VueRouter);
 
-// function isManager() {
-//   return localStorage.getItem('authorityName') === 'MANAGER';
-// }
+function checkManagerAuthority(to, from, next) {
+  const isManager = localStorage.getItem('authorityName') === 'MANAGER';
+
+  if (isManager) {
+    next();
+  } else {
+    alert('이 페이지에 액세스할 수 있는 권한이 없습니다.');
+    next('/');
+  }
+}
 
 const routes = [
   {
@@ -77,15 +84,7 @@ const routes = [
     path: '/notice-register',
     name: 'NoticeRegisterPage',
     component: NoticeRegisterPage,
-
-    props: true,
-    beforeEnter: (to, from, next) => {
-      if (isManager()) {
-        next();
-      } else {
-        next({ name: 'NoticeListPage' });
-      }
-    },
+    beforeEnter: checkManagerAuthority,
   },
   {
     path: '/notice-read/:noticeId',
@@ -101,14 +100,6 @@ const routes = [
     path: '/notice-modify/:noticeId',
     name: 'NoticeModifyPage',
     component: NoticeModifyPage,
-    props: true,
-    beforeEnter: (to, from, next) => {
-      if (isManager()) {
-        next();
-      } else {
-        next({ name: 'NoticeListPage' });
-      }
-    },
   },
   {
     path: '/question-board',

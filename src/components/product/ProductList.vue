@@ -2,6 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
+        <v-select v-model="Filter" :items="filterOptions" label="Filter" @change="filterProducts"></v-select>
         <router-link to="/product-register-page">
           <v-btn v-if="authorityName === 'MANAGER'" color="#a1887f" outlined
             >상품 등록 하러가기</v-btn
@@ -67,6 +68,14 @@ export default {
       memberId: localStorage.getItem('memberId'),
       authorityName: localStorage.getItem('authorityName'),
       cart: [],
+      Filter: 'none',
+      filterOptions: [
+        '판매량순',
+        '낮은가격순',
+        '높은가격순',
+        '신상품(재입고)순',
+        '등록일순',
+      ],
       awsBucketName: 'wmc-s3-bucket',
       awsBucketRegion: 'ap-northeast-2',
       awsIdentityPoolId: 'ap-northeast-2:8de0e190-db24-44d8-88b5-2e897cd0af39',
@@ -155,6 +164,20 @@ export default {
           }
         );
       });
+    },
+    
+    filterProducts() {
+      if (this.Filter === '판매량순') {
+        this.products.sort((a, b) => b.quantity - a.quantity);
+      } else if (this.Filter === '낮은가격순') {
+        this.products.sort((a, b) => a.price - b.price);
+      } else if (this.Filter === '높은가격순') {
+        this.products.sort((a, b) => b.price - a.price);
+      } else if (this.Filter === '신상품(재입고)순') {
+        this.products.sort((a, b) => new Date(b.updDate) - new Date(a.updDate));
+      } else if (this.Filter === '등록일순') {
+        this.products.sort((a, b) => new Date(a.regDate) - new Date(b.regDate));
+      }
     },
   },
 };

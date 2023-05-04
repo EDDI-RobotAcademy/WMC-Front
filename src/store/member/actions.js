@@ -1,6 +1,7 @@
 
 import {
-  REQUEST_MY_PAGE_MEMBER_INFO
+  REQUEST_MY_PAGE_MEMBER_INFO,
+  REQUEST_MANAGER_CHECK
 } from './mutation-types';
 
 import axiosInst from '@/utility/axiosObject';
@@ -74,6 +75,27 @@ export default {
       console.error(error);
       return false;
     }
+  },
+
+  managerCheck({ commit }) {
+    return new Promise((resolve, reject) => {
+      let token = localStorage.getItem('userInfo');
+      const length = token.length;
+      console.log('token: ' + token + ', length: ' + length);
+      token = token.substr(1, length - 2);
+      mainRequest.post(`/member/ismanager/`, token)
+        .then((res) => {
+          commit(REQUEST_MANAGER_CHECK, res.data);
+          console.log(res.data);
+          console.log("managercheck입니다");
+          resolve(res.data); // Resolve with the boolean value
+        })
+        .catch((error) => {
+          console.log(error);
+          alert('문제 발생!');
+          reject(error); // Reject with the error
+        });
+    });
   },
 
 async updateAddress({}, payload) {
