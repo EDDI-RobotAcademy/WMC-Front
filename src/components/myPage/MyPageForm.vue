@@ -41,12 +41,13 @@
                 </v-col>
               </v-row>
               <v-row>
-                  <v-btn text color="grey" v-on:click="showDialog = true"><span>비밀번호 수정</span></v-btn>
-             
-                  <v-btn text color="grey" v-on:click="showAddressDialog = true"><span>주소 수정</span></v-btn>
-               
-                <v-btn text color="grey" v-on:click="resign"><span>회원 탈퇴</span></v-btn>
-
+                <v-col>
+                  <v-btn text color="black" v-on:click="showDialog = true"><span>비밀번호 수정</span></v-btn>
+                  <v-btn text color="black" v-on:click="showAddressDialog = true"><span>주소 수정</span></v-btn>
+                </v-col>
+                
+                  <v-btn text cols="12"  color="grey" v-on:click="resign"><span class="justify-content:center">회원 탈퇴</span></v-btn>
+              
               </v-row>
               </v-card>
             <v-dialog v-model="showDialog" max-width="500px">
@@ -326,5 +327,29 @@
     padding-left:450px;
   }
   
+
+.v-btn {
+  display: inline-block;
+  position: relative;
+  margin: 1em;
+  padding: 0.67em;
+  overflow: hidden;
+  text-decoration: none;
+  font-size: 14px;
+  outline: none;
+  color: black;
+  background: transparent;
+  font-family: 'raleway', sans-serif;
+}
+.v-btn span {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-transition-delay: 0.1s;
+  -moz-transition-delay: 0.1s;
+  -o-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
   </style>
   
