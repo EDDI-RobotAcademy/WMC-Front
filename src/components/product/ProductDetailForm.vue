@@ -57,8 +57,17 @@
 
 <script>
 import { mapState } from 'vuex';
+import ReviewList from '@/components/review/ReviewList.vue'
+import ReviewDetailDialog from '@/components/review/ReviewDetailDialog.vue'
+
+
 
 export default {
+  components: {
+    ReviewList,
+    ReviewDetailDialog
+
+  },
   props: {
     product: Object,
   },
@@ -110,7 +119,7 @@ export default {
   },
   methods: {
     getImagePath(imageData) {
-      return require(`@/${imageData}`);
+      return `https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com/${imageData}`;
     },
     changeMainImage(image) {
       this.mainImage = image;
@@ -159,10 +168,6 @@ export default {
         console.log(this.memberId);
         console.log(this.authorityName);
       }
-    },
-
-    getImagePath(imageData) {
-      return require(`@/${imageData}`);
     },
   },
 };

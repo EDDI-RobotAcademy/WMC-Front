@@ -6,6 +6,7 @@
 
 <script>
 import ProductListByCategory from '@/components/product/ProductListByCategory.vue';
+
 import { mapActions, mapState } from 'vuex';
 
 const productModule = 'productModule';
