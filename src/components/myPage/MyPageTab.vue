@@ -39,6 +39,7 @@
         currentTab: 'MyPageForm',
         navi: [
           { menu: '회원정보', tab: 'MyPageForm' },
+          { menu: '주문정보', tab: 'MyOrderForm' },
         
         ],
       };
