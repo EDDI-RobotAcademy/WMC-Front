@@ -44,7 +44,6 @@ import QuestionCommentList from '@/components/questionBoard/comment/QuestionComm
 import QuestionCommentRegisterForm from '@/components/questionBoard/comment/QuestionCommentRegisterForm.vue';
 import { mapActions, mapState } from 'vuex';
 
-import axios from 'axios'
 
 const questionModule ='questionModule';
 

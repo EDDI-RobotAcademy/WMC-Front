@@ -6,7 +6,6 @@ import {
 
 } from'./mutation-types'
 
-import axiosInst from '@/utility/axiosObject'
 import mainRequest from '@/api/mainRequest';
 
 
