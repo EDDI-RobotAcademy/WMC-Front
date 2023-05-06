@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import ManagerPageForm from '@/components/managerPage/ManagerPageForm.vue';
 import ManagerPageTab from '@/components/managerPage/ManagerPageTab.vue';
 import SalesGraph from '@/views/managerPage/SalesGraph.vue';
 import OrderList from '@/views/managerPage/OrderList.vue';
@@ -25,7 +24,6 @@ const memberModule = 'memberModule';
 export default {
   name: 'ManagerPageView',
   components: {
-    ManagerPageForm,
     ManagerPageTab,
     SalesGraph,
     OrderList,

@@ -22,20 +22,20 @@
               <v-col cols="12" sm="6">
                 <v-text-field :value="product.name" readonly></v-text-field>
               </v-col>
-              <v-col cols="12" sm="6">
+              <!-- <v-col cols="12" sm="6">
                 <v-text-field
                   label="카테고리"
                   :value="product.name"
                   readonly
                 ></v-text-field>
-              </v-col>
-              <v-col cols="12">
+              </v-col> -->
+              <!-- <v-col cols="12">
                 <v-text-field
                   label="작성자"
                   :value="product.name"
                   readonly
                 ></v-text-field>
-              </v-col>
+              </v-col> -->
               <v-col cols="12">
                 <v-rating label="별점" v-model="reviewData.rating" required />
               </v-col>
