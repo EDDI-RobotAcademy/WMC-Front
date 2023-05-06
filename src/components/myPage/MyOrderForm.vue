@@ -29,7 +29,7 @@
             <td>{{ order.address.street }}</td>
             <td>
               <review-create-dialog
-                :product="order.product"
+                :order="order"
               ></review-create-dialog>
             </td>
           </tr>

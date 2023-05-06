@@ -20,22 +20,8 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6">
-                <v-text-field :value="product.name" readonly></v-text-field>
+                <v-text-field :value="order.productName" readonly></v-text-field>
               </v-col>
-              <!-- <v-col cols="12" sm="6">
-                <v-text-field
-                  label="카테고리"
-                  :value="product.name"
-                  readonly
-                ></v-text-field>
-              </v-col> -->
-              <!-- <v-col cols="12">
-                <v-text-field
-                  label="작성자"
-                  :value="product.name"
-                  readonly
-                ></v-text-field>
-              </v-col> -->
               <v-col cols="12">
                 <v-rating label="별점" v-model="reviewData.rating" required />
               </v-col>
@@ -121,7 +107,7 @@ export default {
   },
 
   props: {
-    product: Object,
+    order: Object,
   },
 
   computed: {},
@@ -131,7 +117,7 @@ export default {
   const content = this.reviewData.content;
   // const fileNames = this.fileNames;
   const rating = this.reviewData.rating;
-  const productId = this.product.productId;
+  const productId = this.order.productId;
   const payload = {
     productId: productId,
     token: JSON.parse(localStorage.getItem('userInfo')),

@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <!-- <v-col>
         <review-create-dialog :product="product"/>    
-      </v-col>
+      </v-col> -->
     </v-row>
 
     <v-row v-if="!reviews || (Array.isArray(reviews) && reviews.length === 0)">
