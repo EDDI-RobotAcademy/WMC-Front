@@ -54,7 +54,7 @@
       async onSubmit() {
           const { comment, writer } = this
           this.$emit("submit", { comment, writer})
-          console.log("질문게시판 ID : " + this.questionBoard.questionBoardId)
+          console.log("질문게시판 ID : " + this.questionBoardId)
           console.log("댓글 : " + this.comment)
           console.log("작성자 : " + this.writer)
           this.comment = ""; // 댓글 등록 후 폼 초기화
