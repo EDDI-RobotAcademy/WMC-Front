@@ -25,8 +25,6 @@ import ReviewPage from '@/views/review/ReviewPage.vue';
 import QuestionBoardReadPage from '@/views/questionBoard/QuestionBoardReadPage.vue'
 
 
-import QuestionBoardReadPage from '@/views/questionBoard/QuestionBoardReadPage.vue'
-
 
 function checkManagerAuthority(to, from, next) {
   const isManager = localStorage.getItem('authorityName') === 'MANAGER';
