@@ -26,7 +26,6 @@ export default {
             await this.$router.push({
                 name: 'QuestionBoardListPage'
             })
-            
         }
     }
 }
