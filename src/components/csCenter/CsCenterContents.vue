@@ -29,9 +29,10 @@
               </li>
 
               <li>
-                <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
-                <span>추가할것</span>
+                <router-link to="/question-board" class="no_underline" style="color: black;">Q&A</router-link>
+                <span>Q&A</span>
               </li>
+  
 
               <li>
                 <router-link to="#" class="no_underline" style="color: black;">addcontent</router-link>
