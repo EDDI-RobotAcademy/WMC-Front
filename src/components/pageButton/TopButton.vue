@@ -1,5 +1,7 @@
 <template>
-  <a href="#" class="btn_gotop" ref="btnGotop" @click.prevent="scrollTop">TOP</a>
+  <a href="#" class="btn_gotop" ref="btnGotop" @click.prevent="scrollTop">
+    <span class="arrow-up"></span>
+  </a>
 </template>
 
 <script>
@@ -31,26 +33,43 @@ export default {
 
 <style>
 .btn_gotop {
- position: fixed;
- bottom: 30px;
- right: 30px;
- z-index: 999;
- border: 1px solid #ccc;
- outline: none;
- background-color: white;
- color: #333;
- cursor: pointer;
- padding: 15px 20px;
- border-radius: 100%;
- transition: opacity 0.3s ease-in-out;
- opacity: 0;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.arrow-up {
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
 }
 
 .btn_gotop.show {
- opacity: 1;
+  opacity: 1;
 }
 
 .btn_gotop:hover {
- background-color: #555;
+  background-color: #555;
+}
+
+.btn_gotop:hover .arrow-up {
+  border-color: white;
 }
 </style>
