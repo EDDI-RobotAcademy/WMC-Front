@@ -29,9 +29,12 @@
               </li>
               
               <li>
+
                 <router-link to="/question-board" class="no_underline">Q & A</router-link>
                 <span>문의하기</span>
+
               </li>
+  
 
               <li>
                 <router-link to="/my-page" class="no_underline">Mypage</router-link>

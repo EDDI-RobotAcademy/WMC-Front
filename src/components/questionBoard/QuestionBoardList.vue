@@ -27,7 +27,7 @@
               {{ questionBoard.questionCategoryType }}
             </td>
             <td align="left">
-              <router-link :to="{ name: 'QuestionReadPage',params: { questionBoardId: questionBoard.questionBoardId.toString() }}"
+              <router-link :to="{ name: 'QuestionBoardReadPage',params: { questionBoardId: questionBoard.questionBoardId.toString() }}"
               style="color: black; text-decoration: none">
                 <div v-if="isLogin == false" @click.prevent="readAccess">
                   {{ questionBoard.title }}
@@ -131,3 +131,4 @@
   
   
   </style>
+

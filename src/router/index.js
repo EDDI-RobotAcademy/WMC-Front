@@ -22,6 +22,7 @@ import SalesGraph from '@/views/managerPage/SalesGraph.vue';
 import ProductsSearchView from '@/views/product/ProductsSearchView.vue';
 import MapStoreView from '@/views/storeMap/MapStoreView.vue';
 import ReviewPage from '@/views/review/ReviewPage.vue';
+import QuestionBoardReadPage from '@/views/questionBoard/QuestionBoardReadPage.vue'
 
 
 
@@ -117,6 +118,16 @@ const routes = [
     component: ProductDetailPage,
   },
   {
+    path: '/question/:questionBoardId',
+    name: 'QuestionBoardReadPage',
+    components: { 
+      default: QuestionBoardReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
     path: '/product/listByCategory/:categoryId',
     name: 'ProductListByCategoryPage',
     component: () => import('@/views/product/ProductListByCategoryPage.vue'),
@@ -171,3 +182,4 @@ const router = new VueRouter({
 });
 
 export default router;
+

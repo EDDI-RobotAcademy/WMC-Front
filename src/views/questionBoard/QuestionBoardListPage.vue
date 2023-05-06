@@ -24,7 +24,7 @@
                 @click="registerAccess"/>
             <template>
               <v-dialog v-model="showRegisterBoard" max-width="1000">
-                <register-question-board-form/>
+                <register-question-board-form />
               </v-dialog>
             </template>
           </div>
