@@ -26,6 +26,8 @@ import QuestionBoardReadPage from '@/views/questionBoard/QuestionBoardReadPage.v
 
 
 
+Vue.use(VueRouter);
+
 function checkManagerAuthority(to, from, next) {
   const isManager = localStorage.getItem('authorityName') === 'MANAGER';
 
@@ -111,17 +113,6 @@ const routes = [
     component: QuestionBoardRegisterPage,
   },
   {
-    path: '/question/:questionBoardId',
-    name: 'QuestionBoardReadPage',
-    components: { 
-      default: QuestionBoardReadPage
-    },
-    props: {
-      default: true
-    }
-  },
-
-  {
     path: '/product/detail/:productId',
     name: 'ProductDetailPage',
     component: ProductDetailPage,
@@ -191,3 +182,4 @@ const router = new VueRouter({
 });
 
 export default router;
+
