@@ -18,7 +18,8 @@
         <!--managerCheck-->
         <v-btn
       
-          type="submit">
+        class="submit-button"
+        type="submit">
               등록
           </v-btn>
       </div>
@@ -58,16 +59,21 @@ export default {
         console.log("작성자 : " + this.writer)
         this.comment = ""; // 댓글 등록 후 폼 초기화
         this.writer = "";
-        this.$router.push(`/question/${questionBoardId}`)
+        //this.$router.push(`/question/${this.questionBoard.questionBoardId}`)
+        await this.$router.push({
+            name: 'QuestionBoardReadPage', params: { questionBoardId: questionBoardId }
+        })
         
       },
     },
 
-    created() {
+
+    created() { 
         if(JSON.parse(localStorage.getItem('userInfo'))) {
             //this.commentWriter = JSON.parse(localStorage.getItem('userInfo')).nickName,
             this.memberId = JSON.parse(localStorage.getItem('userInfo')).id
         }
+        this.questionBoardId = this.questionBoard.questionBoardId; // questionBoardId 초기화
     },
 
   };
@@ -78,5 +84,14 @@ export default {
 <style scoped>
 .comment-register-form {
   margin: 20px 0;
+  position: relative;
+  display: inline-block;
+
+}
+.submit-button {
+position: absolute;
+right: 0;
+bottom: 0;
+font-size: small;
 }
 </style>

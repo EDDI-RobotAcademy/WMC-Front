@@ -97,6 +97,18 @@ export default {
     },
 
 
+    requestQuestionCommentDeleteToSpring({}, payload) {
+      const { questionCommentId } = payload
+      return axiosInst.delete(`/questionBoard/comment/${questionCommentId}`)
+          .then(() => {
+              alert("댓글 삭제 성공!");
+          })
+          .catch(() => {
+              alert("문제 발생!");
+          });
+    },
+
+  
       
 };
 

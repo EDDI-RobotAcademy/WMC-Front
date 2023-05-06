@@ -100,32 +100,16 @@ export default {
     
 */
 
-/*
     async onSubmit( payload ){
-        const { writer, comment } = payload
+        const { writer, comment, questionCommentId } = payload
         const questionBoardId = this.questionBoardId;
         console.log("댓글 등록할 boardId:" + questionBoardId)
         console.log('댓글 내용 확인 :' + comment)
         console.log('작성자 :' + writer)
-        const self = this;  // this를 self에 할당
-        await this.requestQuestionCommentRegisterToSpring( { writer, comment, questionBoardId } )
-        await self.$router.push({  // self를 사용하여 $route 객체에 접근
-            name: 'QuestionCommentRegisterForm', params: { questionBoardId: self.questionBoardId }
-        })
-    },
-*/
-
-    async onSubmit( payload ){
-        const { writer, comment } = payload
-        const questionBoardId = this.questionBoardId;
-        console.log("댓글 등록할 boardId:" + questionBoardId)
-        console.log('댓글 내용 확인 :' + comment)
-        console.log('작성자 :' + writer)
-        await this.requestQuestionCommentRegisterToSpring( { writer, comment, questionBoardId } )
-        await this.$router.push({
-            name: 'QuestionBoardReadPage', params: { questionBoardId: questionBoard.questionBoardId }
-        })
-        this.questionComments.push(payload);
+        await this.requestQuestionCommentRegisterToSpring( { writer, comment, questionBoardId, questionCommentId } );
+        await this.requestQuestionCommentListFromSpring(this.questionBoardId);
+        //this.questionComments.push(payload);
+        
     },
     
 },
