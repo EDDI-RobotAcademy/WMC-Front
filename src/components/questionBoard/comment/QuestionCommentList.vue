@@ -36,7 +36,8 @@
 <script>
 
 import {mapActions, mapState} from "vuex";
-import axiosInst from '@/utility/axiosObject'
+
+import mainRequest from '@/api/mainRequest';
 //import ModifyQuestionCommentForm from "@/components/boards/comment/ModifyQuestionCommentForm";
 
 
@@ -100,7 +101,7 @@ export default {
     async deleteQuestionComment(payload) {
       const { questionCommentId } = payload
       console.log("questionCommentId : " + questionCommentId)
-      return axiosInst.delete(`/questionBoard/comment/${questionCommentId}`)
+      return mainRequest.delete(`/questionBoard/comment/${questionCommentId}`)
           .then(() => {
               alert("댓글 삭제 성공!");
               location.reload();
