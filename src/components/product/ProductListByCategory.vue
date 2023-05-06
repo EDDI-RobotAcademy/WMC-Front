@@ -2,6 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
+        <v-select v-model="Filter" :items="filterOptions" label="Filter" @change="filterProducts"></v-select>
         <router-link to="/product-register-page">
           <v-btn v-if="authorityName === 'MANAGER'" color="#a1887f" outlined
             >상품 등록 하러가기</v-btn
@@ -34,19 +35,10 @@
             <v-img
               :src="product.firstPhoto ? getImagePath(product.firstPhoto) : ''"
               aspect-ratio="1"
-              class="grey lighten-2"
             ></v-img>
-
             <v-card-title>{{ product.name }}</v-card-title>
             <v-card-text>{{ product.description }}</v-card-text>
             <v-card-subtitle>{{ product.price }}₩</v-card-subtitle>
-            <!-- <v-card-actions>
-              <div @click.stop>
-                <v-btn small color="#a1887f" @click="addToCart(product)"
-                  >장바구니에 담기</v-btn
-                >
-              </div>
-            </v-card-actions> -->
           </v-card>
         </router-link>
       </v-col>
@@ -57,7 +49,7 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import { mapState } from 'vuex';
-import axios from 'axios';
+import AWS from 'aws-sdk';
 
 export default {
   name: 'ProductList',
@@ -75,6 +67,18 @@ export default {
       memberId: localStorage.getItem('memberId'),
       authorityName: localStorage.getItem('authorityName'),
       cart: [],
+      Filter: 'none',
+      filterOptions: [
+        '판매량순',
+        '낮은가격순',
+        '높은가격순',
+        '신상품(재입고)순',
+        '등록일순',
+      ],
+      awsBucketName: 'wmc-s3-bucket',
+      awsBucketRegion: 'ap-northeast-2',
+      awsIdentityPoolId: 'ap-northeast-2:8de0e190-db24-44d8-88b5-2e897cd0af39',
+      awsFileList: [],
     };
   },
 
@@ -104,48 +108,75 @@ export default {
       });
     },
 
-    addToCart(product, quantity = 1) {
-      if (!this.isAuthenticated) {
-        alert('로그인 먼저 하세용^_^');
-        this.$router.push('/sign-in');
-        return;
-      }
-
-      if (this.memberId && this.authorityName) {
-        const cartKey = `cart_${this.memberId}`;
-        let cart = localStorage.getItem(cartKey);
-        if (!cart) {
-          cart = [];
-        } else {
-          cart = JSON.parse(cart);
-        }
-
-        const existingCartItem = cart.find(
-          (item) => item.productId === product.productId
-        );
-
-        if (existingCartItem) {
-          existingCartItem.quantity += quantity;
-        } else {
-          cart.push({
-            productId: product.productId,
-            name: product.name,
-            image: product.firstPhoto
-              ? this.getImagePath(product.firstPhoto)
-              : '',
-            price: product.price,
-            quantity,
-          });
-        }
-
-        localStorage.setItem(cartKey, JSON.stringify(cart));
-        console.log('Cart:', cart);
-        alert('장바구니에 추가되었습니다!');
-      }
-    },
     getImagePath(imageData) {
-      console.log('imageData:', imageData);
-      return require(`@/${imageData}`);
+      const s3BucketBaseUrl =
+        'https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com';
+      const imageURL = `${s3BucketBaseUrl}/${imageData}`;
+      console.log('Image URL:', imageURL);
+      return imageURL;
+    },
+
+    awsS3Config(callback) {
+      AWS.config.update({ region: this.awsBucketRegion });
+
+      const cognitoCredentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: this.awsIdentityPoolId,
+      });
+
+      cognitoCredentials.get((err) => {
+        if (err) {
+          console.log('Error fetching credentials:', err);
+          return;
+        }
+
+        AWS.config.credentials = cognitoCredentials;
+
+        this.s3 = new AWS.S3({
+          apiVersion: '2006-03-01',
+          params: {
+            Bucket: this.awsBucketName,
+          },
+        });
+
+        console.log('Credentials: ', AWS.config.credentials);
+
+        if (callback) {
+          callback();
+        }
+      });
+    },
+    getAwsS3Files() {
+      this.awsS3Config(() => {
+        let res = this.s3.listObjects(
+          {
+            Delimiter: '/',
+            MaxKeys: 1,
+          },
+          (err, data) => {
+            if (err) {
+              return alert('AWS 버킷내에 문제가 있습니다: ' + err.message);
+            } else {
+              this.awsFileList = data.Contents;
+              console.log('s3 리스트: ', data);
+              this.startAfterAwsS3Bucket = data.NextMarker;
+            }
+          }
+        );
+      });
+    },
+
+    filterProducts() {
+      if (this.Filter === '판매량순') {
+        this.products.sort((a, b) => b.quantity - a.quantity);
+      } else if (this.Filter === '낮은가격순') {
+        this.products.sort((a, b) => a.price - b.price);
+      } else if (this.Filter === '높은가격순') {
+        this.products.sort((a, b) => b.price - a.price);
+      } else if (this.Filter === '신상품(재입고)순') {
+        this.products.sort((a, b) => new Date(b.updDate) - new Date(a.updDate));
+      } else if (this.Filter === '등록일순') {
+        this.products.sort((a, b) => new Date(a.regDate) - new Date(b.regDate));
+      }
     },
   },
 };

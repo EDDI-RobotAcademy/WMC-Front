@@ -78,6 +78,8 @@
 
 <script>
 import axios from 'axios';
+import mainRequest from '@/api/mainRequest';
+
 export default {
   data() {
     return {
@@ -89,7 +91,7 @@ export default {
   },
   created() {
     const token = JSON.parse(localStorage.getItem('userInfo'));
-    axios.post('http://localhost:7777/cart/validate', token).then((res) => {
+    mainRequest.post('/cart/validate', token).then((res) => {
       if (res.data) {
         console.log('인증된 사용자 입니다.');
         const [memberId, authorityName] = res.data.split(':');
@@ -125,9 +127,10 @@ export default {
           orderItems: orderItems,
           token: JSON.parse(localStorage.getItem('userInfo')),
         };
-        const response = await axios.post(
-          'http://localhost:7777/order/kakaoPay',
-          requestBody
+        const response = await mainRequest.post(
+          '/order/kakaoPay',
+          requestBody,
+          { timeout: 5000 }
         );
         console.log(response.data);
         const box = response.data.next_redirect_pc_url;
@@ -135,6 +138,23 @@ export default {
         this.removeSelectedItems();
       } catch (error) {
         console.error('Error processing KakaoPay:', error);
+        if (error.response && error.response.data) {
+          console.log('Error data:', error.response.data);
+          // Check the logged error data object and find the property that contains the error message
+          const errorMessage = error.response.data.error;
+          if (
+            errorMessage &&
+            errorMessage.includes('관리자는 주문할 수 없습니다')
+          ) {
+            alert('관리자는 주문할 수 없습니다.');
+          } else if (errorMessage && errorMessage.includes('재고가')) {
+            alert('재고가 부족합니다. 다시 시도해주세요.');
+          } else {
+            alert('에러 발생. 다시 시도해주세요');
+          }
+        } else {
+          alert('에러 발생. 다시 시도해주세요');
+        }
       }
     },
 
