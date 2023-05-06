@@ -3,17 +3,18 @@
       <div id="question-board">
         <h1>상품 Q&A</h1>
         <br/>
-        <question-board-list :questionBoards="questionBoards"/> <!-- 중요 : 앞하고 뒤 무조건 소문자로 시작 -->
+        <question-board-list 
+        :questionBoards="questionBoards"/> <!-- 중요 : 앞하고 뒤 무조건 소문자로 시작 -->
       </div>
       <br/>
       <div style="float: right">
         <router-link :to="{ name: 'QuestionBoardRegisterPage' }">
           <v-btn class="green white--text" rounded depressed small
                  v-if="isLogin == false" @click.prevent="registerAccess">
-            게시물 작성
+            작성하기
           </v-btn>
           <v-btn class="green white--text" rounded depressed small v-else>
-            게시글 작성
+            작성하기
           </v-btn>
         </router-link>
         <!--<div style="float: right" class="mr-5 mb-15" v-if="!this.$store.state.resMember.managerCheck">-->
@@ -45,6 +46,17 @@
         QuestionBoardList,
        //RegisterQuestionBoardForm,
     },
+    props: {
+      questionCategoryId: {
+        type: Number,
+        require: true,
+      },
+    },
+    watch: {
+      $route(to, from){
+        this.requestQuestionBoardListToSpring(to.params.questionCategoryId);
+      },
+    },
     computed: {
       ...mapState(questionModule, [
         'questionBoards'
@@ -57,13 +69,15 @@
       }
     },
     mounted() {
-      this.requestQuestionBoardListToSpring()
+      this.requestQuestionBoardListToSpring(this.questionCategoryId);
       if (this.$store.state.isAuthenticated != false) {
         this.isLogin = true
       } else {
         this.isLogin = false
       }
+      
     },
+    
     methods: {
       registerAccess() {
         if(this.isLogin == false) {
@@ -74,7 +88,8 @@
         }
       },
       ...mapActions(questionModule,[
-        'requestQuestionBoardListToSpring'
+        'requestQuestionBoardListToSpring',
+        'requestQuestionBoardByCategory',
       ])
     }
   }

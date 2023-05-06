@@ -24,8 +24,8 @@ import MapStoreView from '@/views/storeMap/MapStoreView.vue';
 import ReviewPage from '@/views/review/ReviewPage.vue';
 
 
+import QuestionBoardReadPage from '@/views/questionBoard/QuestionBoardReadPage.vue'
 
-Vue.use(VueRouter);
 
 function checkManagerAuthority(to, from, next) {
   const isManager = localStorage.getItem('authorityName') === 'MANAGER';
@@ -111,6 +111,17 @@ const routes = [
     name: 'QuestionBoardRegisterPage',
     component: QuestionBoardRegisterPage,
   },
+  {
+    path: '/question/:questionBoardId',
+    name: 'QuestionBoardReadPage',
+    components: { 
+      default: QuestionBoardReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+
   {
     path: '/product/detail/:productId',
     name: 'ProductDetailPage',
