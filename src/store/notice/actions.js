@@ -4,24 +4,23 @@ import {
 } from'./mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
 
   requestCreateNoticeToSpring({}, payload) {
-    const { title, writer, content, files } = payload;
-    let formData = new FormData();
-    formData.append('title', title);
-    formData.append('writer', writer);
-    formData.append('content', content);
-    for (let idx = 0; idx < files.length; idx++) {
-      formData.append('fileList[' + idx + ']', files[idx]);
-    }
-    return axiosInst
-      .post('http://localhost:7777/notice/register', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
+    const { title, writer, content, fileNames } = payload;
+
+    const noticeData = {
+      title,
+      writer,
+      content,
+      fileNames,
+    };
+
+    return mainRequest
+      .post('/notice/register', noticeData)
       .then(() => {
         alert('공지사항 등록 성공!');
       })
@@ -31,21 +30,21 @@ export default {
   },
 
       requestNoticeListToSpring({ commit }) {
-        return axiosInst.get('http://localhost:7777/notice/list')
+        return mainRequest.get('/notice/list')
           .then((res) => {
             commit(REQUEST_NOTICE_LIST_TO_SPRING, res.data)
           })
       },
 
       requestNoticeToSpring ({ commit }, noticeId) {
-        return axiosInst.get(`http://localhost:7777/notice/${noticeId}`)
+        return mainRequest.get(`/notice/${noticeId}`)
           .then((res) => {
             commit(REQUEST_NOTICE_TO_SPRING, res.data)
           })
       },
 
       requestDeleteNoticeToSpring({}, noticeId) {
-        return axiosInst.delete(`http://localhost:7777/notice/${noticeId}`)
+        return mainRequest.delete(`/notice/delete/${noticeId}`)
             .then(() => {
                 alert("공지사항 삭제 성공!");
             })
@@ -63,8 +62,8 @@ export default {
         for (let idx = 0; idx < files.length; idx++) {
           formData.append('fileList[' + idx + ']', files[idx]);
         }
-        return axiosInst
-          .put(`http://localhost:7777/notice/modify/${noticeId}`, formData, {
+        return mainRequest
+          .put(`/notice/modify/${noticeId}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

@@ -3,7 +3,7 @@
     <v-app-bar
       flat
       color="rgba(255,255,255,0.5)"
-      class="flex-grow-0"
+      class="flex-grow-0 scrollable-nav"
       height="50"
       app
     >
@@ -62,67 +62,100 @@
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="리뷰"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
           >
             <span>REVIEW</span>
-          </button>
+        </router-link>
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name: 'MapStoreView',
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="스토어"
-            onclick="location.href='http://localhost:8080/#/product-list-page'">
+          >
             <span>STORE</span>
-          </button>
+        </router-link>
         </div>
 
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="브랜드"
-            onclick="location.href='http://localhost:8080/#/product-list-page'">
+          >
             <span>BRAND</span>
-          </button>
+        </router-link>
         </div>
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'ProductListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="아카이브"
-            onclick="location.href='http://localhost:8080/#/product-list-page'"
           >
             <span>ARCHIVE</span>
-          </button>
+        </router-link>
         </div>
       </v-spacer>
 
       <div class="right-box">
         <div class="dropdown">
-          <button
+          <router-link
+          :to="{
+            name:'NoticeListPage'
+          }"
+            tag="button"
             class="button"
             type="button"
             data-hover="고객센터"
-            onclick="location.href='http://localhost:8080/#/notice-list'"
           >
             <span>CS CENTER</span>
-          </button>
-        
+        </router-link>
         </div>
         <div class="nav-util">
-          <v-icon> mdi-magnify</v-icon>
+          <div v-if="showSearch">
+            <v-text-field
+              v-model="keyword"
+              ref="keyword"
+              label="검색어를 입력해주세요"
+              type="text"
+              color="gray"
+              append-icon="mdi-magnify"
+              @click:append="search"
+              class="search-input"
+            />
+          </div>
+          <div v-else>
+            <v-btn large elevation="0" text @click="btnSearch">
+              <v-icon> mdi-magnify</v-icon>
+            </v-btn>
+          </div>
           <button
             class="right-btn"
             large
             elevation="0"
             text
-            @click="goCartPage">
+            @click="goCartPage"
+          >
             <v-icon> mdi-cart-outline</v-icon>
           </button>
         </div>
@@ -131,7 +164,7 @@
           v-if="isAuthenticated == false"
           text
           color="black"
-          onclick="location.href='http://localhost:8080/#/sign-in'"
+          onclick="location.href='/#/sign-in'"
         >
           <span>로그인</span>
         </button>
@@ -142,7 +175,6 @@
             text
             color="black"
             v-on:click="logout"
-            onclick="location.href='http://localhost:8080/#/'"
           >
             <span>로그아웃</span>
           </button>
@@ -152,18 +184,27 @@
             v-if="isAuthenticated == false"
             text
             color="black"
-            onclick="location.href='http://localhost:8080/#/sign-up'"
+            onclick="location.href='/#/sign-up'"
           >
             <span>회원가입</span>
           </button>
           <button
             class="right-btn"
-            v-if="isAuthenticated == true"
+            v-if="isAuthenticated && !isManager"
             text
             color="grey"
-            onclick="location.href='http://localhost:8080/#/my-page-view'"
+            onclick="location.href='/#/my-page-view'"
           >
             <span>마이페이지</span>
+          </button>
+          <button
+            class="right-btn"
+            v-if="isAuthenticated && isManager"
+            text
+            color="grey"
+            onclick="location.href='/#/manager-page-view'"
+          >
+            <span>관리자 페이지</span>
           </button>
         </div>
       </div>
@@ -172,14 +213,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import axios from 'axios';
+import { mapState, mapActions } from 'vuex';
+import mainRequest from '@/api/mainRequest';
+
+const productModule = 'productModule';
+
 export default {
   name: 'NavigationMenuPage',
   data() {
     return {
+      showSearch: false,
+      keyword: '',
       isTrue: false,
       navigation_drawer: false,
+      authorityName: localStorage.getItem('authorityName'),
       isNavHidden: false,
       links: [
         { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
@@ -201,7 +248,7 @@ export default {
   components: {},
 
   computed: {
-    ...mapState(['isAuthenticated']),
+    ...mapState(['isAuthenticated', 'isManager']),
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
@@ -211,8 +258,17 @@ export default {
     } else {
       this.$store.state.isAuthenticated = false;
     }
+    if (
+      localStorage.getItem('userInfo') &&
+      localStorage.getItem('authorityName').includes('MANAGER')
+    ) {
+      this.$store.state.isManager = true;
+    } else {
+      this.$store.state.isManager = false;
+    }
   },
   methods: {
+    ...mapActions(productModule, ['requestProductsToSpring']),
     async fetchProductsByCategory(categoryId) {
       try {
         this.$router.push({
@@ -237,12 +293,13 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token + ', length: ' + token.length);
-      axios.post('http://localhost:7777/member/logout', token).then(() => {
+      mainRequest.post('/member/logout', token).then(() => {
         alert('로그아웃 완료');
         localStorage.removeItem('userInfo');
         localStorage.removeItem('memberId');
         localStorage.removeItem('authorityName');
         this.$store.state.isAuthenticated = false;
+        this.$store.state.isManager = false;
       });
     },
     resign() {
@@ -251,7 +308,7 @@ export default {
       console.log('token: ' + token + ', length: ' + length);
       token = token.substr(1, length - 2);
       console.log('token: ' + token);
-      axios.post('http://localhost:7777/member/resign', token).then(() => {
+      mainRequest.post('/member/resign', token).then(() => {
         alert('회원탈퇴 완료');
         localStorage.removeItem('userInfo');
         this.$store.state.isAuthenticated = false;
@@ -259,9 +316,22 @@ export default {
     },
     goCartPage() {
       if (this.$router.currentRoute.path !== '/cart') {
-      this.$router.push({ name: 'CartView' });
-      this.showSearch = false;
+        this.$router.push({ name: 'CartView' });
+        this.showSearch = false;
       }
+    },
+    btnSearch() {
+      this.showSearch = true;
+      this.$router.push('/product-search');
+    },
+    btnNoSearch() {
+      this.showSearch = false;
+    },
+    async search() {
+      const keyword = this.$refs.keyword.value;
+      await this.requestProductsToSpring(keyword);
+      this.$router.push('/product-search');
+
     },
   },
 };
@@ -441,4 +511,37 @@ export default {
 /* 
 We hide :before pseudo-element on :active
 */
+.scrollable-nav {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.scrollable-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-nav {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.nav-util .search-input {
+    width: 200px;
+    margin: auto;
+  }
+@media screen and (max-width: 768px) {
+  .scrollable-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .scrollable-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollable-nav {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+}
 </style>

@@ -7,6 +7,8 @@ import {
 } from'./mutation-types'
 
 import axiosInst from '@/utility/axiosObject'
+import mainRequest from "@/api/mainRequest";
+
 
 export default {
 
@@ -20,8 +22,8 @@ export default {
         for (let idx = 0; idx < files.length; idx++) {
           formData.append('fileList[' + idx + ']', files[idx])
         }
-        return axiosInst
-          .post('http://localhost:7777/questionBoard/register', formData, {
+        return mainRequest
+          .post('/questionBoard/register', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -36,7 +38,7 @@ export default {
     
       requestQuestionBoardListToSpring ({ commit }) {
         console.log('requestQuestionBoardListToSpring()')
-        return axiosInst.get('http://localhost:7777/questionBoard/list')
+        return mainRequest.get('/questionBoard/list')
             .then((res) => {
                 commit(REQUEST_QUESTION_BOARD_LIST_TO_SPRING, res.data)
             })

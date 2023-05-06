@@ -2,7 +2,9 @@ import {
   REQUEST_PRODUCT_LIST_TO_SPRING,
   REQUEST_PRODUCT_ITEM_LIST_TO_SPRING,
   REQUEST_MAIN_PRODUCT_LIST_TO_SPRING,
-  REQUEST_PRODUCT_LIST_BY_CATEGORY
+  REQUEST_PRODUCT_LIST_BY_CATEGORY,
+  REQUEST_MOST_SOLD_PRODUCT_LIST,
+  REQUEST_SEARCH_RESULTS,
 } from './mutation-types'
 
 export default {
@@ -50,6 +52,27 @@ export default {
       imageDataList: productResponse.imageDataList
     }))
   },
-  
+  [REQUEST_MOST_SOLD_PRODUCT_LIST] (state, passingData) {
+    if (!passingData) {
+      console.error('REQUEST_MOST_SOLD_PRODUCT_LIST IS UNDEFINED')
+      return
+    }
+
+    state.mostSoldProducts = passingData.map(productResponse => ({
+      ...productResponse,
+      imageDataList: productResponse.imageDataList
+    }))
+  },
+  [REQUEST_SEARCH_RESULTS] (state, passingData) {
+    if (!passingData) {
+      console.error('REQUEST_MOST_SOLD_PRODUCT_LIST IS UNDEFINED')
+      return
+    }
+
+    state.searchResults = passingData.map(productResponse => ({
+      ...productResponse,
+      imageDataList: productResponse.imageDataList
+    }))
+  },
 
 }
