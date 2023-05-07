@@ -22,9 +22,10 @@ export default {
         alert('문제 발생!');
       });
   },
-  requestReviewListToSpring({ commit }) {
+  requestReviewListToSpring({ commit }, productId) {
     console.log('requestReviewListToSpring()');
-    return mainRequest.get('/review/list').then((res) => {
+    console.log(productId);
+    return mainRequest.get(`/review/list/${productId}`).then((res) => {
       commit(REQUEST_REVIEW_LIST_TO_SPRING, res.data);
     });
   },

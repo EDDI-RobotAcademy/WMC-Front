@@ -126,12 +126,18 @@ export default {
     fileNames: this.fileNames,
   };
   console.log(payload);
-  this.requestCreateReviewToSpring(payload)
+  this.uploadMultipleFilesToS3(this.files)
     .then(() => {
-      this.dialog = false;
+      this.requestCreateReviewToSpring(payload)
+        .then(() => {
+          this.dialog = false;
+        })
+        .catch(() => {
+          console.error('Error submitting the review.');
+        });
     })
-    .catch(() => {
-      console.error('Error submitting the review.');
+    .catch((err) => {
+      console.error('Error uploading files to S3:', err);
     });
 },
 
