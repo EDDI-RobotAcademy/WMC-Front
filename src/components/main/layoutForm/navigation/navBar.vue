@@ -61,20 +61,21 @@
           </router-link>
         </div>
 
+        
         <div class="dropdown">
           <router-link
           :to="{
             name:'ProductListPage'
           }"
-            tag="button"
-            class="button"
+          tag="button"
+          class="button"
             type="button"
-            data-hover="리뷰"
+            data-hover="전체상품"
           >
-            <span>REVIEW</span>
+            <span>PRODUCT</span>
         </router-link>
         </div>
-
+        
         <div class="dropdown">
           <router-link
           :to="{
@@ -86,20 +87,6 @@
             data-hover="스토어"
           >
             <span>STORE</span>
-        </router-link>
-        </div>
-
-        <div class="dropdown">
-          <router-link
-          :to="{
-            name:'ProductListPage'
-          }"
-            tag="button"
-            class="button"
-            type="button"
-            data-hover="전체상품"
-          >
-            <span>PRODUCT</span>
         </router-link>
         </div>
       </v-spacer>
