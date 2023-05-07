@@ -37,7 +37,18 @@
           <v-card-text>{{ stockStatus }}</v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
-            <v-btn small color="primary" outlined>Like</v-btn>
+            <v-btn
+              @click="
+                liked
+                  ? unlikeProduct(product.productId)
+                  : likeProduct(product.productId)
+              "
+              small
+              color="primary"
+              :outlined="!liked"
+              >{{ liked ? 'Unlike' : 'Like' }}</v-btn
+            >
+
             <v-spacer></v-spacer>
             <v-btn
               v-if="product.stock > 0"
@@ -57,19 +68,18 @@
 
 <script>
 import { mapState } from 'vuex';
-import ReviewList from '@/components/review/ReviewList.vue'
-import ReviewDetailDialog from '@/components/review/ReviewDetailDialog.vue'
-
-
+import ReviewList from '@/components/review/ReviewList.vue';
+import ReviewDetailDialog from '@/components/review/ReviewDetailDialog.vue';
+import mainRequest from '@/api/mainRequest';
 
 export default {
   components: {
     ReviewList,
-    ReviewDetailDialog
-
+    ReviewDetailDialog,
   },
   props: {
     product: Object,
+    liked: Boolean,
   },
   data() {
     return {
@@ -84,6 +94,14 @@ export default {
   },
   computed: {
     ...mapState(['isAuthenticated']),
+    isLiked: {
+      get() {
+        return this.liked;
+      },
+      set(value) {
+        this.$emit('update:liked', value);
+      }
+    },
     stockStatus() {
       if (this.product.stock <= 0) {
         return 'Out of stock';
@@ -124,6 +142,53 @@ export default {
     changeMainImage(image) {
       this.mainImage = image;
     },
+    async likeProduct(productId) {
+      if (!this.isAuthenticated) {
+        alert('로그인 먼저 하세용^_^');
+        this.$router.push('/sign-in');
+        return;
+      }
+
+      if (this.memberId && this.authorityName) {
+        const userInfo = localStorage.getItem('userInfo');
+        if (!userInfo) {
+          alert('사용자 정보를 찾을 수 없습니다');
+          return;
+        }
+
+        const token = JSON.parse(userInfo);
+
+        try {
+          const response = await mainRequest.post(
+            '/member/like',
+            {
+              token: token,
+              productId: productId,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (response.status === 200) {
+            this.liked = !this.liked;
+            alert('좋아요를 눌렀습니다!');
+          } else {
+            alert('좋아요 처리에 실패했습니다. 다시 시도해주세요.');
+          }
+        } catch (error) {
+          console.error('Error while liking product:', error);
+          alert('좋아요 처리에 실패했습니다. 다시 시도해주세요.');
+        }
+      } else {
+        console.log('not added');
+        console.log(this.memberId);
+        console.log(this.authorityName);
+      }
+    },
+
     addToCart(product, quantity = 1) {
       if (!this.isAuthenticated) {
         alert('로그인 먼저 하세용^_^');
@@ -165,6 +230,52 @@ export default {
         alert('장바구니에 추가되었습니다!');
       } else {
         console.log('not added');
+        console.log(this.memberId);
+        console.log(this.authorityName);
+      }
+    },
+    async unlikeProduct(productId) {
+      if (!this.isAuthenticated) {
+        alert('로그인 먼저 하세용^_^');
+        this.$router.push('/sign-in');
+        return;
+      }
+
+      if (this.memberId && this.authorityName) {
+        const userInfo = localStorage.getItem('userInfo');
+        if (!userInfo) {
+          alert('사용자 정보를 찾을 수 없습니다');
+          return;
+        }
+
+        const token = JSON.parse(userInfo);
+
+        try {
+          const response = await mainRequest.post(
+            '/member/unlike',
+            {
+              token: token,
+              productId: productId,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (response.status === 200) {
+            this.liked = !this.liked;
+            alert('좋아요를 취소했습니다!');
+          } else {
+            alert('좋아요 취소 처리에 실패했습니다. 다시 시도해주세요.');
+          }
+        } catch (error) {
+          console.error('Error while unliking product:', error);
+          alert('좋아요 취소 처리에 실패했습니다. 다시 시도해주세요.');
+        }
+      } else {
+        console.log('not removed');
         console.log(this.memberId);
         console.log(this.authorityName);
       }

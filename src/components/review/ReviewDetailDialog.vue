@@ -1,12 +1,12 @@
 <template>
   <div width="100%" heigh="100hv">
-    <div class="flex-container ">
+    <div class="flex-container">
       <div class="photo-container">
         <div class="pre">
-          <button class="prev-button" @click="prevImage">〈</button> 
+          <button class="prev-button" @click="prevImage">〈</button>
         </div>
         <div class="image">
-          <img class="photo" :src="photoUrl" alt="photo">
+          <img class="photo" :src="photoUrl" alt="photo" />
           <div class="thumbnails">
             <img
               v-for="(thumbnailUrl, index) in thumbnailUrls"
@@ -15,22 +15,22 @@
               :src="thumbnailUrl"
               @click="selectImage(index)"
             />
-         </div>
-         </div>
+          </div>
+        </div>
         <div class="next">
-          <button class="next-button" @click="nextImage">〉</button> 
+          <button class="next-button" @click="nextImage">〉</button>
         </div>
       </div>
       <div class="left">
       <div class="review-container">
-        <div class="productName">productName</div>
-        <div class="productImg">productImg</div>
-        <div class="reviewcount">reviewcount</div>
-        <div class="rating">rating</div>
-        <div class="date">date</div>
-        <div class="writer">writer</div>
-        <div class="content">content</div>
-        <div class="comment">comment</div>
+        <div class="productName">{{ selectedReview.productName }}</div>
+        <div class="productImg">{{selectedReview.firstPhoto}}</div>
+        <div class="reviewcount"><!-- Add review count here --></div>
+        <div class="rating">{{ selectedReview.rating }}</div>
+        <div class="date">{{ selectedReview.regDate }}</div>
+        <div class="writer">{{ selectedReview.username }}</div>
+        <div class="content">{{ selectedReview.content }}</div>
+        <div class="comment"><!-- Add comment section here --></div>
       </div>
       </div>
     </div>
@@ -39,18 +39,24 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
       thumbnailUrls: [
-        "https://assets2.cre.ma/p/caringlasses-com/reviews/00/00/01/18/38/image1/59d3d6b14b85032a.jpg",
-        "https://assets2.cre.ma/p/caringlasses-com/reviews/00/00/01/18/37/image1/b756a92523606065.jpg",
-        "https://assets2.cre.ma/p/caringlasses-com/reviews/00/00/01/18/36/image1/f501223f2ebbaa42.jpg",
+        'https://assets2.cre.ma/p/caringlasses-com/reviews/00/00/01/18/38/image1/59d3d6b14b85032a.jpg',
+        'https://assets2.cre.ma/p/caringlasses-com/reviews/00/00/01/18/37/image1/b756a92523606065.jpg',
+        'https://assets2.cre.ma/p/caringlasses-com/reviews/00/00/01/18/36/image1/f501223f2ebbaa42.jpg',
       ],
       currentImageIndex: 0,
     };
   },
+  props: {
+    selectedReview: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+
   methods: {
     prevImage() {
       if (this.currentImageIndex > 0) {
@@ -78,26 +84,24 @@ export default {
 };
 </script>
 
-
 <style scoped>
-
- .flex-container{
+.flex-container {
   justify-content: space-between;
   display: flex;
- } 
- .left{
+}
+.left {
   flex-grow: 1;
   background-color: black;
   align-items: stretch;
- }
-.photo-container{ 
+}
+.photo-container {
   display: flex;
   margin: 20px 20px 20px 20px;
 }
-.pre{
+.pre {
   float: left;
 }
- .prev-button{
+.prev-button {
   width: 100px;
   position: relative;
   top: 50%;
@@ -107,9 +111,8 @@ export default {
   font-size: 4vw;
   cursor: pointer;
   z-index: 1;
-  
 }
-.image{
+.image {
   flex-grow: 1;
   width: calc(100% - 200px);
   display: flex;
@@ -121,7 +124,7 @@ export default {
   height: auto;
   object-fit: contain;
 }
-.next{
+.next {
   float: right;
 }
 .next-button {
@@ -134,7 +137,6 @@ export default {
   font-size: 4vw;
   cursor: pointer;
   z-index: 1;
-
 }
 .thumbnails {
   bottom: 10%;
@@ -142,63 +144,61 @@ export default {
   align-items: center;
   width: 100%;
   position: absolute;
-} 
+}
 
- .thumbnail {
+.thumbnail {
   width: 100px;
   height: 100px;
   margin: 20px 5px;
   cursor: pointer;
 }
-.review-container{
+.review-container {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(10, minmax(100px, auto));
-  grid-template-areas:'productImg productName productName' 
-                      'productImg reviewcount  reviewcount '
-                      'rating rating date'
-                      'writer writer writer'
-                      'content content content'
-                      'content content content'
-                      'content content content'
-                      'content content content'
-                      'content content content'
-
-                      'comment comment comment';
-
+  grid-template-areas:
+    'productImg productName productName'
+    'productImg reviewcount  reviewcount '
+    'rating rating date'
+    'writer writer writer'
+    'content content content'
+    'content content content'
+    'content content content'
+    'content content content'
+    'content content content'
+    'comment comment comment';
 }
-.review-container > div{
+.review-container > div {
   background-color: white;
-  padding:00 00 00 00;
-  border: 1px solid black;
+  padding: 00 00 00 00;
+  border: 0.1px solid #d7d7d7;
   display: grid;
   justify-items: center;
   align-items: center;
-
 }
-.productImg{
+.productImg {
   grid-area: productImg;
 }
-.productName{
+.productName {
   grid-area: productName;
 }
-.reviewcount{
-   grid-area:reviewcount ;
+.reviewcount {
+  grid-area: reviewcount;
 }
-.rating{
-   grid-area:rating ;
+.rating {
+  grid-area: rating;
 }
-.date{
-   grid-area:date ;
+.date {
+  grid-area: date;
 }
-.writer{
-   grid-area:writer ;
+.writer {
+  grid-area: writer;
 }
-.content{
-   grid-area:content ;
+.content {
+  grid-area: content;
 }
-.comment{
-   grid-area: comment;
+.comment {
+  grid-area: comment;
 }
 </style>
