@@ -45,12 +45,12 @@
         </div>
       </v-card>
     </div>
-    <v-pagination :length="3"></v-pagination>
-    <v-dialog v-model="isReviewDialogOpen">
+    <!-- <v-pagination :length="3"></v-pagination> -->
+    <v-dialog :value="isReviewDialogOpen" @input="closeReviewDialog">
       <review-detail-dialog
         class="detail"
         :selectedReview="selectedReview"
-        @close="selectedReview = null"
+        @close="closeReviewDialog"
       ></review-detail-dialog>
     </v-dialog>
   </v-container>
@@ -91,6 +91,9 @@ export default {
     },
     getImagePath(imageData) {
       return `https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com/${imageData}`;
+    },
+    closeReviewDialog() {
+      this.selectedReview = null;
     },
   },
 };
