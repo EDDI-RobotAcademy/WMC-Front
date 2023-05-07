@@ -10,8 +10,8 @@
       <router-link to="/">
         <v-img
           :src="require('@/assets/logo.png')"
-          max-height="40"
-          max-width="40"
+          max-height="60"
+          max-width="60"
           class="mx-10"
         />
       </router-link>
@@ -97,22 +97,9 @@
             tag="button"
             class="button"
             type="button"
-            data-hover="브랜드"
+            data-hover="전체상품"
           >
-            <span>BRAND</span>
-        </router-link>
-        </div>
-        <div class="dropdown">
-          <router-link
-          :to="{
-            name:'ProductListPage'
-          }"
-            tag="button"
-            class="button"
-            type="button"
-            data-hover="아카이브"
-          >
-            <span>ARCHIVE</span>
+            <span>PRODUCT</span>
         </router-link>
         </div>
       </v-spacer>
