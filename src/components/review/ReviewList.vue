@@ -1,11 +1,5 @@
 <template>
   <v-container>
-    <v-row>
-      <!-- <v-col>
-        <review-create-dialog :product="product"/>    
-      </v-col> -->
-    </v-row>
-
     <v-row v-if="!reviews || (Array.isArray(reviews) && reviews.length === 0)">
       <v-col>
         현재 등록된 리뷰가 없습니다!
@@ -18,14 +12,17 @@
           <template slot="progress">
             <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
           </template>
-          <v-img height="250" :src="review.image"></v-img>
-          <v-card-title>{{ review.writer }}님이 작성한 리뷰입니다</v-card-title>
+          <v-img
+                :src="review.firstPhoto ? getImagePath(review.firstPhoto) : ''"
+                aspect-ratio=".8"
+              ></v-img>
+          <v-card-title>{{ review.username }}님이 작성한 리뷰입니다</v-card-title>
           <v-card-text>
             <v-row align="center" class="mx-0">
               <v-rating :value="review.rating" color="amber" dense readonly size="14"></v-rating>
             </v-row>
-            <div class="my-4 text-subtitle-1">{{ review.regDate }}</div>
-            <div>{{ review.content }}</div>
+            <!-- <div class="my-4 text-subtitle-1">{{ review.regDate }}</div> -->
+            <!-- <div>{{ review.content }}</div> -->
           </v-card-text>
         </v-card>
       </v-col>
@@ -38,22 +35,16 @@
 </template>
 
 <script>
-import ReviewCreateDialog from '@/components/review/ReviewCreateDialog.vue';
 import ReviewDetailDialog from '@/components/review/ReviewDetailDialog.vue';
 
 export default {
   props: {
-    product: {
-      type: Object,
-      default: null,
-    },
     reviews: {
       type: Array,
       default: () => [],
     },
   },
   components: {
-    ReviewCreateDialog,
     ReviewDetailDialog,
   },
   data: () => ({
@@ -74,6 +65,9 @@ export default {
     },
     openReviewDialog(review) {
       this.selectedReview = review;
+    },
+    getImagePath(imageData) {
+      return `https://wmc-s3-bucket.s3.ap-northeast-2.amazonaws.com/${imageData}`;
     },
   },
 };

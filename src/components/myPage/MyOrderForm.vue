@@ -17,10 +17,12 @@
         </thead>
         <tbody>
           <tr v-for="(order, index) in orders" :key="index">
-            <td>            <v-img
-              :src="order.photo ? getImagePath(order.photo) : ''"
-              aspect-ratio=".8"
-            ></v-img></td>
+            <td>
+              <v-img
+                :src="order.photo ? getImagePath(order.photo) : ''"
+                aspect-ratio=".8"
+              ></v-img>
+            </td>
             <td>{{ order.productName }}</td>
             <td>{{ order.quantity }}</td>
             <td>{{ formatNumber(order.price / order.quantity) }}</td>
@@ -28,9 +30,7 @@
             <td>{{ order.orderDate }}</td>
             <td>{{ order.address.street }}</td>
             <td>
-              <review-create-dialog
-                :order="order"
-              ></review-create-dialog>
+              <review-create-dialog :order="order"></review-create-dialog>
             </td>
           </tr>
         </tbody>
